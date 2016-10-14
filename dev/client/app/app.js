@@ -24,16 +24,16 @@ app.config(function($stateProvider, $urlRouterProvider){
     // CALIBRATION
     .state("equipment", {
       url: "/equipment",
-      templateUrl: "fixtures/calibration/equipmentList.html",
+      templateUrl: "fixtures/calibration/list-equipments.html",
       controller: 'equipmentCtrl'
     })
     .state("equipmentView", {
       url: "/equipmentView",
-      templateUrl: "fixtures/calibration/equipmentView.html"
+      templateUrl: "fixtures/calibration/view-equipment.html"
     })
     .state("equipmentForm", {
       url: "/equipmentForm",
-      templateUrl: "fixtures/calibration/equipmentForm.html"
+      templateUrl: "fixtures/calibration/form-equipment.html"
     })
     .state("equipmentRecord", {
       url: "/equipmentRecord",
