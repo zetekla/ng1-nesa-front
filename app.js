@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     })
     .state("equipment", {
       url: "/equipment",
-      templateUrl: "dev/client/app/fixtures/equipmentList.html",
+      templateUrl: "dev/client/app/fixtures/calibration/equipmentList.html",
       controller: 'equipmentCtrl'
     })
     // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================

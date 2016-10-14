@@ -1,0 +1,32 @@
+{
+  "name": "ng1-nesa-front-end",
+  "description": "Front-end for NESA app",
+  "main": "app.js",
+  "authors": [
+    "Phuc Tran"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zetekla/ng1-nesa-front",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "^1.5.8",
+    "angular-bootstrap": "^2.2.0",
+    "angular-cookies": "^1.5.8",
+    "angular-resource": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "angular-touch": "^1.5.8",
+    "bootstrap": "v4.0.0-alpha.4",
+    "angular-ui-router": "^0.3.1",
+    "lodash": "^4.16.4",
+    "moment": "^2.15.1",
+    "angular": "^1.5.8"
+  }
+}
