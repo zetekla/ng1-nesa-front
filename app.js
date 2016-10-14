@@ -20,6 +20,11 @@ app.config(function($stateProvider, $urlRouterProvider){
     .state("PageTab.Page3", {
       url: "/Page3",
       templateUrl: "dev/client/app/fixtures/Page3.html"
+    })
+    .state("PageTab.equipment", {
+      url: "/equipment",
+      templateUrl: "dev/client/app/fixtures/equipmentList.html",
+      controller: 'equipmentCtrl'
     });
 });
 
