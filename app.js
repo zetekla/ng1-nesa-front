@@ -2,29 +2,41 @@ var app = angular.module('plunker', ['ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider){
 
-  $urlRouterProvider.when("", "/PageTab");
+  $urlRouterProvider.when("", "/home");
 
   $stateProvider
-    .state("PageTab", {
-      url: "/PageTab",
-      templateUrl: "dev/client/app/layout/PageTab.html"
+    .state("home", {
+      url: "/home",
+      templateUrl: "dev/client/app/layout/home.html"
     })
-    .state("PageTab.Page1", {
-      url: "/Page1",
-      templateUrl: "dev/client/app/fixtures/Page1.html"
+    .state("home.list", {
+      url: "/list",
+      templateUrl: "dev/client/app/fixtures/partial-list.html",
+      controller: function($scope) {
+        $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
+      }
     })
-    .state("PageTab.Page2", {
-      url: "/Page2",
-      templateUrl: "dev/client/app/fixtures/Page2.html"
+    // nested list with just some random string data
+    .state('home.paragraph', {
+      url: '/paragraph',
+      template: 'I could sure use a drink right now.'
     })
-    .state("PageTab.Page3", {
-      url: "/Page3",
-      templateUrl: "dev/client/app/fixtures/Page3.html"
-    })
-    .state("PageTab.equipment", {
+    .state("equipment", {
       url: "/equipment",
       templateUrl: "dev/client/app/fixtures/equipmentList.html",
       controller: 'equipmentCtrl'
+    })
+    // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+    .state('about', {
+      url: '/about',
+      views: {
+        '': { templateUrl: 'dev/client/app/fixtures/partial-about.html' },
+        'columnOne@about': { template: 'Look I am a column!' },
+        'columnTwo@about': {
+          templateUrl: 'dev/client/app/fixtures/table-data.html',
+          controller: 'tableDataCtrl'
+        }
+      }
     });
 });
 

@@ -15,10 +15,14 @@
 
 <body ng-app="plunker" ng-cloak>
   <div id="container" ng-controller="MainCtrl">
-    <div ui-view></div>
+    <!-- NAVIGATION -->
+    <div ng-include="'dev/client/app/layout/nav.html'"></div>
 
-    <h1>Hello {{name}}</h1>
-
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div ui-view></div>
+      <h1>Hello {{name}}</h1>
+    </div>
   </div>
 
   <script data-require="json2" data-semver="0.0.2012100-8" src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
@@ -30,6 +34,7 @@
   <script src="app.js"></script>
   <script src="dev/client/app/controllers/app.controllers.js"></script>
   <script src="dev/client/app/controllers/equipment.controllers.js"></script>
+  <script src="dev/client/app/controllers/tableDataCtrl.controllers.js"></script>
   <script src="appSpec.js"></script>
   <script src="test/client/jasmineBootstrap.js"></script>
   <!-- bootstraps Jasmine -->
