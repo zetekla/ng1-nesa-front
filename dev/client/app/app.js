@@ -1,4 +1,4 @@
-var app = angular.module('plunker', ['ui.router']);
+var app = angular.module('plunker', ['ui.router', 'calibrates']);
 
 app.config(function($stateProvider, $urlRouterProvider){
 

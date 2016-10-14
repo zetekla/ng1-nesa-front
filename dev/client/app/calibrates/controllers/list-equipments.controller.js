@@ -1,4 +1,4 @@
-var app = angular.module('plunker');
+var app = angular.module('calibrates', []);
 
 app.controller('equipmentCtrl', function($scope, RestfulService) {
   var display = this,
