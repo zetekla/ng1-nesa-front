@@ -2,3 +2,24 @@
 body { background-color: white; padding: 0; margin: 8px; }
 /* ... but remain the "jasmine.css" styling for the Jasmine reporting */
 .jasmine_reporter { background-color: #eeeeee; padding: 0; margin: 0; }
+
+.gray {
+  color: gray;
+}
+.italic-small {
+  font-style: italic;
+  font-size: 8pt;
+}
+.floatright {
+  float: right;
+}
+.right {
+  text-align: right;
+}
+.nopad {
+  padding: 0px !important;
+}
+.inline-block {
+  display: inline-block !important;
+  width: auto;
+}

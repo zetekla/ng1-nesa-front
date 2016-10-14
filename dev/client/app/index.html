@@ -23,6 +23,9 @@
       <div ui-view></div>
       <h1>Hello {{name}}</h1>
     </div>
+
+    <!-- FOOTER -->
+    <div ng-include="'layout/footer.html'"></div>
   </div>
 
   <script data-require="json2" data-semver="0.0.2012100-8" src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
@@ -46,8 +49,9 @@
   <script src="../../../public/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
   <script src="app.js"></script>
-  <script src="controllers/app.controllers.js"></script>
-  <script src="controllers/equipment.controllers.js"></script>
+  <script src="assets/RestfulService.js"></script>
+  <script src="controllers/app.controller.js"></script>
+  <script src="calibrates/controllers/list-equipments.controller.js"></script>
   <script src="controllers/tableDataCtrl.controllers.js"></script>
   <script src="appSpec.js"></script>
   <script src="../../../test/client/jasmineBootstrap.js"></script>
