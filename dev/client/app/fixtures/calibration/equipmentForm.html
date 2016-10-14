@@ -1,0 +1,77 @@
+<section>
+  <p>equipmentForm page</p>
+  <div class="page-header">
+    <h1>{{vm.equipment._id ? 'Edit Equipment' : 'New Equipment'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.equipmentForm" class="" ng-submit="vm.save(vm.form.equipmentForm.$valid)" novalidate>
+      <fieldset>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+        <div class="form-group" show-errors>
+          <div class = "row">
+            <div class="col-sm-6 text-center">
+              <i class="glyphicon glyphicon-user cust-profile"
+                 ng-class="{'text-primary': vm.equipment.referred, 'text-danger': !vm.equipment.referred}"></i>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="control-label" for="assetNumber">Asset Number</label>
+                <div class="controls">
+                  <input name="assetNumber" type="text" ng-model="vm.equipment.assetNumber" class="form-control" placeholder="assetNumber" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="model">Model</label>
+                <div class="controls">
+                  <input name="model" type="text" ng-model="vm.equipment.model" class="form-control" placeholder="model">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="location">Location</label>
+                <div class="controls">
+                  <input name="location" type="text" ng-model="vm.equipment.location" class="form-control" placeholder="location">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="last_cal">Last Cal</label>
+                <div class="controls">
+                  <input name="last_cal" type="text" ng-model="vm.equipment.last_cal" class="form-control" placeholder="last_cal">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="schedule">Schedule</label>
+                <div class="controls">
+                  <input name="schedule" type="text" ng-model="vm.equipment.schedule" class="form-control" placeholder="schedule">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="next_cal">Next Cal</label>
+                <div class="controls">
+                  <input name="next_cal" type="text" ng-model="vm.equipment.next_cal" class="form-control" placeholder="next_cal">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="file">File</label>
+                <div class="controls">
+                  <input name="file" type="text" ng-model="vm.equipment.file" class="form-control" placeholder="file">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <button type="submit" class="btn btn-lg btn-success">{{vm.equipment._id ? 'Update' : 'Create'}}</button>
+            </div>
+          </div>
+        </div>
+        <div ng-messages="vm.form.equipmentForm.name.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Equipment name is required.</p>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

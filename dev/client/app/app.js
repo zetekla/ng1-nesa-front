@@ -21,10 +21,23 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/paragraph',
       template: 'I could sure use a drink right now.'
     })
+    // CALIBRATION
     .state("equipment", {
       url: "/equipment",
       templateUrl: "fixtures/calibration/equipmentList.html",
       controller: 'equipmentCtrl'
+    })
+    .state("equipmentView", {
+      url: "/equipmentView",
+      templateUrl: "fixtures/calibration/equipmentView.html"
+    })
+    .state("equipmentForm", {
+      url: "/equipmentForm",
+      templateUrl: "fixtures/calibration/equipmentForm.html"
+    })
+    .state("equipmentRecord", {
+      url: "/equipmentRecord",
+      templateUrl: "fixtures/calibration/recordForm.html"
     })
     // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
     .state('about', {
