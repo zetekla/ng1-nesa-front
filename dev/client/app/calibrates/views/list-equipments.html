@@ -1,10 +1,31 @@
 <div>
-  <div class="col-lg-5">
-    <button type="button" class="btn btn-primary glyphicon glyphicon-plus" style="margin:25px 10px 10px 10px" > Add equipment</button>
-    <button type="button" class="btn btn-primary glyphicon glyphicon-calendar" style="margin:25px 10px 10px 10px" > Add record</button>
+  <br>
+  <div class="page-header">
+    <h1>Equipments</h1>
   </div>
-
-  <div ng-cloak ng-controller='equipmentCtrl as display'>
+  <br>
+  <div class="row">
+    <div class="col-lg-7">
+      <div class="input-group input-group-lg">
+        <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div>
+    </div>
+    <div class="col-lg-5 text-center">
+      <button class="btn btn-lg btn-primary" type="button">
+        <i class="glyphicon glyphicon-plus"></i>
+        Add equipment
+      </button>
+      <button class="btn btn-lg btn-primary" type="button">
+        <i class="glyphicon glyphicon-plus"></i>
+        Add record
+      </button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
     <table class="table table-hover col-12">
       <thead>
       <tr class="bg-info">
@@ -18,9 +39,9 @@
         <th class="text-nowrap">Actions</th>
       </tr>
       </thead>
-      <tr ng-repeat="equipment in display.equipments">
+      <tr ng-repeat="equipment in vm.equipments">
         <td>{{$index+1}}</td>
-        <td>{{equipment.asset_number}}</td>
+        <td><a data-ui-sref="equipments.view({ equipmentId: equipment.asset_number })">{{equipment.asset_number}}</a></td>
         <td>{{equipment.model}}</td>
         <td>{{equipment.ECMS_Location.desc}}</td>
         <td><button type="button" class="btn btn-info" ng-click="changeCalDate()">{{equipment.ECMS_Attributes[0].last_cal | date:'MM/dd/yyyy'}}</button></td>

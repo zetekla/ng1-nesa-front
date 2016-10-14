@@ -1,19 +1,35 @@
-var app = angular.module('calibrates', []);
+(function () {
+  'use strict';
 
-app.controller('equipmentCtrl', function($scope, RestfulService) {
-  var display = this,
-    uri = {
-      equipment: 'http://localhost:3000/equipment'
-    };
+  var calibratesApp = angular.module('calibrates');
 
-  RestfulService.getEquipment(uri.equipment,
-    function (res) {
-      display.equipments = res.data.calibrates;
-    },
-    function (err) {
-      console.dir(err);
-    }
-  );
+  calibratesApp.controller('EquipmentsListController' , EquipmentsListController);
+  calibratesApp.controller('EquipmentsCreateController' , EquipmentsCreateController);
+  calibratesApp.controller('EquipmentsEditController' , EquipmentsEditController);
 
+  EquipmentsListController.$inject = ['EquipmentsService'];
 
-});
+  function EquipmentsListController(EquipmentsService) {
+    var vm = this;
+    EquipmentsService.get((data) => vm.equipments = data.calibrates)
+  }
+
+  EquipmentsCreateController.$inject = ['EquipmentsService'];
+
+  function EquipmentsCreateController(EquipmentsService) {
+    var vm = this;
+
+    vm.equipments = EquipmentsService.query();
+  }
+
+  EquipmentsEditController.$inject = ['EquipmentsService'];
+
+  function EquipmentsEditController(EquipmentsService) {
+    var vm = this;
+
+    vm.equipments = EquipmentsService.get((data) => {
+      vm.equipments = data.calibrates;
+      console.log(equipments);
+    })
+  }
+})();

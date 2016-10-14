@@ -2,8 +2,9 @@
   'use strict';
 
   angular
-    .module('calibrates')
-    .config(routeConfig);
+    .module('calibrates', ['ngResource'])
+    .config(routeConfig)
+    .factory('CalibratesService', CalibratesService);
 
   routeConfig.$inject = ['$stateProvider'];
 
@@ -16,7 +17,7 @@
       })
       .state('equipments.list', {
         url: '',
-        templateUrl: 'views/list-equipments.html',
+        templateUrl: 'calibrates/views/list-equipments.html',
         controller: 'EquipmentsListController',
         controllerAs: 'vm',
         data: {
@@ -75,5 +76,9 @@
 
   function newEquipment(EquipmentsService) {
     return new EquipmentsService();
+  }
+
+  function CalibratesService(){
+    return 'Tested with CalibratesService';
   }
 })();

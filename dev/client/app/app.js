@@ -22,11 +22,6 @@ app.config(function($stateProvider, $urlRouterProvider){
       template: 'I could sure use a drink right now.'
     })
     // CALIBRATION
-    .state("equipment", {
-      url: "/equipment",
-      templateUrl: "calibrates/views/list-equipments.html",
-      controller: 'equipmentCtrl'
-    })
     .state("equipmentView", {
       url: "/equipmentView",
       templateUrl: "calibrates/views/view-equipment.html"
