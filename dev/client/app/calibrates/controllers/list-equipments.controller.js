@@ -4,16 +4,17 @@
   var calibratesApp = angular.module('calibrates');
 
   calibratesApp.controller('EquipmentsListController' , EquipmentsListController);
-  calibratesApp.controller('EquipmentsCreateController' , EquipmentsCreateController);
-  calibratesApp.controller('EquipmentsEditController' , EquipmentsEditController);
+/*  calibratesApp.controller('EquipmentsCreateController' , EquipmentsCreateController);
+  calibratesApp.controller('EquipmentsEditController' , EquipmentsEditController);*/
 
   EquipmentsListController.$inject = ['EquipmentsService'];
 
   function EquipmentsListController(EquipmentsService) {
     var vm = this;
-    EquipmentsService.get((data) => vm.equipments = data.calibrates)
+    vm.equipments = EquipmentsService.query();
   }
 
+  /*
   EquipmentsCreateController.$inject = ['EquipmentsService'];
 
   function EquipmentsCreateController(EquipmentsService) {
@@ -31,5 +32,5 @@
       vm.equipments = data.calibrates;
       console.log(equipments);
     })
-  }
+  }*/
 })();

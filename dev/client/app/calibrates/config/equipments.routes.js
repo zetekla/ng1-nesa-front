@@ -4,7 +4,9 @@
   angular
     .module('calibrates', ['ngResource'])
     .config(routeConfig)
-    .factory('CalibratesService', CalibratesService);
+    /*.run(function($state) {
+      $state.go('equipments'); //make a transition to equipments state when app starts
+    })*/;
 
   routeConfig.$inject = ['$stateProvider'];
 
@@ -26,7 +28,7 @@
       })
       .state('equipments.create', {
         url: '/create',
-        templateUrl: 'views/form-equipment.html',
+        templateUrl: 'calibrates/views/form-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
         resolve: {
@@ -38,8 +40,8 @@
         }
       })
       .state('equipments.edit', {
-        url: '/:equipmentId/edit',
-        templateUrl: 'views/form-equipment.html',
+        url: '/:asset_number/edit',
+        templateUrl: 'calibrates/views/form-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
         resolve: {
@@ -47,19 +49,19 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle: 'Edit Equipment {{ equipmentResolve.name }}'
+          pageTitle: 'Edit Equipment {{ equipmentResolve.asset_number }}'
         }
       })
       .state('equipments.view', {
-        url: '/:equipmentId',
-        templateUrl: 'views/view-equipment.html',
+        url: '/:asset_number',
+        templateUrl: 'calibrates/views/view-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
         resolve: {
           equipmentResolve: getEquipment
         },
         data:{
-          pageTitle: 'Equipment {{ equipmentResolve.name }}'
+          pageTitle: 'Equipment {{ equipmentResolve.asset_number }}'
         }
       });
   }
@@ -67,8 +69,9 @@
   getEquipment.$inject = ['$stateParams', 'EquipmentsService'];
 
   function getEquipment($stateParams, EquipmentsService) {
-    return EquipmentsService.get({
-      equipmentId: $stateParams.equipmentId
+    console.log($stateParams);
+    return EquipmentsService.query({
+      asset_number: $stateParams.asset_number
     }).$promise;
   }
 
@@ -76,9 +79,5 @@
 
   function newEquipment(EquipmentsService) {
     return new EquipmentsService();
-  }
-
-  function CalibratesService(){
-    return 'Tested with CalibratesService';
   }
 })();

@@ -6,12 +6,14 @@
     .module('calibrates')
     .controller('EquipmentsController', EquipmentsController);
 
-  EquipmentsController.$inject = ['$scope', '$state', 'equipmentResolve'];
+  EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve'];
 
-  function EquipmentsController ($scope, $state, equipment) {
+  function EquipmentsController ($scope, $state, $window, equipment) {
     var vm = this;
 
-    vm.equipment = equipment;
+    vm.equipment = equipment[0];
+
+    vm.pageTitle = $state.current.data.pageTitle;
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
@@ -19,7 +21,7 @@
 
     // Remove existing Equipment
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
+      if ($window.confirm('Are you sure you want to delete?')) {
         vm.equipment.$remove($state.go('equipments.list'));
       }
     }
@@ -31,17 +33,13 @@
         return false;
       }
 
-      // TODO: move create/update logic to service
-      if (vm.equipment._id) {
-        vm.equipment.$update(successCallback, errorCallback);
-      } else {
-        vm.equipment.$save(successCallback, errorCallback);
-      }
+      // Create a new article, or update the current instance
+      vm.equipment.createOrUpdate()
+        .then(successCallback)
+        .catch(errorCallback);
 
       function successCallback(res) {
-        $state.go('equipments.view', {
-          equipmentId: res._id
-        });
+        $state.go('equipments.view');
       }
 
       function errorCallback(res) {

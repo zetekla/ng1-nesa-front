@@ -1,5 +1,5 @@
 <section>
-  <p>viewEquipment page</p>
+  <p>viewEquipment page {{vm.pageTitle}}</p>
   <div class="page-header">
     <h1>{{vm.equipment.asset_number}}</h1>
     <h2 data-ng-bind="vm.equipment.model"></h2>
@@ -8,13 +8,13 @@
     <h2 data-ng-bind="vm.equipment.next_cal"></h2>
     <h2 data-ng-bind="vm.equipment.file"></h2>
   </div>
-  <div class="pull-right">
-    <a class="btn btn-primary"
-       data-ui-sref="equipments.edit({ equipmentId: vm.equipment._id })">
-      <i class="glyphicon glyphicon-edit"></i>
+  <div>
+    <a class="btn btn-lg btn-primary"
+       data-ui-sref="equipments.edit({ asset_number: vm.equipment.asset_number })">
+      <i class="glyphicon glyphicon-edit"></i>Edit
     </a>
-    <a class="btn btn-primary" data-ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
+    <a class="btn btn-lg btn-danger" data-ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>Remove
     </a>
   </div>
   <small>
