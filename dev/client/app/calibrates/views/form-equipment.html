@@ -11,12 +11,10 @@
         <div class="form-group" show-errors>
           <div class = "row">
             <div class="col-sm-6 text-center">
-              <i class="glyphicon glyphicon-user cust-profile"
-                 ng-class="{'text-primary': vm.equipment.referred, 'text-danger': !vm.equipment.referred}"></i>
               <div class="form-group">
                 <label class="control-label" for="assetNumber">Asset Number</label>
                 <div class="controls">
-                  <input name="assetNumber" type="text" ng-model="vm.equipment.assetNumber" class="form-control" placeholder="assetNumber" required>
+                  <input name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control" placeholder="assetNumber" required>
                 </div>
               </div>
               <div class="form-group">
@@ -28,13 +26,13 @@
               <div class="form-group">
                 <label class="control-label" for="location">Location</label>
                 <div class="controls">
-                  <input name="location" type="text" ng-model="vm.equipment.location" class="form-control" placeholder="location">
+                  <input name="location" type="text" ng-model="vm.equipment.ECMS_Location.desc" class="form-control" placeholder="location">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="last_cal">Last Cal</label>
                 <div class="controls">
-                  <input name="last_cal" type="text" ng-model="vm.equipment.last_cal" class="form-control" placeholder="last_cal">
+                  <input name="last_cal" type="text" ng-model="vm.equipment.ECMS_Attributes[0].last_cal" class="form-control" placeholder="last_cal">
                 </div>
               </div>
             </div>
@@ -43,19 +41,19 @@
               <div class="form-group">
                 <label class="control-label" for="schedule">Schedule</label>
                 <div class="controls">
-                  <input name="schedule" type="text" ng-model="vm.equipment.schedule" class="form-control" placeholder="schedule">
+                  <input name="schedule" type="text" ng-model="vm.equipment.ECMS_Attributes[0].schedule" class="form-control" placeholder="schedule">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="next_cal">Next Cal</label>
                 <div class="controls">
-                  <input name="next_cal" type="text" ng-model="vm.equipment.next_cal" class="form-control" placeholder="next_cal">
+                  <input name="next_cal" type="text" ng-model="vm.equipment.ECMS_Attributes[0].next_cal" class="form-control" placeholder="next_cal">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="file">File</label>
                 <div class="controls">
-                  <input name="file" type="text" ng-model="vm.equipment.file" class="form-control" placeholder="file">
+                  <input name="file" type="text" ng-model="vm.equipment.ECMS_Attributes[0].file" class="form-control" placeholder="file">
                 </div>
               </div>
             </div>
@@ -68,9 +66,9 @@
             </div>
           </div>
         </div>
-        <div ng-messages="vm.form.equipmentForm.name.$error" role="alert">
-          <p class="help-block error-text" ng-message="required">Equipment name is required.</p>
-        </div>
+<!--        <div ng-messages="vm.form.equipmentForm.model.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Equipment model is required.</p>
+        </div>-->
       </fieldset>
     </form>
   </div>

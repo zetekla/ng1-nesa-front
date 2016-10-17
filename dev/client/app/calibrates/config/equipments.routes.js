@@ -70,7 +70,7 @@
 
   function getEquipment($stateParams, EquipmentsService) {
     console.log($stateParams);
-    return EquipmentsService.query({
+    return EquipmentsService.get({
       asset_number: $stateParams.asset_number
     }).$promise;
   }

@@ -2,11 +2,11 @@
   <p>viewEquipment page {{vm.pageTitle}}</p>
   <div class="page-header">
     <h1>{{vm.equipment.asset_number}}</h1>
-    <h2 data-ng-bind="vm.equipment.model"></h2>
-    <h2 data-ng-bind="vm.equipment.location"></h2>
-    <h2 data-ng-bind="vm.equipment.last_cal"></h2>
-    <h2 data-ng-bind="vm.equipment.next_cal"></h2>
-    <h2 data-ng-bind="vm.equipment.file"></h2>
+    <h3 data-ng-bind="vm.equipment.model"></h3>
+    <h3 data-ng-bind="vm.equipment.ECMS_Location.desc"></h3>
+    <h3 data-ng-bind="vm.equipment.ECMS_Attributes[0].last_cal"></h3>
+    <h3 data-ng-bind="vm.equipment.ECMS_Attributes[0].next_cal"></h3>
+    <h3 data-ng-bind="vm.equipment.ECMS_Attributes[0].file | json"></h3>
   </div>
   <div>
     <a class="btn btn-lg btn-primary"

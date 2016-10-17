@@ -11,7 +11,7 @@
   function EquipmentsController ($scope, $state, $window, equipment) {
     var vm = this;
 
-    vm.equipment = equipment[0];
+    vm.equipment = equipment;
 
     vm.pageTitle = $state.current.data.pageTitle;
     vm.error = null;
