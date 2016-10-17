@@ -39,7 +39,7 @@
         .catch(errorCallback);
 
       function successCallback(res) {
-        $state.go('equipments.view');
+        $state.go('equipments.view', {location_id: res.location_id});
       }
 
       function errorCallback(res) {
