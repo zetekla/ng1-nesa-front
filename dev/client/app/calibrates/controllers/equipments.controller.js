@@ -13,7 +13,7 @@
 
     vm.equipment = equipment;
 
-    vm.pageTitle = $state.current.data.pageTitle;
+    // vm.pageTitle = $state.current.data.pageTitle;
     vm.error = null;
     vm.form = {};
     vm.remove = remove;

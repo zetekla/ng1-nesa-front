@@ -40,7 +40,7 @@
         <th class="text-nowrap">Actions</th>
       </tr>
       </thead>
-      <tr ng-repeat="equipment in vm.equipments" data-ui-sref="equipments.view({ asset_number: equipment.asset_number })">
+      <tr ng-repeat="equipment in vm.equipments" data-ui-sref="equipments.view({ location_id: equipment.location_id })">
         <td>{{$index+1}}</td>
         <td>{{equipment.asset_number}}</td>
         <td>{{equipment.model}}</td>

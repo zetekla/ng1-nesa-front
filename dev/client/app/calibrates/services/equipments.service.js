@@ -9,8 +9,8 @@
   EquipmentsService.$inject = ['$resource'];
 
   function EquipmentsService($resource) {
-    var Equipment = $resource('http://localhost:3000/equipments/:asset_number', {
-      asset_number: '@asset_number'
+    var Equipment = $resource('http://localhost:3000/equipments/:location_id', {
+      location_id: '@location_id'
     }, {
       update: {
         method: 'PUT'
@@ -29,7 +29,7 @@
     return Equipment;
 
     function createOrUpdate(equipment) {
-      if (equipment.asset_number) {
+      if (equipment.location_id) {
         return equipment.$update(onSuccess, onError);
       } else {
         return equipment.$save(onSuccess, onError);

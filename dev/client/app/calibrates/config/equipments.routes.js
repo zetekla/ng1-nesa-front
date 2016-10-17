@@ -40,7 +40,7 @@
         }
       })
       .state('equipments.edit', {
-        url: '/:asset_number/edit',
+        url: '/:location_id/edit',
         templateUrl: 'calibrates/views/form-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
@@ -49,11 +49,11 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle: 'Edit Equipment {{ equipmentResolve.asset_number }}'
+          pageTitle: 'Edit Equipment {{ equipmentResolve.location_id }}'
         }
       })
       .state('equipments.view', {
-        url: '/:asset_number',
+        url: '/:location_id',
         templateUrl: 'calibrates/views/view-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
@@ -61,7 +61,7 @@
           equipmentResolve: getEquipment
         },
         data:{
-          pageTitle: 'Equipment {{ equipmentResolve.asset_number }}'
+          pageTitle: 'Equipment {{ equipmentResolve.location_id }}'
         }
       });
   }
@@ -71,7 +71,7 @@
   function getEquipment($stateParams, EquipmentsService) {
     console.log($stateParams);
     return EquipmentsService.get({
-      asset_number: $stateParams.asset_number
+      location_id: $stateParams.location_id
     }).$promise;
   }
 
