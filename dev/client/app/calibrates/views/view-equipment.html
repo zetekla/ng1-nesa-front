@@ -4,13 +4,15 @@
     <h1>{{vm.equipment.asset_number}}</h1>
     <h3 data-ng-bind="vm.equipment.model"></h3>
     <h3 data-ng-bind="vm.equipment.ECMS_Location.desc"></h3>
-    <h3 data-ng-bind="vm.equipment.ECMS_Attributes[0].last_cal"></h3>
-    <h3 data-ng-bind="vm.equipment.ECMS_Attributes[0].next_cal"></h3>
-    <h3>File content <i>{{vm.equipment.ECMS_Attributes[0].file | json}}</i></h3>
+    <ul data-ng-repeat="attribute in vm.equipment.ECMS_Attributes">
+      <li data-ng-bind="attribute.last_cal"></li>
+      <li data-ng-bind="attribute.next_cal"></li>
+      <li>File content <i>{{attribute.file | json}}</i></li>
+    </ul>
   </div>
   <div>
     <a class="btn btn-lg btn-primary"
-       data-ui-sref="equipments.edit({ location_id: vm.equipment.location_id })">
+       data-ui-sref="equipments.edit({ asset_id: vm.equipment.asset_id })">
       <i class="glyphicon glyphicon-edit"></i>Edit
     </a>
     <a class="btn btn-lg btn-danger" data-ng-click="vm.remove()">

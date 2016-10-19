@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.equipment.location_id ? 'Edit Equipment' : 'New Equipment'}}</h1>
+    <h1>{{vm.equipment.asset_id ? 'Edit Equipment' : 'New Equipment'}}</h1>
   </div>
   <div class="col-md-12">
     <form name="vm.form.equipmentForm" class="" ng-submit="vm.save(vm.form.equipmentForm.$valid)" novalidate>
@@ -62,7 +62,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <button type="submit" class="btn btn-lg btn-success">{{vm.equipment.location_id ? 'Update' : 'Create'}}</button>
+              <button type="submit" class="btn btn-lg btn-success">{{vm.equipment.asset_id ? 'Update' : 'Create'}}</button>
             </div>
           </div>
         </div>

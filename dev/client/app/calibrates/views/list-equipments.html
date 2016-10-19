@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="col-lg-5 text-center">
-      <button class="btn btn-lg btn-primary" type="button">
+      <button class="btn btn-lg btn-primary" type="button" data-ui-sref="equipments.create">
         <i class="glyphicon glyphicon-plus"></i>
         Add equipment
       </button>
@@ -40,7 +40,7 @@
         <th class="text-nowrap">Actions</th>
       </tr>
       </thead>
-      <tr ng-repeat="equipment in vm.equipments" data-ui-sref="equipments.view({ location_id: equipment.location_id })">
+      <tr ng-repeat="equipment in vm.equipments" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })">
         <td>{{$index+1}}</td>
         <td>{{equipment.asset_number}}</td>
         <td>{{equipment.model}}</td>
