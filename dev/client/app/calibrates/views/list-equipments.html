@@ -27,31 +27,53 @@
   </div>
   <br>
   <div class="row">
-    <table class="table table-hover col-12">
+    <table class="table table-striped table-hover table-bordered col-12">
       <thead>
       <tr class="bg-info">
-        <th class="text-nowrap">#</th>
-        <th class="text-nowrap">Asset Tag Number</th>
-        <th class="text-nowrap">Model Number</th>
-        <th class="text-nowrap">Location</th>
-        <th class="text-nowrap">Last Calibration Date</th>
-        <th class="text-nowrap">Next Calibration Date</th>
+        <th class="text-nowrap text-center" rowspan="2">#</th>
+        <th class="text-nowrap text-center" rowspan="2">Asset Tag Number</th>
+        <th class="text-nowrap" rowspan="2">Model Number</th>
+        <th class="text-nowrap" rowspan="2">Location</th>
+        <th class="text-nowrap" rowspan="2">Last Calibration Date</th>
+        <th class="text-nowrap" rowspan="2">Next Calibration Date</th>
+        <th class="text-nowrap" colspan="3">File Info</th>
+        <th class="text-nowrap" rowspan="2">Actions</th>
+      </tr>
+      <tr class="bg-info">
         <th class="text-nowrap">File</th>
-        <th class="text-nowrap">Actions</th>
+        <th class="text-nowrap">CreatedAt</th>
+        <th class="text-nowrap">UpdatedAt</th>
       </tr>
       </thead>
-      <tr ng-repeat="equipment in vm.equipments" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })">
-        <td>{{$index+1}}</td>
-        <td>{{equipment.asset_number}}</td>
-        <td>{{equipment.model}}</td>
-        <td>{{equipment.ECMS_Location.desc}}</td>
-        <td><button type="button" class="btn btn-info" ng-click="changeCalDate()">{{equipment.ECMS_Attributes[0].last_cal | date:'MM/dd/yyyy'}}</button></td>
-        <td>{{equipment.ECMS_Attributes[0].next_cal | date:'MM/dd/yyyy'}}</td>
-        <td><span ng-show="displayFile" ng-init="displayFile=false">{{equipment.ECMS_Attributes[0].file}}</span></td>
-        <td>
-          <button type="button" class="btn btn-warning">Add New Cal Record
-        </td>
-      </tr>
+      <tbody ng-repeat="equipment in vm.equipments" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })">
+        <tr>
+          <th scope="row" rowspan="equipment.ECMS_Attributes.length+1">{{$index+1}}</th>
+          <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.asset_number}}</td>
+          <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.model}}</td>
+          <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.ECMS_Location.desc}}</td>
+          <td><button type="button" class="btn btn-info" ng-click="changeCalDate()">{{equipment.last_cal | date:'MM/dd/yyyy'}}</button></td>
+          <td>{{equipment.next_cal | date:'MM/dd/yyyy'}}</td>
+          <td>{{equipment.ECMS_Attributes[0].filename}}</td>
+          <td>{{equipment.ECMS_Attributes[0].createdAt}}</td>
+          <td>{{equipment.ECMS_Attributes[0].updatedAt}}</td>
+          <td>
+            <button type="button" class="btn btn-warning">Add New Cal Record
+          </td>
+        </tr>
+        <tr data-ng-repeat="attribute in equipment.ECMS_Attributes | limitTo:20:1">
+          <!--<tr ng-show="displayFile" ng-init="displayFile=false">-->
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <!--<td>File content <i>{{attribute.file | json}}</i></td>-->
+          <td class="bg-gray"><i>{{attribute.file}}</i></td>
+          <td class="bg-gray" data-ng-bind="attribute.createdAt"></td>
+          <td class="bg-gray" data-ng-bind="attribute.updatedAt"></td>
+        </tr>
+      </tbody>
     </table>
   </div>
   </div>

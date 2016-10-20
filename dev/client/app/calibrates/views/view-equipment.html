@@ -1,12 +1,14 @@
 <section>
   <p>viewEquipment page {{vm.pageTitle}}</p>
   <div class="page-header">
-    <h1>{{vm.equipment.asset_number}}</h1>
-    <h3 data-ng-bind="vm.equipment.model"></h3>
-    <h3 data-ng-bind="vm.equipment.ECMS_Location.desc"></h3>
+    <h2>{{vm.equipment.equipmentInfo}} {{vm.equipment.ECMS_Location.getLocation}}</h2>
+    <h4 data-ng-bind="vm.equipment.last_cal | date:'MM/dd/yyyy'"></h4>
+    <h4 data-ng-bind="vm.equipment.schedule"></h4>
+    <h4 data-ng-bind="vm.equipment.next_cal | date:'MM/dd/yyyy'"></h4>
+    <h4 data-ng-bind="vm.equipment.ECMS_Location.desc"></h4>
     <ul data-ng-repeat="attribute in vm.equipment.ECMS_Attributes">
-      <li data-ng-bind="attribute.last_cal"></li>
-      <li data-ng-bind="attribute.next_cal"></li>
+      <li data-ng-bind="attribute.createdAt"></li>
+      <li data-ng-bind="attribute.updatedAt"></li>
       <li>File content <i>{{attribute.file | json}}</i></li>
     </ul>
   </div>
