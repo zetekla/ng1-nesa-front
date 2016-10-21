@@ -15,19 +15,19 @@
               <div class="form-group">
                 <label class="control-label" for="assetNumber">Asset Number</label>
                 <div class="controls">
-                  <input id="assetNumber" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control" placeholder="assetNumber" required>
+                  <input id="assetNumber" ng-readonly="vm.equipment.asset_id" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control form-control-lg" placeholder="asset number" required>
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="model">Model</label>
                 <div class="controls">
-                  <input id="model" name="model" type="text" ng-model="vm.equipment.model" class="form-control" placeholder="model">
+                  <input id="model" ng-readonly="vm.equipment.asset_id" name="model" type="text" ng-model="vm.equipment.model" class="form-control form-control-lg" placeholder="model">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="location">Location</label>
                 <div class="controls">
-                  <input id="location" name="location" type="text" ng-model="vm.equipment.ECMS_Location.desc" class="form-control" placeholder="location">
+                  <input id="location" name="location" type="text" ng-model="vm.equipment.ECMS_Location.desc" class="form-control form-control-lg" placeholder="location">
                 </div>
               </div>
             </div>
@@ -36,24 +36,25 @@
               <div class="form-group">
                 <label class="control-label" for="last_cal">Last Cal</label>
                 <div class="controls">
-                  <input id="last_cal" name="last_cal" type="text" ng-model="vm.equipment.last_cal" class="form-control" placeholder="last_cal">
+                  <input id="last_cal" name="last_cal" type="text" ng-model="vm.equipment.last_cal" class="form-control form-control-lg" placeholder="last_cal">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="schedule">Schedule</label>
                 <div class="controls">
-                  <input id="schedule" name="schedule" type="text" ng-model="vm.equipment.schedule" class="form-control" placeholder="schedule">
+                  <input id="schedule" name="schedule" type="text" ng-model="vm.equipment.schedule" class="form-control form-control-lg" placeholder="schedule">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="next_cal">Next Cal</label>
                 <div class="controls">
-                  <input id="next_cal" name="next_cal" type="text" ng-model="vm.equipment.next_cal" class="form-control" placeholder="next_cal">
+                  <input id="next_cal" name="next_cal" type="text" ng-model="vm.equipment.next_cal" class="form-control form-control-lg" placeholder="next_cal">
                 </div>
               </div>
             </div>
           </div>
-
+          <br>
+          <br>
           <div class = "row">
             <div class="col-sm-12" ng-repeat="attribute in vm.equipment.ECMS_Attributes">
               <div class="row alert alert-info">#{{$index+1}} set of equipment asset (file) attributes</div>
@@ -98,7 +99,7 @@
         </div>
 
         <!--File Uploader http://nervgh.github.io/pages/angular-file-upload/examples/simple/ -->
-        <div class="row" ng-hide="vm.hideFileUploader">
+        <div class="row" ng-hide="vm.hideFileUploader || vm.equipment.asset_id">
           <div class="row alert alert-warning">Upload calibration.equipment.asset file using the inputs below</div>
           <div class = "row">
             <div class="col-sm-6">

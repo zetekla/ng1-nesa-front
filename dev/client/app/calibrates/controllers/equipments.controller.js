@@ -18,7 +18,7 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    vm.hideFileUploader = true;
+    vm.hideFileUploader = false;
 
     // Remove existing Equipment
     function remove() {

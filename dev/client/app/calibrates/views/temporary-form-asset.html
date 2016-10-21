@@ -15,14 +15,14 @@
               <label class="control-label" for="assetNumber">label1</label>
               <div class="controls input-group">
                 <span class="input-group-addon">Asset Number</span>
-                <input id="assetNumber" disabled name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control" placeholder="assetNumber" required>
+                <input id="assetNumber" ng-readonly="vm.equipment.asset_id" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control" placeholder="assetNumber" required>
               </div>
             </div>
             <div class="col-sm-4 form-group">
               <label class="control-label" for="model">label2</label>
               <div class="controls input-group">
                 <span class="input-group-addon">Model</span>
-                <input id="model" disabled name="model" type="text" ng-model="vm.equipment.model" class="form-control" placeholder="model">
+                <input id="model" ng-readonly="vm.equipment.asset_id" name="model" type="text" ng-model="vm.equipment.model" class="form-control" placeholder="model">
               </div>
             </div>
             <div class="col-sm-4 form-group">
