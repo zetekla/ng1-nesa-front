@@ -66,7 +66,7 @@
       })
       .state('equipments.assetFileCreate', {
         url: '/:asset_id/assetFileCreate',
-        templateUrl: 'calibrates/views/temporary-form-asset.html',
+        templateUrl: 'calibrates/views/form-asset-files.html',
         controller: 'assetFilesController',
         controllerAs: 'vm',
         resolve: {

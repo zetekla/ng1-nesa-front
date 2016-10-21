@@ -90,13 +90,6 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <button type="submit" class="btn btn-lg btn-success">{{vm.equipment.asset_id ? 'Update' : 'Create'}}</button>
-            </div>
-          </div>
-        </div>
 
         <!--File Uploader http://nervgh.github.io/pages/angular-file-upload/examples/simple/ -->
         <div class="row" ng-hide="vm.hideFileUploader || vm.equipment.asset_id">
@@ -106,9 +99,19 @@
               <div class="form-group">
                 <label class="control-label" for="fileUploader">Uploader Pane</label>
                 <div class="controls input-group input-group-lg">
-                  <input id="fileUploader" name="createdAt" type="text" ng-model="attribute.file" class="form-control" placeholder="Browse..">
+                  <input id="fileUploader" name="file" type="text" ng-model="vm.equipment.file" class="form-control" placeholder="Browse..">
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <button type="submit" class="btn btn-lg btn-success">{{vm.equipment.asset_id ? 'Update' : 'Create'}}</button>
             </div>
           </div>
         </div>

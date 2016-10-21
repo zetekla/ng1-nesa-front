@@ -20,7 +20,7 @@
     // Save Equipment
     function save(isValid) {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.equipmentForm');
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.assetFilesForm');
         return false;
       }
 
