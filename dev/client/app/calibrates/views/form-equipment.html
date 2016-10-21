@@ -10,50 +10,75 @@
         </div>
         <div class="form-group" show-errors>
           <div class = "row">
-            <div class="col-sm-6 text-center">
+            <div class="col-sm-6">
               <div class="form-group">
                 <label class="control-label" for="assetNumber">Asset Number</label>
                 <div class="controls">
-                  <input name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control" placeholder="assetNumber" required>
+                  <input id="assetNumber" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control" placeholder="assetNumber" required>
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="model">Model</label>
                 <div class="controls">
-                  <input name="model" type="text" ng-model="vm.equipment.model" class="form-control" placeholder="model">
+                  <input id="model" name="model" type="text" ng-model="vm.equipment.model" class="form-control" placeholder="model">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="location">Location</label>
                 <div class="controls">
-                  <input name="location" type="text" ng-model="vm.equipment.ECMS_Location.desc" class="form-control" placeholder="location">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="last_cal">Last Cal</label>
-                <div class="controls">
-                  <input name="last_cal" type="text" ng-model="vm.equipment.ECMS_Attributes[0].last_cal" class="form-control" placeholder="last_cal">
+                  <input id="location" name="location" type="text" ng-model="vm.equipment.ECMS_Location.desc" class="form-control" placeholder="location">
                 </div>
               </div>
             </div>
 
             <div class="col-sm-6">
               <div class="form-group">
+                <label class="control-label" for="last_cal">Last Cal</label>
+                <div class="controls">
+                  <input id="last_cal" name="last_cal" type="text" ng-model="vm.equipment.last_cal" class="form-control" placeholder="last_cal">
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="control-label" for="schedule">Schedule</label>
                 <div class="controls">
-                  <input name="schedule" type="text" ng-model="vm.equipment.ECMS_Attributes[0].schedule" class="form-control" placeholder="schedule">
+                  <input id="schedule" name="schedule" type="text" ng-model="vm.equipment.schedule" class="form-control" placeholder="schedule">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="next_cal">Next Cal</label>
                 <div class="controls">
-                  <input name="next_cal" type="text" ng-model="vm.equipment.ECMS_Attributes[0].next_cal" class="form-control" placeholder="next_cal">
+                  <input id="next_cal" name="next_cal" type="text" ng-model="vm.equipment.next_cal" class="form-control" placeholder="next_cal">
                 </div>
               </div>
-              <div class="form-group">
-                <label class="control-label" for="file">File</label>
-                <div class="controls">
-                  <input name="file" type="text" ng-model="vm.equipment.ECMS_Attributes[0].file" class="form-control" placeholder="file">
+            </div>
+            <div class="col-sm-12" ng-repeat="attribute in vm.equipment.ECMS_Attributes">
+              <div class="row alert alert-info">#{{$index+1}} set of equipment asset (file) attributes</div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="control-label" for="file">File</label>
+                  <div class="controls">
+                    <input id="file" name="file" type="text" ng-model="attribute.file" class="form-control" placeholder="file">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="filename">filename</label>
+                  <div class="controls">
+                    <input id="filename" name="filename" type="text" ng-model="attribute.filename" class="form-control" placeholder="filename">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="control-label" for="createdAt">Uploaded Date</label>
+                  <div class="controls">
+                    <input id="createdAt" name="createdAt" type="text" ng-model="attribute.createdAt" class="form-control" placeholder="createdAt">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="updatedAt">updatedAt</label>
+                  <div class="controls">
+                    <input id="updatedAt" name="updatedAt" type="text" ng-model="attribute.updatedAt" class="form-control" placeholder="updatedAt">
+                  </div>
                 </div>
               </div>
             </div>
