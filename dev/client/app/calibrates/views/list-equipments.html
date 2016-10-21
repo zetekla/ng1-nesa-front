@@ -57,7 +57,7 @@
           <td>{{equipment.ECMS_Attributes[0].createdAt}}</td>
           <td>{{equipment.ECMS_Attributes[0].updatedAt}}</td>
           <td>
-            <button type="button" class="btn btn-warning">Add New Cal Record
+            <button type="button" class="btn btn-warning" data-ui-sref="equipments.assetFileCreate({ asset_id: equipment.asset_id })">Add New Cal Record
           </td>
         </tr>
         <tr data-ng-repeat="attribute in equipment.ECMS_Attributes | limitTo:20:1">

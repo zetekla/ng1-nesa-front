@@ -3,8 +3,9 @@
     <h1>{{vm.equipment.asset_id ? 'Edit Equipment' : 'New Equipment'}}</h1>
   </div>
   <div class="col-md-12">
-    <form name="vm.form.equipmentForm" class="" ng-submit="vm.save(vm.form.equipmentForm.$valid)" novalidate>
+    <form name="vm.form.equipmentForm" class="" ng-submit="vm.save(vm.form.equipmentForm.$valid)" ng-init="fieldTitle='Existing data'" novalidate>
       <fieldset>
+        <legend>{{fieldTitle}}</legend>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
@@ -51,6 +52,9 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class = "row">
             <div class="col-sm-12" ng-repeat="attribute in vm.equipment.ECMS_Attributes">
               <div class="row alert alert-info">#{{$index+1}} set of equipment asset (file) attributes</div>
               <div class="col-sm-6">
@@ -67,6 +71,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="col-sm-6">
                 <div class="form-group">
                   <label class="control-label" for="createdAt">Uploaded Date</label>
@@ -88,6 +93,21 @@
           <div class="col-sm-6">
             <div class="form-group">
               <button type="submit" class="btn btn-lg btn-success">{{vm.equipment.asset_id ? 'Update' : 'Create'}}</button>
+            </div>
+          </div>
+        </div>
+
+        <!--File Uploader http://nervgh.github.io/pages/angular-file-upload/examples/simple/ -->
+        <div class="row" ng-hide="vm.hideFileUploader">
+          <div class="row alert alert-warning">Upload calibration.equipment.asset file using the inputs below</div>
+          <div class = "row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="control-label" for="fileUploader">Uploader Pane</label>
+                <div class="controls input-group input-group-lg">
+                  <input id="fileUploader" name="createdAt" type="text" ng-model="attribute.file" class="form-control" placeholder="Browse..">
+                </div>
+              </div>
             </div>
           </div>
         </div>

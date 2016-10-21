@@ -63,6 +63,19 @@
         data:{
           pageTitle: 'Equipment {{ equipmentResolve.asset_id }}'
         }
+      })
+      .state('equipments.assetFileCreate', {
+        url: '/:asset_id/assetFileCreate',
+        templateUrl: 'calibrates/views/temporary-form-asset.html',
+        controller: 'assetFilesController',
+        controllerAs: 'vm',
+        resolve: {
+          equipmentResolve: getEquipment
+        },
+        data: {
+          roles: ['user', 'admin'],
+          pageTitle : 'Asset File Create'
+        }
       });
   }
 

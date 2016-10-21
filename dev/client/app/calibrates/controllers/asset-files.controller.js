@@ -4,28 +4,18 @@
   // Equipments controller
   angular
     .module('calibrates')
-    .controller('EquipmentsController', EquipmentsController);
+    .controller('assetFilesController', assetFilesController);
 
-  EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve'];
+  assetFilesController.$inject = ['$scope', '$state', '$window', 'equipmentResolve'];
 
-  function EquipmentsController ($scope, $state, $window, equipment) {
+  function assetFilesController ($scope, $state, $window, equipment) {
     var vm = this;
-
     vm.equipment = equipment;
 
-    // vm.pageTitle = $state.current.data.pageTitle;
     vm.error = null;
     vm.form = {};
-    vm.remove = remove;
     vm.save = save;
-    vm.hideFileUploader = true;
-
-    // Remove existing Equipment
-    function remove() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.equipment.$remove($state.go('equipments.list'));
-      }
-    }
+    vm.hideFileUploader = false;
 
     // Save Equipment
     function save(isValid) {

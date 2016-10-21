@@ -1,0 +1,24 @@
+<!--An equipment is defined by model and asset_number. Rhetorically, the equipment is tied with model and asset_number to reference of it uniqueness.-->
+<!--An asset form allows users to upload a file to write to the database.-->
+
+<section>
+  <div class="page-header">
+    <h1>{{vm.file.file_id ? 'Edit File' : 'New File'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.equipmentForm" class="" ng-submit="vm.save(vm.form.equipmentForm.$valid)" novalidate>
+      <fieldset>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <button type="submit" class="btn btn-lg btn-success">{{vm.equipment.asset_id ? 'Update' : 'Create'}}</button>
+            </div>
+          </div>
+        </div>
+        <!--<div ng-messages="vm.form.equipmentForm.model.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Equipment model is required.</p>
+            </div>-->
+      </fieldset>
+    </form>
+  </div>
+</section>
