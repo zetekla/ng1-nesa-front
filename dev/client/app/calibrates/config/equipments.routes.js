@@ -19,7 +19,7 @@
       })
       .state('equipments.list', {
         url: '',
-        templateUrl: 'calibrates/views/list-equipments.html',
+        templateUrl: 'app/calibrates/views/list-equipments.html',
         controller: 'EquipmentsListController',
         controllerAs: 'vm',
         data: {
@@ -28,7 +28,7 @@
       })
       .state('equipments.create', {
         url: '/create',
-        templateUrl: 'calibrates/views/form-equipment.html',
+        templateUrl: 'app/calibrates/views/form-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
         resolve: {
@@ -41,7 +41,7 @@
       })
       .state('equipments.edit', {
         url: '/:asset_id/edit',
-        templateUrl: 'calibrates/views/form-equipment.html',
+        templateUrl: 'app/calibrates/views/form-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
         resolve: {
@@ -54,7 +54,7 @@
       })
       .state('equipments.view', {
         url: '/:asset_id',
-        templateUrl: 'calibrates/views/view-equipment.html',
+        templateUrl: 'app/calibrates/views/view-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
         resolve: {
@@ -66,7 +66,7 @@
       })
       .state('equipments.assetFileCreate', {
         url: '/:asset_id/assetFileCreate',
-        templateUrl: 'calibrates/views/form-asset-files.html',
+        templateUrl: 'app/calibrates/views/form-asset-files.html',
         controller: 'assetFilesController',
         controllerAs: 'vm',
         resolve: {

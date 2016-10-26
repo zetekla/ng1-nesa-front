@@ -7,11 +7,11 @@ app.config(function($stateProvider, $urlRouterProvider){
   $stateProvider
     .state("home", {
       url: "/home",
-      templateUrl: "layout/home.html"
+      templateUrl: "app/layout/home.html"
     })
     .state("home.list", {
       url: "/list",
-      templateUrl: "fixtures/partial-list.html",
+      templateUrl: "app/fixtures/partial-list.html",
       controller: function($scope) {
         $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
       }
@@ -24,20 +24,20 @@ app.config(function($stateProvider, $urlRouterProvider){
     // CALIBRATION
     .state("equipmentForm", {
       url: "/equipmentForm",
-      templateUrl: "calibrates/views/form-equipment.html"
+      templateUrl: "app/calibrates/views/form-equipment.html"
     })
     .state("equipmentRecord", {
       url: "/equipmentRecord",
-      templateUrl: "fixtures/calibration/recordForm.html"
+      templateUrl: "app/fixtures/calibration/recordForm.html"
     })
     // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
     .state('about', {
       url: '/about',
       views: {
-        '': { templateUrl: 'fixtures/partial-about.html' },
+        '': { templateUrl: 'app/fixtures/partial-about.html' },
         'columnOne@about': { template: 'Look I am a column!' },
         'columnTwo@about': {
-          templateUrl: 'fixtures/table-data.html',
+          templateUrl: 'app/fixtures/table-data.html',
           controller: 'tableDataCtrl'
         }
       }
