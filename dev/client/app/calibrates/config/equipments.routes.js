@@ -76,7 +76,21 @@
           roles: ['user', 'admin'],
           pageTitle : 'Asset File Create'
         }
-      });
+      })
+      /*
+        .state('equipments.assetFileView',{
+          url:'/:asset_id/:file_id'
+
+        .state('equipments.assetFileEdit', {
+          url:'/:asset_id/:file_id/edit   => need file_id be sent as a param to update the correct set of files
+          file_id ~~ id in attrs table.
+          file_id is used to delete a right file in the database.
+
+          It's a good practice to develop full CRUD operations and then strip away the unnecessary front-end functionality.
+           and enhance back-end security, ACL,...
+      */
+
+    ;
   }
 
   getEquipment.$inject = ['$stateParams', 'EquipmentsService'];
