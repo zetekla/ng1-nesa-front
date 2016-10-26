@@ -28,6 +28,8 @@ var gulp = require('gulp'),
   uglify              = require('gulp-uglify'),
   rename              = require('gulp-rename'),
 
+  angularFilesort     = require('gulp-angular-filesort'),
+
   typescript          = require('gulp-typescript'),
 
 
@@ -40,6 +42,25 @@ var gulp = require('gulp'),
   vendorBundleName    = bundleHash + '.vendor.bundle.js',
   mainStylesBundleName= bundleHash + '.styles.min.css'
 ;
+
+
+var config = {
+  dist: './public/dist',
+  lib: './public/lib',
+  partials: ['dev/client/**/*.html', '!dev/client/index.html'],
+  index: './dev/client/index.html',
+  styles: {
+    src: [ './public/lib/bootstrap/dist/css/bootstrap.min.css',
+           './public/lib/font-awesome/css/font-awesome.min.css',
+           './public/dist/assets/**/*.+(css|scss)',
+           './public/dist/assets/!*styles{.min}.+(css|scss)'],
+    dest: './public/dist/assets'
+  },
+  fonts: {
+    src: ['./public/lib/font-awesome/fonts/**/*'],
+    dest:'./public/dist/fonts'
+  }
+};
 
 gulp.task('dist', function(done) {
   runSequence('clean', 'bundle', function() {
@@ -66,39 +87,41 @@ gulp.task('bundle:vendor', function () {
     });
 });
 
+gulp.task('bundle:app', function () {
+  return gulp.src(['./dev/client/app/**/**/*.js'])
+    .pipe(angularFilesort())
+    .pipe(concat(mainBundleName))
+    .pipe(gulp.dest('./public/build'));
+});
+
 
 gulp.task('build:css', function() {
-  var css = gulp.src('./dev/client/assets/**/*.css')
-    .pipe(sourcemaps.init());
-
-  var scss = gulp.src('./dev/client/assets/**/*.scss')
+  return gulp.src(config.styles.src)
     .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError));
-  return es.merge(css,scss)
+    .pipe(sass().on('error', sass.logError))
     .pipe(postcss([precss, autoprefixer, cssnano]))
     .pipe(sourcemaps.write())
     .pipe(ext_replace('.css'))
-    .pipe(gulp.dest('./public/dist/assets'));
+    .pipe(gulp.dest(config.styles.dest));
 });
 
 gulp.task('bundle:css', ['build:css'], function() {
-  var bundleCSS = {
-    src: [ './public/lib/bootstrap/dist/css/bootstrap.min.css',
-           './public/lib/font-awesome/css/font-awesome.min.css',
-           './public/dist/assets/**/*',
-           './public/dist/assets/!*styles{.min}.css'],
-    dest: './public/dist/assets'
-  };
-
-    gulp.src(bundleCSS.src)
+    gulp.src(config.styles.src)
     .pipe(concat('styles.min.css'))
     .pipe(minify())
-    .pipe(gulp.dest(bundleCSS.dest));
+    .pipe(gulp.dest(config.styles.dest));
 
-  return gulp.src(bundleCSS.src)
+  return gulp.src(config.styles.src)
     .pipe(concat(mainStylesBundleName))
     .pipe(minify())
-    .pipe(gulp.dest(bundleCSS.dest));
+    .pipe(gulp.dest(config.styles.dest));
+});
+
+
+/*-- COPY --*/
+gulp.task('copy-fonts', function(){
+  return gulp.src(config.fonts.src)
+    .pipe(gulp.dest(config.fonts.dest));
 });
 
 /*-- CLEAN --*/

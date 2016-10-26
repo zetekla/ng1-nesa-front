@@ -5,10 +5,11 @@
     "baseDir": "./dev/client",
     "routes": {
       "/": "./",
-      "/app": "dev/client",
-      "/assets": "public/dist/assets",
+      "/home": "dev/client",
+      "/app": "public/dist/",
       "/vendors": "public/lib",
-      "/test": "test"
+      "/test": "test",
+      "/app/fonts": "public/lib/font-awesome/fonts"
     }
   }
 }
