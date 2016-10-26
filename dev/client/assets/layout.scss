@@ -1,0 +1,42 @@
+/* restore "body" styling that were changes by "jasmine.css"... */
+body { background-color: white; padding: 0; margin: 8px; }
+/* ... but remain the "jasmine.css" styling for the Jasmine reporting */
+.jasmine_reporter { background-color: #eeeeee; padding: 0; margin: 0; }
+
+.gray {
+  color: gray;
+}
+.italic-small {
+  font-style: italic;
+  font-size: 8pt;
+}
+.floatright {
+  float: right;
+}
+.right {
+  text-align: right;
+}
+.nopad {
+  padding: 0px !important;
+}
+.inline-block {
+  display: inline-block !important;
+  width: auto;
+}
+
+/*
+fieldset {
+  display: block;
+  -webkit-margin-start: 2px;
+  -webkit-margin-end: 2px;
+  -webkit-padding-before: 0.35em;
+  -webkit-padding-start: 0.75em;
+  -webkit-padding-end: 0.75em;
+  -webkit-padding-after: 0.625em;
+  min-width: -webkit-min-content;
+  border-width: 2px;
+  border-style: groove;
+  border-color: threedface;
+  border-image: initial;
+}
+*/

@@ -1,0 +1,14 @@
+@import 'layout';
+
+td {
+  color: olive;
+}
+
+.footer {
+  @extend .gray;
+  @extend .floatright;
+  @extend .right;
+  @extend .italic-small;
+  @extend .nopad;
+  @extend .inline-block;
+}

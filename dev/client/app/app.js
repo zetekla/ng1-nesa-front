@@ -1,6 +1,10 @@
 var app = angular.module('plunker', ['ui.router', 'calibrates']);
+    app.config(CalibratesRouteConfig);
 
-app.config(function($stateProvider, $urlRouterProvider){
+
+CalibratesRouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+function CalibratesRouteConfig($stateProvider, $urlRouterProvider){
 
   $urlRouterProvider.when("", "/home");
 
@@ -42,7 +46,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       }
     });
-});
+}
 
 /*
 

@@ -1,5 +1,8 @@
 var app = angular.module('plunker');
+app.controller('MainCtrl', MainCtrl);
 
-app.controller('MainCtrl', function($scope) {
+MainCtrl.$inject = ['$scope'];
+
+function MainCtrl($scope) {
   $scope.name = 'World';
-});
+}

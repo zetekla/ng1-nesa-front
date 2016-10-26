@@ -1,6 +1,9 @@
 var app = angular.module('plunker');
+app.controller('tableDataCtrl', tableDataCtrl);
 
-app.controller('tableDataCtrl', function($scope, $http) {
+tableDataCtrl.$inject = ['$scope', '$http'];
+
+function tableDataCtrl($scope, $http) {
   $scope.message = 'test';
 
   $scope.scotches = [
@@ -17,4 +20,4 @@ app.controller('tableDataCtrl', function($scope, $http) {
       price: 20000
     }
   ];
-});
+}
