@@ -76,10 +76,25 @@ var config = {
     },
     dest: './public/dist/assets'
   },
-
+  html: {
+    src:  './dev/client/app/**/**/**/*.html',
+    dest: './public/dist'
+  },
   fonts: {
     src: ['./public/lib/font-awesome/fonts/**/*'],
     dest:'./public/dist/fonts'
+  },
+  images: {
+    src: ['./public/lib/jasmine/images/jasmine_favicon.png'],
+    dest:'./public/dist/images'
+  },
+  bower: {
+    src: [
+      './public/lib/jasmine/lib/jasmine-core/json2.js',
+      './public/lib/jasmine/lib/jasmine-core/jasmine.js',
+      './public/lib/jasmine/lib/jasmine-core/jasmine-html.js'
+    ],
+    dest: './public/dist/lib'
   },
   vendor: {
     js: [
@@ -107,7 +122,7 @@ var config = {
 
 
 gulp.task('dist', function(done) {
-  runSequence('clean', 'copy-fonts', 'bundle', function() {
+  runSequence('clean', 'copy-fonts', 'copy-html', 'copy-images', 'copy-lib', 'bundle', function() {
     done();
   });
 });
@@ -117,7 +132,7 @@ gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
     .pipe(htmlreplace({
       'app': mainBundleName,
       'vendor': vendorBundleName,
-      'css': mainStylesBundleName
+      'css': 'assets/' + mainStylesBundleName
     }))
     .pipe(gulp.dest('./public/dist'));
 });
@@ -185,6 +200,21 @@ gulp.task('bower-restore', function () {
 gulp.task('copy-fonts', function(){
   return gulp.src(config.fonts.src)
     .pipe(gulp.dest(config.fonts.dest));
+});
+
+gulp.task('copy-html', function(){
+  return gulp.src(config.html.src, {base:'./dev/client/'})
+    .pipe(gulp.dest(config.html.dest));
+});
+
+gulp.task('copy-images', function(){
+  return gulp.src(config.images.src)
+    .pipe(gulp.dest(config.images.dest));
+});
+
+gulp.task('copy-lib', function(){
+  return gulp.src(config.bower.src)
+    .pipe(gulp.dest(config.bower.dest));
 });
 
 /*gulp.task('copy-map-files', function(){

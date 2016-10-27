@@ -4,10 +4,13 @@
     "baseDir": "./dev/client",
     "routes": {
       "/": "./",
-      "/home": "dev/client",
-      "/app": "public/dist/",
-      "/vendors": "public/lib",
-      "/test": "test"
+      "/app": "dev/client",
+      "/assets": "public/dist/assets",
+      "/public/lib": "public/lib",
+      "/test": "test",
+      "/fonts": "public/dist/fonts",
+      "/lib": "public/dist/lib",
+      "/images": "public/dist/images"
     }
   }
 }
