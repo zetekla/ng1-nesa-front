@@ -10,6 +10,7 @@ var gulp = require('gulp'),
 
 
   /*-- Mixed --*/
+  _                   = require('lodash'),
   sourcemaps          = require('gulp-sourcemaps'),
   ext_replace         = require('gulp-ext-replace'),
   concat              = require('gulp-concat'),
@@ -47,6 +48,8 @@ var gulp = require('gulp'),
   mainStylesBundleName= bundleHash + '.styles.min.css'
 ;
 
+// import imported_vendor from './dev/client/vendor';
+var imported_vendor = require('./dev/client/vendor');
 
 var config = {
   dist: './public/dist',
@@ -57,7 +60,8 @@ var config = {
     src: [
       './dev/client/app/**/**/*.js',
       'test/client/jasmineBootstrap.js'
-    ]
+    ],
+    watch: './dev/client/app/**/**/**/*.+(ts|js)'
   },
   styles: {
     src: {
@@ -95,25 +99,7 @@ var config = {
     ],
     dest: './public/dist/lib'
   },
-  vendor: {
-    js: [
-      // './public/lib/json3/lib/json3.js',
-      './public/lib/angular/angular.js',
-      './public/lib/angular-mocks/angular-mocks.js',
-      './public/lib/angular-ui-router/release/angular-ui-router.js',
-      './public/lib/moment/min/moment.js',
-      './public/lib/tether/dist/js/tether.js',
-      './public/lib/angular-animate/angular-animate.js',
-      './public/lib/angular-cookies/angular-cookies.js',
-      './public/lib/angular-resource/angular-resource.js',
-      './public/lib/angular-route/angular-route.js',
-      './public/lib/angular-sanitize/angular-sanitize.js',
-      './public/lib/angular-touch/angular-touch.js',
-      './public/lib/lodash/dist/lodash.js',
-      './public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
-    ]
-  }
-
+  vendor: imported_vendor
 };
 
 
@@ -125,7 +111,7 @@ gulp.task('dist', function(done) {
 });
 
 gulp.task('refresh', function(done) {
-  runSequence('clean:dev', 'copy-html', 'bundle', function() {
+  runSequence('clean:dev', 'bundle', function() {
     done();
   });
 });
@@ -140,31 +126,60 @@ gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
     .pipe(gulp.dest('./public/dist'));
 });
 
-gulp.task('bundle:vendor', ['bower-restore'], function () {
+var tasks = {
+  bundle_css: {
+    dev:      () => gulp.src(config.styles.src.bundle)
+                      .pipe(concat('styles.min.css'))
+                      .pipe(minify())
+                      .pipe(gulp.dest(config.styles.dest)),
+    dist:     () => gulp.src(config.styles.src.bundle)
+                      .pipe(concat(mainStylesBundleName))
+                      .pipe(minify())
+                      .pipe(gulp.dest(config.styles.dest))
+  },
+  bundle_vendor: {
+    dev:      (vendor) => vendor.pipe(concat(vendorShortName))
+                .pipe(gulp.dest(config.dist)),
+    dist:     (vendor) => vendor
+                .pipe(sourcemaps.init())
+                .pipe(concat(vendorBundleName))
+                .pipe(sourcemaps.write('maps/'))
+                .pipe(gulp.dest(config.dist))
+  },
+  bundle_app: {
+    dev:      (app) =>  app.pipe(concat(mainShortName))
+                          .pipe(gulp.dest(config.dist)),
+    dist:     (app) =>  app.pipe(sourcemaps.init())
+                          .pipe(concat(mainBundleName))
+                          .pipe(sourcemaps.write('maps/'))
+                          .pipe(gulp.dest(config.dist))
+  }
+};
 
+gulp.task('bundle:vendor', ['bundle:vendor:dev', 'bundle:vendor:dist']);
+
+gulp.task('bundle:vendor:dev', ['bower-restore'], function () {
   var vendor = gulp.src(config.vendor.js);
-
-  vendor
-    .pipe(sourcemaps.init())
-    .pipe(concat(vendorBundleName))
-    .pipe(sourcemaps.write('maps/'))
-    .pipe(gulp.dest(config.dist));
-
-  return vendor.pipe(concat(vendorShortName))
-    .pipe(gulp.dest(config.dist));
+    return tasks.bundle_vendor.dev(vendor);
+});
+gulp.task('bundle:vendor:dist', ['bower-restore'], function () {
+  var vendor = gulp.src(config.vendor.js);
+    return tasks.bundle_vendor.dist(vendor);
 });
 
-gulp.task('bundle:app', function () {
+gulp.task('bundle:app', ['bundle:app:dev', 'bundle:app:dist']);
+
+gulp.task('bundle:app:dev', function () {
   var app = gulp.src(config.scripts.src)
     .pipe(angularFilesort());
-  app
-    .pipe(sourcemaps.init())
-    .pipe(concat(mainBundleName))
-    .pipe(sourcemaps.write('maps/'))
-    .pipe(gulp.dest(config.dist));
 
-  return app.pipe(concat(mainShortName))
-    .pipe(gulp.dest(config.dist));
+  return tasks.bundle_app.dev(app);
+});
+gulp.task('bundle:app:dist', function () {
+  var app = gulp.src(config.scripts.src)
+    .pipe(angularFilesort());
+
+  return tasks.bundle_app.dist(app);
 });
 
 
@@ -182,16 +197,35 @@ gulp.task('build:css', function() {
 });
 
 gulp.task('bundle:css', ['build:css'], function() {
-    gulp.src(config.styles.src.bundle)
-    .pipe(concat('styles.min.css'))
-    .pipe(minify())
-    .pipe(gulp.dest(config.styles.dest));
-
-  return gulp.src(config.styles.src.bundle)
-    .pipe(concat(mainStylesBundleName))
-    .pipe(minify())
-    .pipe(gulp.dest(config.styles.dest));
+  tasks.bundle_css.dev();
+  return tasks.bundle_css.dist();
 });
+
+gulp.task('bundle:css:dev', ['build:css'], function() {
+  return tasks.bundle_css.dev();
+});
+gulp.task('bundle:css:dist', ['build:css'], function() {
+  return tasks.bundle_css.dist();
+});
+
+/*-- WATCHERS --*/
+gulp.task('watch:styles', function () {
+  gulp.watch(config.styles.src.scss, ['bundle:css:dev']);
+});
+
+gulp.task('watch:html', function () {
+  gulp.watch(config.html.src);
+});
+
+gulp.task('watch:vendors', function () {
+  gulp.watch(config.vendor.watch, ['bundle:vendor:dev']);
+});
+
+gulp.task('watch:scripts', function () {
+  gulp.watch(config.scripts.watch, ['bundle:app:dev']);
+});
+
+gulp.task('watch', ['watch:styles', 'watch:html', 'watch:vendors', 'watch:scripts']);
 
 
 /*-- RESTORE MISSING BOWER COMPONENTS --*/
@@ -225,7 +259,7 @@ gulp.task('copy-lib', function(){
     .pipe(gulp.dest(config.dist));
 });*/
 
-/*-- CLEAN --*/
+/*-- CLEANERS --*/
 gulp.task('clean', ['clean:dist']);
 
 gulp.task('clean:dist', function () {
@@ -233,11 +267,32 @@ gulp.task('clean:dist', function () {
     .pipe(clean());
 });
 
+gulp.task('clean:styles', function () {
+  return gulp.src([
+    config.styles.dest +'styles.min.css'
+  ], {read: false})
+    .pipe(clean());
+});
+
+gulp.task('clean:vendor', function () {
+  return gulp.src([
+    config.scripts.dest + vendorShortName
+  ], {read: false})
+    .pipe(clean());
+});
+
+gulp.task('clean:scripts', function () {
+  return gulp.src([
+    config.scripts.dest + mainShortName
+  ], {read: false})
+    .pipe(clean());
+});
+
 gulp.task('clean:dev', function () {
   return gulp.src([
     './public/dist/*.bundle.js',
-    './public/dist/app/*',
-    './public/dist/assets/*'
+  // './public/dist/app/*',
+    './public/dist/assets/styles.min.css'
   // ,'./public/dist/maps/*'
   ], {read: false})
     .pipe(clean());
