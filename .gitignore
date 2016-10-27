@@ -149,3 +149,4 @@ dev/server/app/dodo/
 /routeConfig.json
 public/js/
 /testConfig.json
+*.bundle.js

@@ -1,5 +1,4 @@
 {
-  "port": 8080,
   "files": ["./dev/client/**/*.{html,htm,css,js}"],
   "server": {
     "baseDir": "./dev/client",
@@ -8,8 +7,7 @@
       "/home": "dev/client",
       "/app": "public/dist/",
       "/vendors": "public/lib",
-      "/test": "test",
-      "/app/fonts": "public/lib/font-awesome/fonts"
+      "/test": "test"
     }
   }
 }
