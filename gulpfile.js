@@ -51,7 +51,6 @@ var gulp = require('gulp'),
 var config = {
   dist: './public/dist',
   lib: './public/lib',
-  client: './dev/client',
   partials: ['dev/client/**/*.html', '!dev/client/index.html'],
   index: './dev/client/index.html',
   scripts: {
@@ -88,7 +87,7 @@ var config = {
     src: ['./public/lib/jasmine/images/jasmine_favicon.png'],
     dest:'./public/dist/images'
   },
-  bower: {
+  jasmine: {
     src: [
       './public/lib/jasmine/lib/jasmine-core/json2.js',
       './public/lib/jasmine/lib/jasmine-core/jasmine.js',
@@ -98,9 +97,7 @@ var config = {
   },
   vendor: {
     js: [
-/*      './public/lib/jasmine/lib/jasmine-core/json2.js',
-      './public/lib/jasmine/lib/jasmine-core/jasmine.js',
-      './public/lib/jasmine/lib/jasmine-core/jasmine-html.js',*/
+      // './public/lib/json3/lib/json3.js',
       './public/lib/angular/angular.js',
       './public/lib/angular-mocks/angular-mocks.js',
       './public/lib/angular-ui-router/release/angular-ui-router.js',
@@ -127,6 +124,12 @@ gulp.task('dist', function(done) {
   });
 });
 
+gulp.task('refresh', function(done) {
+  runSequence('clean:dev', 'copy-html', 'bundle', function() {
+    done();
+  });
+});
+
 gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
   return gulp.src('dev/client/index.html')
     .pipe(htmlreplace({
@@ -148,7 +151,7 @@ gulp.task('bundle:vendor', ['bower-restore'], function () {
     .pipe(gulp.dest(config.dist));
 
   return vendor.pipe(concat(vendorShortName))
-    .pipe(gulp.dest(config.client));
+    .pipe(gulp.dest(config.dist));
 });
 
 gulp.task('bundle:app', function () {
@@ -161,7 +164,7 @@ gulp.task('bundle:app', function () {
     .pipe(gulp.dest(config.dist));
 
   return app.pipe(concat(mainShortName))
-    .pipe(gulp.dest(config.client));
+    .pipe(gulp.dest(config.dist));
 });
 
 
@@ -213,18 +216,17 @@ gulp.task('copy-images', function(){
 });
 
 gulp.task('copy-lib', function(){
-  return gulp.src(config.bower.src)
-    .pipe(gulp.dest(config.bower.dest));
+  return gulp.src(config.jasmine.src)
+    .pipe(gulp.dest(config.jasmine.dest));
 });
 
 /*gulp.task('copy-map-files', function(){
   return gulp.src(config.vendor.map)
-    .pipe(gulp.dest(config.client))
     .pipe(gulp.dest(config.dist));
 });*/
 
 /*-- CLEAN --*/
-gulp.task('clean', ['clean:dist', 'clean:dev']);
+gulp.task('clean', ['clean:dist']);
 
 gulp.task('clean:dist', function () {
   return gulp.src(['./public/dist'], {read: false})
@@ -232,6 +234,11 @@ gulp.task('clean:dist', function () {
 });
 
 gulp.task('clean:dev', function () {
-  return gulp.src(['./dev/client/*.bundle.js'], {read: false})
+  return gulp.src([
+    './public/dist/*.bundle.js',
+    './public/dist/app/*',
+    './public/dist/assets/*'
+  // ,'./public/dist/maps/*'
+  ], {read: false})
     .pipe(clean());
 });
