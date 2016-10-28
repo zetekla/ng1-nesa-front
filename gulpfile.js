@@ -53,6 +53,7 @@ var gulp = require('gulp'),
 var imported_vendor = require('./dev/client/vendor');
 
 var config = {
+  devClient: './dev/client/',
   dist: './public/dist',
   lib: './public/lib',
   partials: ['dev/client/**/*.html', '!dev/client/index.html'],
@@ -125,7 +126,7 @@ gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
       'vendor': vendorBundleName,
       'css': 'assets/' + mainStylesBundleName
     }))
-    .pipe(gulp.dest('./public/dist'));
+    .pipe(gulp.dest(config.dist));
 });
 
 var tasks = {
@@ -241,7 +242,7 @@ gulp.task('copy-fonts', function(){
 });
 
 gulp.task('copy-html', function(){
-  return gulp.src(config.html.src, {base:'./dev/client/'})
+  return gulp.src(config.html.src, {base: config.devClient})
     .pipe(gulp.dest(config.html.dest));
 });
 
@@ -264,7 +265,7 @@ gulp.task('copy-lib', function(){
 gulp.task('clean', ['clean:dist']);
 
 gulp.task('clean:dist', function () {
-  return gulp.src(['./public/dist'], {read: false})
+  return gulp.src([config.dist], {read: false})
     .pipe(clean());
 });
 
