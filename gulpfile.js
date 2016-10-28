@@ -17,6 +17,7 @@ var gulp = require('gulp'),
   es                  = require('event-stream'),
   browserSync         = require('browser-sync').create(),
   runSequence         = require('run-sequence'),
+  shell               = require('gulp-shell'),
   // sanity
   clean               = require('gulp-clean'),
   // dependencies management
@@ -58,10 +59,10 @@ var config = {
   index: './dev/client/index.html',
   scripts: {
     src: [
-      './dev/client/app/**/**/*.js',
+      './dev/client/app/**/*.js',
       'test/client/jasmineBootstrap.js'
     ],
-    watch: './dev/client/app/**/**/**/*.+(ts|js)'
+    watch: './dev/client/app/**/*.+(ts|js)'
   },
   styles: {
     src: {
@@ -73,14 +74,14 @@ var config = {
         './public/lib/jasmine/lib/jasmine-core/jasmine.css',
         './public/lib/bootstrap/dist/css/bootstrap.css',
         './public/lib/font-awesome/css/font-awesome.css',
-        './public/dist/assets/**/**/*.css',
+        './public/dist/assets/**/*.css',
         '!./public/dist/assets/styles{,.min}.css'
       ]
     },
     dest: './public/dist/assets'
   },
   html: {
-    src:  './dev/client/app/**/**/**/*.html',
+    src:  './dev/client/app/**/*.html',
     dest: './public/dist'
   },
   fonts: {
@@ -102,7 +103,8 @@ var config = {
   vendor: imported_vendor
 };
 
-
+gulp.task('default', ['serve']);
+gulp.task('shell', shell.task(['lite-server']));
 
 gulp.task('dist', function(done) {
   runSequence('clean', 'copy-fonts', 'copy-html', 'copy-images', 'copy-lib', 'bundle', function() {
@@ -110,8 +112,8 @@ gulp.task('dist', function(done) {
   });
 });
 
-gulp.task('refresh', function(done) {
-  runSequence('clean:dev', 'bundle', function() {
+gulp.task('serve', function(done) {
+  runSequence('clean:dev', 'copy-lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', function() {
     done();
   });
 });
@@ -129,8 +131,7 @@ gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
 var tasks = {
   bundle_css: {
     dev:      () => gulp.src(config.styles.src.bundle)
-                      .pipe(concat('styles.min.css'))
-                      .pipe(minify())
+                      .pipe(concat('styles.css'))
                       .pipe(gulp.dest(config.styles.dest)),
     dist:     () => gulp.src(config.styles.src.bundle)
                       .pipe(concat(mainStylesBundleName))
@@ -210,19 +211,19 @@ gulp.task('bundle:css:dist', ['build:css'], function() {
 
 /*-- WATCHERS --*/
 gulp.task('watch:styles', function () {
-  gulp.watch(config.styles.src.scss, ['bundle:css:dev']);
+  return gulp.watch(config.styles.src.scss, ['bundle:css:dev']);
 });
 
 gulp.task('watch:html', function () {
-  gulp.watch(config.html.src);
+  return gulp.watch(config.html.src);
 });
 
 gulp.task('watch:vendors', function () {
-  gulp.watch(config.vendor.watch, ['bundle:vendor:dev']);
+  return gulp.watch(config.vendor.watch, ['bundle:vendor:dev']);
 });
 
 gulp.task('watch:scripts', function () {
-  gulp.watch(config.scripts.watch, ['bundle:app:dev']);
+  return gulp.watch(config.scripts.watch, ['bundle:app:dev']);
 });
 
 gulp.task('watch', ['watch:styles', 'watch:html', 'watch:vendors', 'watch:scripts']);
@@ -269,7 +270,7 @@ gulp.task('clean:dist', function () {
 
 gulp.task('clean:styles', function () {
   return gulp.src([
-    config.styles.dest +'styles.min.css'
+    config.styles.dest +'styles.css'
   ], {read: false})
     .pipe(clean());
 });
@@ -288,12 +289,4 @@ gulp.task('clean:scripts', function () {
     .pipe(clean());
 });
 
-gulp.task('clean:dev', function () {
-  return gulp.src([
-    './public/dist/*.bundle.js',
-  // './public/dist/app/*',
-    './public/dist/assets/styles.min.css'
-  // ,'./public/dist/maps/*'
-  ], {read: false})
-    .pipe(clean());
-});
+gulp.task('clean:dev', ['clean:styles', 'clean:vendor', 'clean:scripts']);

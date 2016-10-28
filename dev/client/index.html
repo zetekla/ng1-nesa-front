@@ -7,7 +7,7 @@
   <link rel="shortcut icon" type="image/png" href="images/jasmine_favicon.png">
 
   <!-- build:css -->
-  <link rel="stylesheet" href="assets/styles.min.css">
+  <link rel="stylesheet" href="assets/styles.css">
   <!-- endbuild -->
 
   <style>
@@ -38,7 +38,12 @@
 
   <!-- build:vendor -->
   <script src="/public/dist/vendor.bundle.js"></script>
-
+    <!-- optionally require vendor.js to retrieve the src -->
+    <script src="vendor.js"></script>
+    <script type="text/javascript">
+      // console.log(vendor.js);
+    </script>
+    <!-- optionally -->
   <!-- endbuild -->
 
   <!-- build:app -->

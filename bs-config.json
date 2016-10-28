@@ -1,5 +1,5 @@
 {
-  "files": ["./dev/client/**/*.{html,htm,css,scss,js}"],
+  "files": ["./dev/client/**/*.{html,htm}", "./public/dist/*.bundle.js", "./public/dist/assets/styles.css"],
   "server": {
     "baseDir": "./dev/client",
     "routes": {
