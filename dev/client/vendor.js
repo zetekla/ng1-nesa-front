@@ -32,4 +32,13 @@ var vendor = {
   watch: './dev/client/vendor.js'
 };
 
+/*
+
+module.exports = vendor;
+
+// works fine for [dev] with server-side systemJS load, browserRequire not needed.
+// For production, all vendor becomes vendor.bundle.js, so systemJS isn't then needed.
+
+*/
+
 browserRequire(vendor);
