@@ -14,6 +14,7 @@ function browserRequire(_){
 var vendor = {
   js: [
     // './public/lib/json3/lib/json3.js',
+    // './node_modules/systemjs/dist/system.js',
     './public/lib/angular/angular.js',
     './public/lib/angular-mocks/angular-mocks.js',
     './public/lib/angular-ui-router/release/angular-ui-router.js',

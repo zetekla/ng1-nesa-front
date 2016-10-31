@@ -1,16 +1,17 @@
 {
   "files": ["./dev/client/**/*.{html,htm}", "./public/dist/*.bundle.js", "./public/dist/assets/styles.css"],
   "server": {
-    "baseDir": "./dev/client",
+    "baseDir": "./dev/client/",
     "routes": {
       "/": "./",
-      "/app": "dev/client",
-      "/assets": "public/dist/assets",
-      "/public/lib": "public/lib",
-      "/test": "test",
-      "/fonts": "public/dist/fonts",
-      "/lib": "public/dist/lib",
-      "/images": "public/dist/images"
+      "/app": "dev/client/",
+      "/assets": "public/dist/assets/",
+      "/public/lib": "public/lib/",
+      "/test": "test/",
+      "/fonts": "public/dist/fonts/",
+      "/lib": "public/dist/lib/",
+      "/images": "public/dist/images/",
+      "/node_modules": "/node_modules/"
     }
   }
 }
