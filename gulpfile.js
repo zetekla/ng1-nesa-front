@@ -54,13 +54,13 @@ gulp.task('default', ['serve']);
 gulp.task('shell', shell.task(['lite-server']));
 
 gulp.task('dist', function(done) {
-  runSequence('clean', 'copy-fonts', 'copy-html', 'copy-images', 'copy-lib', 'bundle', function() {
+  runSequence('clean', 'copy_fonts', 'copy_html', 'copy_images', 'copy_lib', 'bundle', function() {
     done();
   });
 });
 
 gulp.task('serve', function(done) {
-  runSequence('clean:dev', 'copy-fonts', 'copy-lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', function() {
+  runSequence('clean:dev', 'copy_fonts', 'copy_lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', function() {
     done();
   });
 });
@@ -106,11 +106,11 @@ var tasks = {
 
 gulp.task('bundle:vendor', ['bundle:vendor:dev', 'bundle:vendor:dist']);
 
-gulp.task('bundle:vendor:dev', ['bower-restore'], function () {
+gulp.task('bundle:vendor:dev', ['bower_restore'], function () {
   var vendor = gulp.src(config.vendor.js);
     return tasks.bundle_vendor.dev(vendor);
 });
-gulp.task('bundle:vendor:dist', ['bower-restore'], function () {
+gulp.task('bundle:vendor:dist', ['bower_restore'], function () {
   var vendor = gulp.src(config.vendor.js);
     return tasks.bundle_vendor.dist(vendor);
 });
@@ -177,27 +177,27 @@ gulp.task('watch', ['watch:styles', 'watch:html', 'watch:vendors', 'watch:script
 
 
 /*-- RESTORE MISSING BOWER COMPONENTS --*/
-gulp.task('bower-restore', function () {
+gulp.task('bower_restore', function () {
   return bower();
 });
 
 /*-- COPY --*/
-gulp.task('copy-fonts', function(){
+gulp.task('copy_fonts', function(){
   return gulp.src(config.fonts.src)
     .pipe(gulp.dest(config.fonts.dest));
 });
 
-gulp.task('copy-html', function(){
-  return gulp.src(config.html.src, {base: config.devClient})
+gulp.task('copy_html', function(){
+  return gulp.src(config.html.src, {base: config.clientDir})
     .pipe(gulp.dest(config.html.dest));
 });
 
-gulp.task('copy-images', function(){
+gulp.task('copy_images', function(){
   return gulp.src(config.images.src)
     .pipe(gulp.dest(config.images.dest));
 });
 
-gulp.task('copy-lib', function(){
+gulp.task('copy_lib', function(){
   return gulp.src(config.jasmine.src)
     .pipe(gulp.dest(config.jasmine.dest));
 });

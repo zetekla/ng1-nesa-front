@@ -1,5 +1,5 @@
 module.exports = {
-  devClient: './dev/client/',
+  clientDir: './dev/client/',
   dist: './public/dist/',
   lib: './public/lib/',
   partials: ['dev/client/**/*.html', '!dev/client/index.html'],
