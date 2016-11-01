@@ -6,16 +6,16 @@ CalibratesRouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function CalibratesRouteConfig($stateProvider, $urlRouterProvider){
 
-  $urlRouterProvider.when("", "/home");
+  $urlRouterProvider.when('', '/home');
 
   $stateProvider
-    .state("home", {
-      url: "/home",
-      templateUrl: "./app/layout/home.html"
+    .state('home', {
+      url: '/home',
+      templateUrl: './app/layout/home.html'
     })
-    .state("home.list", {
-      url: "/list",
-      templateUrl: "./app/fixtures/partial-list.html",
+    .state('home.list', {
+      url: '/list',
+      templateUrl: './app/fixtures/partial-list.html',
       controller: function($scope) {
         $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
       }
@@ -26,13 +26,13 @@ function CalibratesRouteConfig($stateProvider, $urlRouterProvider){
       template: 'I could sure use a drink right now.'
     })
     // CALIBRATION
-    .state("equipmentForm", {
-      url: "/equipmentForm",
-      templateUrl: "./app/calibrates/views/form-equipment.html"
+    .state('equipmentForm', {
+      url: '/equipmentForm',
+      templateUrl: './app/calibrates/views/form-equipment.html'
     })
-    .state("equipmentRecord", {
-      url: "/equipmentRecord",
-      templateUrl: "./app/fixtures/calibration/recordForm.html"
+    .state('equipmentRecord', {
+      url: '/equipmentRecord',
+      templateUrl: './app/fixtures/calibration/recordForm.html'
     })
     // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
     .state('about', {
