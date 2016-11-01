@@ -60,7 +60,7 @@ gulp.task('dist', function(done) {
 });
 
 gulp.task('serve', function(done) {
-  runSequence('clean:dev', 'copy_fonts', 'copy_lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', function() {
+  runSequence('clean:dev', 'copy_images', 'copy_fonts', 'copy_lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', function() {
     done();
   });
 });
