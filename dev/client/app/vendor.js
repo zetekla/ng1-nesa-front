@@ -29,7 +29,7 @@ var vendor = {
     './public/lib/lodash/dist/lodash.js',
     './public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
   ],
-  watch: './dev/client/vendor.js'
+  watch: './dev/client/app/vendor.js'
 };
 
 /*

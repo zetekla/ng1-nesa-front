@@ -7,9 +7,13 @@ module.exports = {
   scripts: {
     src: [
       './dev/client/app/**/*.js',
+      '!./dev/client/app/vendor.js',
       'test/client/jasmineBootstrap.js'
     ],
-    watch: './dev/client/app/**/*.+(ts|js)'
+    watch: [
+      './dev/client/app/**/*.+(ts|js)',
+      '!./dev/client/app/vendor.js'
+    ]
   },
   styles: {
     src: {
@@ -47,5 +51,5 @@ module.exports = {
     ],
     dest: './public/dist/lib/'
   },
-  vendor: require('./dev/client/vendor')
+  vendor: require('./dev/client/app/vendor')
 };

@@ -4,7 +4,7 @@
     "baseDir":                "./dev/client/",
     "routes": {
       "/":                    "./",
-      "/app":                 "./dev/client/",
+      "/app":                 "./dev/client/app/",
       "/assets":              "./public/dist/assets/",
       "/public/lib":          "./public/lib/",
       "/test":                "./test/",
