@@ -45,14 +45,14 @@
       // console.log(vendor.js);
     </script>-->
 
-    <!--Using SystemJS-->
-    <script src="/node_modules/systemjs/dist/system.js"></script>
+    <!--Using SystemJS by default -->
+    <!--<script src="/node_modules/systemjs/dist/system.js"></script>-->
     <script>
       System.import('./app/vendor.js')
         .then(callback, console.error.bind(console));
 
-      function callback(data){
-        console.log(data);
+      function callback(vendor){
+        console.log(vendor);
       }
     </script>
     <!-- optionally -->

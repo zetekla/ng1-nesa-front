@@ -91,7 +91,7 @@ var tasks = {
     dist:     (vendor) => vendor
                 .pipe(sourcemaps.init())
                 .pipe(concat(vendorBundleName))
-                // .pipe(uglify())
+                .pipe(uglify({ mangle: false }))
                 .pipe(sourcemaps.write('maps/'))
                 .pipe(gulp.dest(config.dist))
   },
@@ -100,7 +100,7 @@ var tasks = {
                           .pipe(gulp.dest(config.dist)),
     dist:     (app) =>  app.pipe(sourcemaps.init())
                           .pipe(concat(mainBundleName))
-                          // .pipe(uglify())
+                          .pipe(uglify({ mangle: false })) // review appSpec for mangle
                           .pipe(sourcemaps.write('maps/'))
                           .pipe(gulp.dest(config.dist))
   },
