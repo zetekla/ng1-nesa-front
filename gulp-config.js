@@ -40,7 +40,10 @@ module.exports = {
     dest:'./public/dist/fonts/'
   },
   images: {
-    src: ['./public/lib/jasmine/images/jasmine_favicon.png'],
+    src: [
+      './public/lib/jasmine/images/jasmine_favicon.png',
+      './dev/client/images/**/*.+(png|img|bmp|jpg|jpeg|gif|ico|tff|tiff)'
+    ],
     dest:'./public/dist/images/'
   },
   jasmine: {

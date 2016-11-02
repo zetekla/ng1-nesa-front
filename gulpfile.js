@@ -42,7 +42,9 @@ var gulp = require('gulp'),
   /*-- Bundling --*/
   htmlreplace         = require('gulp-html-replace'),
 
-  bundleHash          = new Date().getTime(),
+  moment              = require('moment'),
+
+  bundleHash          = moment(new Date().getTime()).format('YYYY-MM-DD-HH-mm-ss'),
   mainBundleName      = bundleHash + '.main.bundle.js',
   mainShortName       = 'main.bundle.js',
   vendorBundleName    = bundleHash + '.vendor.bundle.js',
@@ -52,17 +54,14 @@ var gulp = require('gulp'),
 
 gulp.task('default', ['serve']);
 gulp.task('shell', shell.task(['lite-server']));
+gulp.task('serve:dev', ['watch', 'shell']);
 
-gulp.task('dist', function(done) {
-  runSequence('clean', 'copy_fonts', 'copy_html', 'copy_images', 'copy_lib', 'bundle', function() {
-    done();
-  });
+gulp.task('dist', function(callback) {
+  runSequence('clean', 'copy_images', 'copy_fonts', 'copy_lib', 'copy_html', 'bundle', callback);
 });
 
-gulp.task('serve', function(done) {
-  runSequence('clean:dev', 'copy_images', 'copy_fonts', 'copy_lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', function() {
-    done();
-  });
+gulp.task('serve', function(callback) {
+  runSequence('clean:dev', 'copy_images', 'copy_fonts', 'copy_lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', callback);
 });
 
 gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
@@ -101,6 +100,54 @@ var tasks = {
                           .pipe(concat(mainBundleName))
                           .pipe(sourcemaps.write('maps/'))
                           .pipe(gulp.dest(config.dist))
+  },
+  build_css:            function(src, srcmaps, dest){
+    srcmaps = srcmaps || null;
+    return gulp.src(src)
+      .pipe(sourcemaps.init())
+      .pipe(sass().on('error', sass.logError))
+      .pipe(postcss([precss, autoprefixer, cssnano]))
+      .pipe(sourcemaps.write(srcmaps))
+      .pipe(ext_replace('.css'))
+      .pipe(gulp.dest(dest));
+  },
+  copy_js:            function (src, options, suffix, dest) {
+    options = options || {};
+    suffix  = suffix  || {};
+
+    return gulp.src(src, options)
+      .pipe(rename(suffix))
+      .pipe(gulp.dest(dest));
+  },
+  uglify_js:            function (src, options, suffix, dest) {
+    options = options || {};
+    suffix  = suffix  || {};
+
+    return gulp.src(src, options)
+      .pipe(uglify())
+      .pipe(rename(suffix))
+      .pipe(gulp.dest(dest));
+  },
+  uglify_css:           function (src, output, dest) {
+    return uglifyCSS = gulp.src(src)
+      .pipe(concat(output))
+      .pipe(minify())
+      .pipe(gulp.dest(dest));
+  },
+  uglify_both:          function (src, options, suffix, output, dest) {
+    options = options || {};
+    suffix  = suffix  || {};
+    var uglifyJS = gulp.src(src.js, options)
+      .pipe(uglify())
+      .pipe(rename(suffix));
+
+    var uglifyCSS = gulp.src(src.css)
+      .pipe(concat(output))
+      .pipe(minify());
+
+
+    return es.merge(uglifyJS, uglifyCSS)
+      .pipe(gulp.dest(dest));
   }
 };
 
@@ -131,17 +178,8 @@ gulp.task('bundle:app:dist', function () {
 });
 
 
-gulp.task('build:css', function() {
-/*  var css = gulp.src(config.styles.src.css)
-    .pipe(sourcemaps.init());*/
-
-  return scss = gulp.src(config.styles.src.scss)
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(postcss([precss, autoprefixer, cssnano]))
-    .pipe(sourcemaps.write())
-    .pipe(ext_replace('.css'))
-    .pipe(gulp.dest(config.styles.dest));
+gulp.task('build:css', function () {
+  return tasks.build_css(config.styles.src.scss, null, config.styles.dest);
 });
 
 gulp.task('bundle:css', ['build:css'], function() {
@@ -173,7 +211,11 @@ gulp.task('watch:scripts', function () {
   return gulp.watch(config.scripts.watch, ['bundle:app:dev']);
 });
 
-gulp.task('watch', ['watch:styles', 'watch:html', 'watch:vendors', 'watch:scripts']);
+gulp.task('watch:images', function () {
+  return gulp.watch(config.images.src, ['copy_images']);
+});
+
+gulp.task('watch', ['watch:images', 'watch:html', 'watch:styles', 'watch:vendors', 'watch:scripts']);
 
 
 /*-- RESTORE MISSING BOWER COMPONENTS --*/
