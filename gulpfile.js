@@ -34,6 +34,7 @@ var gulp = require('gulp'),
   rename              = require('gulp-rename'),
 
   angularFilesort     = require('gulp-angular-filesort'),
+  ngAnnotate          = require('gulp-ng-annotate'),
 
   typescript          = require('gulp-typescript'),
 
@@ -90,6 +91,7 @@ var tasks = {
     dist:     (vendor) => vendor
                 .pipe(sourcemaps.init())
                 .pipe(concat(vendorBundleName))
+                // .pipe(uglify())
                 .pipe(sourcemaps.write('maps/'))
                 .pipe(gulp.dest(config.dist))
   },
@@ -98,6 +100,7 @@ var tasks = {
                           .pipe(gulp.dest(config.dist)),
     dist:     (app) =>  app.pipe(sourcemaps.init())
                           .pipe(concat(mainBundleName))
+                          // .pipe(uglify())
                           .pipe(sourcemaps.write('maps/'))
                           .pipe(gulp.dest(config.dist))
   },
@@ -109,44 +112,6 @@ var tasks = {
       .pipe(postcss([precss, autoprefixer, cssnano]))
       .pipe(sourcemaps.write(srcmaps))
       .pipe(ext_replace('.css'))
-      .pipe(gulp.dest(dest));
-  },
-  copy_js:            function (src, options, suffix, dest) {
-    options = options || {};
-    suffix  = suffix  || {};
-
-    return gulp.src(src, options)
-      .pipe(rename(suffix))
-      .pipe(gulp.dest(dest));
-  },
-  uglify_js:            function (src, options, suffix, dest) {
-    options = options || {};
-    suffix  = suffix  || {};
-
-    return gulp.src(src, options)
-      .pipe(uglify())
-      .pipe(rename(suffix))
-      .pipe(gulp.dest(dest));
-  },
-  uglify_css:           function (src, output, dest) {
-    return uglifyCSS = gulp.src(src)
-      .pipe(concat(output))
-      .pipe(minify())
-      .pipe(gulp.dest(dest));
-  },
-  uglify_both:          function (src, options, suffix, output, dest) {
-    options = options || {};
-    suffix  = suffix  || {};
-    var uglifyJS = gulp.src(src.js, options)
-      .pipe(uglify())
-      .pipe(rename(suffix));
-
-    var uglifyCSS = gulp.src(src.css)
-      .pipe(concat(output))
-      .pipe(minify());
-
-
-    return es.merge(uglifyJS, uglifyCSS)
       .pipe(gulp.dest(dest));
   }
 };
@@ -166,13 +131,15 @@ gulp.task('bundle:app', ['bundle:app:dev', 'bundle:app:dist']);
 
 gulp.task('bundle:app:dev', function () {
   var app = gulp.src(config.scripts.src)
-    .pipe(angularFilesort());
+    .pipe(angularFilesort())
+    .pipe(ngAnnotate());
 
   return tasks.bundle_app.dev(app);
 });
 gulp.task('bundle:app:dist', function () {
   var app = gulp.src(config.scripts.src)
-    .pipe(angularFilesort());
+    .pipe(angularFilesort())
+    .pipe(ngAnnotate());
 
   return tasks.bundle_app.dist(app);
 });
