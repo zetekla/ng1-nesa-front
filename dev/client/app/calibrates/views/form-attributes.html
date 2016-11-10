@@ -3,7 +3,7 @@
     <h2>{{vm.equipment.asset_id ? 'Add Files to an existing Calibration>Equipment>Model|Asset' : 'New Equipment'}}</h2>
   </div>
   <div class="col-md-12">
-    <form name="vm.form.assetFilesForm" class="" ng-submit="vm.save(vm.form.assetFilesForm.$valid)" novalidate>
+    <form name="vm.form.attributesForm" class="" ng-submit="vm.save(vm.form.attributesForm.$valid)" novalidate>
       <fieldset>
         <legend>{{fieldTitle}}</legend>
         <div ng-show="vm.error" class="text-danger">
@@ -39,6 +39,12 @@
         <div class="row" ng-hide="vm.hideFileUploader">
           <div class="row alert alert-warning">Upload calibration.equipment.asset file using the inputs below</div>
           <div class = "row">
+            <div class="col-sm-6">
+              <label class="control-label" for="filename">Experiment Filename</label>
+              <div class="controls input-group input-group-lg">
+                <input id="filename" name="file" type="text" ng-model="vm.equipment.filename" class="form-control" placeholder="xyz._">
+              </div>
+            </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label class="control-label" for="fileUploader">Uploader Pane</label>

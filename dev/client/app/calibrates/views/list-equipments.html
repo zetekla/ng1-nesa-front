@@ -48,16 +48,16 @@
       <tbody ng-repeat="equipment in vm.equipments">
         <tr>
           <th scope="row" rowspan="equipment.ECMS_Attributes.length+1">{{$index+1}}</th>
-          <td rowspan="equipment.ECMS_Attributes.length+1" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })"><a href="#">{{equipment.asset_number}}</a></td>
+          <td rowspan="equipment.ECMS_Attributes.length+1" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })"><a href="asset#{{ equipment.asset_id }}">{{equipment.asset_number}}</a></td>
           <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.model}}</td>
           <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.ECMS_Location.desc}}</td>
           <td><button type="button" class="btn btn-info" ng-click="changeCalDate()">{{equipment.last_cal | date:'MM/dd/yyyy'}}</button></td>
           <td>{{equipment.next_cal | date:'MM/dd/yyyy'}}</td>
-          <td>{{equipment.ECMS_Attributes[0].filename}}</td>
+          <td data-ui-sref="equipments.attributeView({ file_id: equipment.ECMS_Attributes[0].file_id })"><a href="file#{{ equipment.ECMS_Attributes[0].file_id }}">{{equipment.ECMS_Attributes[0].filename}}</a></td>
           <td>{{equipment.ECMS_Attributes[0].createdAt}}</td>
           <td>{{equipment.ECMS_Attributes[0].updatedAt}}</td>
           <td>
-            <button type="button" class="btn btn-warning" data-ui-sref="equipments.assetFileCreate({ asset_id: equipment.asset_id })">Add New Cal Record
+            <button type="button" class="btn btn-warning" data-ui-sref="equipments.attributeCreate({ asset_id: equipment.asset_id })">Add New Cal Record
           </td>
         </tr>
         <tr data-ng-repeat="attribute in equipment.ECMS_Attributes | limitTo:20:1">
@@ -69,7 +69,7 @@
           <td></td>
           <td></td>
           <!--<td>File content <i>{{attribute.file | json}}</i></td>-->
-          <td class="bg-faded"><i>{{attribute.filename}}</i></td>
+          <td class="bg-faded" data-ui-sref="equipments.attributeView({ file_id: attribute.file_id })"><a href="file#{{ attribute.file_id }}"><i>{{attribute.filename}}</i></a></td>
           <td class="bg-faded" data-ng-bind="attribute.createdAt"></td>
           <td class="bg-faded" data-ng-bind="attribute.updatedAt"></td>
         </tr>

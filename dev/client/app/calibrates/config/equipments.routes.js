@@ -64,10 +64,22 @@
           pageTitle: 'Equipment {{ equipmentResolve.asset_id }}'
         }
       })
-      .state('equipments.assetFileCreate', {
-        url: '/:asset_id/assetFileCreate',
-        templateUrl: './app/calibrates/views/form-asset-files.html',
-        controller: 'assetFilesController',
+      .state('equipments.attributeView', {
+        url: '/files/:file_id',
+        templateUrl: './app/calibrates/views/view-attribute.html',
+        controller: 'attributesController',
+        controllerAs: 'vm',
+        resolve: {
+          attributeResolve: getAttribute
+        },
+        data:{
+          pageTitle: 'Equipment {{ attributeResolve.file_id }}'
+        }
+      })
+      .state('equipments.attributeCreate', {
+        url: '/:asset_id/attributeCreate',
+        templateUrl: './app/calibrates/views/form-attributes.html',
+        controller: 'attributesController',
         controllerAs: 'vm',
         resolve: {
           equipmentResolve: getEquipment
@@ -106,5 +118,14 @@
 
   function newEquipment(EquipmentsService) {
     return new EquipmentsService();
+  }
+
+  getAttribute.$inject = ['$stateParams', 'AttributesService'];
+
+  function getAttribute($stateParams, AttributesService) {
+    console.log($stateParams);
+    return AttributesService.get({
+      file_id: $stateParams.file_id
+    }).$promise;
   }
 })();
