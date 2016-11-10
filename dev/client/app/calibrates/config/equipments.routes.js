@@ -78,11 +78,11 @@
       })
       .state('equipments.fichierCreate', {
         url: '/:asset_id/fichierCreate',
-        templateUrl: './app/calibrates/views/form-fichiers.html',
+        templateUrl: './app/calibrates/views/form-fichier.html',
         controller: 'fichiersController',
         controllerAs: 'vm',
         resolve: {
-          equipmentResolve: getEquipment
+          fichierResolve: getFichier
         },
         data: {
           roles: ['user', 'admin'],
