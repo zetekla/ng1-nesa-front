@@ -1,15 +1,15 @@
-//Attributes service used to communicate Attributes REST endpoints
+//Fichiers service used to communicate Fichiers REST endpoints
 (function () {
   'use strict';
 
   angular
     .module('calibrates')
-    .factory('AttributesService', AttributesService);
+    .factory('FichiersService', FichiersService);
 
-  AttributesService.$inject = ['$resource'];
+  FichiersService.$inject = ['$resource'];
 
-  function AttributesService($resource) {
-    var Attribute = $resource('http://localhost:3000/equipments/files/:file_id', {
+  function FichiersService($resource) {
+    var Fichier = $resource('http://localhost:3000/equipments/files/:file_id', {
       file_id: '@file_id'
     }, {
       update: {
@@ -17,24 +17,24 @@
       }
     });
 
-    angular.extend(Attribute.prototype, {
+    angular.extend(Fichier.prototype, {
       createOrUpdate: function () {
-        var attribute = this;
-        return createOrUpdate(attribute);
+        var fichier = this;
+        return createOrUpdate(fichier);
       }
     });
 
-    return Attribute;
+    return Fichier;
 
-    function createOrUpdate(attribute) {
-      if (attribute.file_id) {
-        return attribute.$update(onSuccess, onError);
+    function createOrUpdate(fichier) {
+      if (fichier.file_id) {
+        return fichier.$update(onSuccess, onError);
       } else {
-        return attribute.$save(onSuccess, onError);
+        return fichier.$save(onSuccess, onError);
       }
 
       // Handle successful response
-      function onSuccess(attribute) {
+      function onSuccess(fichier) {
         // Any required internal processing from inside the service, goes here.
       }
 

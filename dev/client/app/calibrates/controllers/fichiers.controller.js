@@ -4,15 +4,15 @@
   // Equipments controller
   angular
     .module('calibrates')
-    .controller('attributesController', attributesController);
+    .controller('fichiersController', fichiersController);
 
-  attributesController.$inject = ['$scope', '$state', '$window', 'attributeResolve'];
+  fichiersController.$inject = ['$scope', '$state', '$window', 'fichierResolve'];
 
-  function attributesController ($scope, $state, $window, attribute) {
+  function fichiersController ($scope, $state, $window, fichier) {
     var vm = this;
-    vm.attribute = attribute;
+    vm.fichier = fichier;
 
-    console.log('Attribute: ', attribute);
+    console.log('Fichier: ', fichier);
 
     vm.error = null;
     vm.form = {};
@@ -22,12 +22,12 @@
     // Save Equipment
     function save(isValid) {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.attributesForm');
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.fichiersForm');
         return false;
       }
 
       // Create a new article, or update the current instance
-      vm.attribute.createOrUpdate()
+      vm.fichier.createOrUpdate()
         .then(successCallback)
         .catch(errorCallback);
 

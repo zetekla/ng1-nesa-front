@@ -64,22 +64,22 @@
           pageTitle: 'Equipment {{ equipmentResolve.asset_id }}'
         }
       })
-      .state('equipments.attributeView', {
+      .state('equipments.fichierView', {
         url: '/files/:file_id',
-        templateUrl: './app/calibrates/views/view-attribute.html',
-        controller: 'attributesController',
+        templateUrl: './app/calibrates/views/view-fichier.html',
+        controller: 'fichiersController',
         controllerAs: 'vm',
         resolve: {
-          attributeResolve: getAttribute
+          fichierResolve: getFichier
         },
         data:{
-          pageTitle: 'Equipment {{ attributeResolve.file_id }}'
+          pageTitle: 'Equipment {{ fichierResolve.file_id }}'
         }
       })
-      .state('equipments.attributeCreate', {
-        url: '/:asset_id/attributeCreate',
-        templateUrl: './app/calibrates/views/form-attributes.html',
-        controller: 'attributesController',
+      .state('equipments.fichierCreate', {
+        url: '/:asset_id/fichierCreate',
+        templateUrl: './app/calibrates/views/form-fichiers.html',
+        controller: 'fichiersController',
         controllerAs: 'vm',
         resolve: {
           equipmentResolve: getEquipment
@@ -120,12 +120,19 @@
     return new EquipmentsService();
   }
 
-  getAttribute.$inject = ['$stateParams', 'AttributesService'];
+  /* Fichiers */
+  getFichier.$inject = ['$stateParams', 'FichiersService'];
 
-  function getAttribute($stateParams, AttributesService) {
+  function getFichier($stateParams, FichiersService) {
     console.log($stateParams);
-    return AttributesService.get({
+    return FichiersService.get({
       file_id: $stateParams.file_id
     }).$promise;
+  }
+
+  newFichier.$inject = ['FichiersService'];
+
+  function newFichier(FichiersService) {
+    return new FichiersService();
   }
 })();

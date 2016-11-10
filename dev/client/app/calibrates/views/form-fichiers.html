@@ -1,9 +1,9 @@
 <section>
   <div class="page-header">
-    <h2>{{vm.equipment.asset_id ? 'Add Files to an existing Calibration>Equipment>Model|Asset' : 'New Equipment'}}</h2>
+    <h2>{{vm.equipment.asset_id ? 'Add Files to an existing Fichier (Calibration>Equipment>Model|Asset)' : 'New Equipment'}}</h2>
   </div>
   <div class="col-md-12">
-    <form name="vm.form.attributesForm" class="" ng-submit="vm.save(vm.form.attributesForm.$valid)" novalidate>
+    <form name="vm.form.fichiersForm" class="" ng-submit="vm.save(vm.form.fichiersForm.$valid)" novalidate>
       <fieldset>
         <legend>{{fieldTitle}}</legend>
         <div ng-show="vm.error" class="text-danger">
@@ -37,7 +37,7 @@
 
         <!--File Uploader http://nervgh.github.io/pages/angular-file-upload/examples/simple/ -->
         <div class="row" ng-hide="vm.hideFileUploader">
-          <div class="row alert alert-warning">Upload calibration.equipment.asset file using the inputs below</div>
+          <div class="row alert alert-warning">Upload Fichier using the inputs below</div>
           <div class = "row">
             <div class="col-sm-6">
               <label class="control-label" for="filename">Experiment Filename</label>

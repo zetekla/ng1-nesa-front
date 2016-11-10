@@ -1,0 +1,40 @@
+<section>
+  <p>viewFichier page {{vm.pageTitle}}</p>
+  <div class="page-header">
+    <h4>{{vm.fichier.equipmentInfo}} {{vm.fichier.ECMS_Location.getLocation}}</h4>
+    <p data-ng-bind="vm.fichier.last_cal | date:'MM/dd/yyyy'"></p>
+    <p data-ng-bind="vm.fichier.schedule"></p>
+    <p data-ng-bind="vm.fichier.next_cal | date:'MM/dd/yyyy'"></p>
+    <br>
+    <div class="col-sm-12" data-ng-repeat="dossier in vm.fichier.ECMS_Attributes">
+      <div class="row alert alert-info">#{{$index+1}} set of equipment asset (file) dossiers</div>
+      <div class="row offset-sm-2">
+        <p>Display file content here</p>
+        <div class="">File name <i>{{dossier.filename}}</i></div>
+        <div class="" data-ng-bind="dossier.createdAt"></div>
+        <div class="" data-ng-bind="dossier.updatedAt"></div>
+      </div>
+      <br>
+    </div>
+  </div>
+  <div class="row">
+    <a class="btn btn-lg btn-primary"
+       data-ui-sref="equipments.edit({ asset_id: vm.fichier.asset_id })">
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Edit
+    </a>
+    <a class="btn btn-lg btn-danger pull-right" data-ng-click="vm.remove()">
+      <i class="fa fa-trash"></i>&nbsp; Remove
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span data-ng-bind="vm.fichier.created | date:'mediumDate'"></span>
+      by
+      <span data-ng-if="vm.fichier.user"
+            data-ng-bind="vm.fichier.user.displayName"></span>
+      <span data-ng-if="!vm.fichier.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" data-ng-bind="vm.fichier.content"></p>
+</section>
