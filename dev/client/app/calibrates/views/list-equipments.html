@@ -54,11 +54,11 @@
           <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.ECMS_Location.desc}}</td>
           <td><button type="button" class="btn btn-info" ng-click="changeCalDate()">{{equipment.last_cal | date:'MM/dd/yyyy'}}</button></td>
           <td>{{equipment.next_cal | date:'MM/dd/yyyy'}}</td>
-          <td data-ui-sref="equipments.fichierView({ file_id: equipment.ECMS_Attributes[0].file_id })"><a href="file#{{ equipment.ECMS_Attributes[0].file_id }}">{{equipment.ECMS_Attributes[0].filename}}</a></td>
+          <td data-ui-sref="equipments.dossierView({ file_id: equipment.ECMS_Attributes[0].file_id })"><a href="file#{{ equipment.ECMS_Attributes[0].file_id }}">{{equipment.ECMS_Attributes[0].filename}}</a></td>
           <td>{{equipment.ECMS_Attributes[0].createdAt}}</td>
           <td>{{equipment.ECMS_Attributes[0].updatedAt}}</td>
           <td>
-            <button type="button" class="btn btn-warning" data-ui-sref="equipments.fichierCreate({ asset_id: equipment.asset_id })">Add New Cal Record
+            <button type="button" class="btn btn-warning" data-ui-sref="equipments.dossierCreate({ asset_id: equipment.asset_id })">Add New Cal Record
           </td>
         </tr>
         <tr data-ng-repeat="document in equipment.ECMS_Attributes | limitTo:20:1">
@@ -70,7 +70,7 @@
           <td></td>
           <td></td>
           <!--<td>File content <i>{{document.file | json}}</i></td>-->
-          <td data-ui-sref="equipments.fichierView({ file_id: document.file_id })"><a href="file#{{ document.file_id }}"><i>{{document.filename}}</i></a></td>
+          <td data-ui-sref="equipments.dossierView({ file_id: document.file_id })"><a href="file#{{ document.file_id }}"><i>{{document.filename}}</i></a></td>
           <td data-ng-bind="document.createdAt"></td>
           <td data-ng-bind="document.updatedAt"></td>
           <td></td>

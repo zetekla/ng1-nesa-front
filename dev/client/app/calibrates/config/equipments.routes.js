@@ -64,21 +64,21 @@
           pageTitle: 'Equipment {{ equipmentResolve.asset_id }}'
         }
       })
-      .state('equipments.fichierView', {
+      .state('equipments.dossierView', {
         url: '/files/:file_id',
-        templateUrl: './app/calibrates/views/view-fichier.html',
-        controller: 'FichiersController',
+        templateUrl: './app/calibrates/views/view-dossier.html',
+        controller: 'DossiersController',
         controllerAs: 'vm',
         resolve: {
-          fichierResolve: getFichier
+          dossierResolve: getDossier
         },
         data:{
-          pageTitle: 'Equipment {{ fichierResolve.file_id }}'
+          pageTitle: 'Equipment {{ dossierResolve.file_id }}'
         }
       })
-      .state('equipments.fichierCreate', {
-        url: '/:asset_id/fichierCreate',
-        templateUrl: './app/calibrates/views/form-fichier.html',
+      .state('equipments.dossierCreate', {
+        url: '/:asset_id/dossierCreate',
+        templateUrl: './app/calibrates/views/form-dossier.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
         resolve: {
@@ -86,7 +86,7 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle : 'Asset File Create'
+          pageTitle : 'Dossier Create'
         }
       })
       /*
@@ -120,19 +120,19 @@
     return new EquipmentsService();
   }
 
-  /* Fichier */
-  getFichier.$inject = ['$stateParams', 'FichierService'];
+  /* Dossier */
+  getDossier.$inject = ['$stateParams', 'DossierService'];
 
-  function getFichier($stateParams, FichierService) {
+  function getDossier($stateParams, DossierService) {
     console.log($stateParams);
-    return FichierService.get({
+    return DossierService.get({
       file_id: $stateParams.file_id
     }).$promise;
   }
 
-  newFichier.$inject = ['FichierService'];
+  newDossier.$inject = ['DossierService'];
 
-  function newFichier(FichierService) {
-    return new FichierService();
+  function newDossier(DossierService) {
+    return new DossierService();
   }
 })();

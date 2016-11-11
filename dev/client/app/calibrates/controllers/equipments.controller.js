@@ -19,7 +19,7 @@
     vm.remove             = remove;
     vm.save               = save;
     vm.hideFileUploader   = false;
-    vm.hideFichierList    = true;
+    vm.hideDossierList    = true;
     vm.useFileUploader    = true;
     var usePlaceHolder    = true,
         useRandomized     = true;

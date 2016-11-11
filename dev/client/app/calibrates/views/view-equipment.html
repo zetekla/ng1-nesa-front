@@ -1,16 +1,16 @@
 <section>
-  <p>viewEquipment page {{vm.pageTitle}}</p>
+  <p><strong>viewEquipment</strong> page {{vm.pageTitle}}</p>
   <div class="page-header">
     <h2>{{vm.equipment.equipmentInfo}} {{vm.equipment.ECMS_Location.getLocation}}</h2>
-    <h4 data-ng-bind="vm.equipment.last_cal | date:'MM/dd/yyyy'"></h4>
-    <h4 data-ng-bind="vm.equipment.schedule"></h4>
-    <h4 data-ng-bind="vm.equipment.next_cal | date:'MM/dd/yyyy'"></h4>
-    <h4 data-ng-bind="vm.equipment.ECMS_Location.desc"></h4>
+    <h5 class="row offset-sm-5" data-ng-bind="vm.equipment.last_cal | date:'MM/dd/yyyy'"></h5>
+    <h5 class="row offset-sm-5" data-ng-bind="vm.equipment.schedule"></h5>
+    <h5 class="row offset-sm-5" data-ng-bind="vm.equipment.next_cal | date:'MM/dd/yyyy'"></h5>
+    <h5 class="row offset-sm-5" data-ng-bind="vm.equipment.ECMS_Location.desc"></h5>
     <br>
     <div class="col-sm-12" data-ng-repeat="document in vm.equipment.ECMS_Attributes" ng-class-even="'stripedblue'"
          ng-class-odd="'stripedbeige'">
-      <span class="text-sm-left">#{{$index+1}} set of equipment asset (file) documents</span>
-      <div class="row offset-sm-5">
+      <span class="text-sm-left" data-ui-sref="equipments.dossierView({ file_id: document.file_id })"><a href="file#{{ document.file_id }}">{{$index+1}}. Dossier #{{ document.file_id }}</a></span>
+      <div class="row offset-sm-3">
         <div class="">File name: <i>{{document.filename}}</i></div>
         <div class="" data-ng-bind="document.createdAt"></div>
         <div class="" data-ng-bind="document.updatedAt"></div>

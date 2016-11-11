@@ -4,16 +4,16 @@
   // Equipments controller
   angular
     .module('calibrates')
-    .controller('FichiersController', FichiersController);
+    .controller('DossiersController', DossiersController);
 
-  FichiersController.$inject = ['$scope', '$state', '$window', 'fichierResolve'];
+  DossiersController.$inject = ['$scope', '$state', '$window', 'dossierResolve'];
 
-  function FichiersController ($scope, $state, $window, fichier) {
+  function DossiersController ($scope, $state, $window, dossier) {
     var vm = this;
-    vm.fichier = fichier;
+    vm.dossier = dossier;
 
-    console.log('Fichier: ', fichier);
-    // fichier.$resolve(function(data){  }) ;
+    console.log('Dossier: ', dossier);
+    // dossier.$resolve(function(data){  }) ;
 
 
     vm.error = null;
@@ -25,19 +25,19 @@
     // Remove existing Equipment
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.fichier.$remove($state.go('equipments.list'));
+        vm.dossier.$remove($state.go('equipments.list'));
       }
     }
 
     // Save Equipment
     function save(isValid) {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.fichiersForm');
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.dossiersForm');
         return false;
       }
 
       // Create a new article, or update the current instance
-      vm.fichier.createOrUpdate()
+      vm.dossier.createOrUpdate()
         .then(successCallback)
         .catch(errorCallback);
 

@@ -1,0 +1,41 @@
+<section>
+  <p><strong>viewDossier</strong> page {{vm.pageTitle}}</p>
+  <div class="page-header">
+    <h2>{{vm.dossier.equipmentInfo}} {{vm.dossier.ECMS_Location.getLocation}}</h2>
+    <h5 class="row offset-sm-5" data-ng-bind="vm.dossier.last_cal | date:'MM/dd/yyyy'"></h5>
+    <h5 class="row offset-sm-5" data-ng-bind="vm.dossier.schedule"></h5>
+    <h5 class="row offset-sm-5" data-ng-bind="vm.dossier.next_cal | date:'MM/dd/yyyy'"></h5>
+    <br>
+    <div class="col-sm-12" data-ng-repeat="document in vm.dossier.ECMS_Attributes" ng-class-even="'stripedblue'"
+         ng-class-odd="'stripedbeige'">
+      <span class="text-sm-left">{{$index+1}}. Dossier #{{ document.file_id }}</span>
+      <div class="row offset-sm-3">
+        <p>Display file content here</p>
+        <div class="">File name <i>{{document.filename}}</i></div>
+        <div class="" data-ng-bind="document.createdAt"></div>
+        <div class="" data-ng-bind="document.updatedAt"></div>
+      </div>
+      <br>
+    </div>
+  </div>
+  <div class="row">
+    <a class="btn btn-lg btn-primary"
+       data-ui-sref="equipments.edit({ asset_id: vm.dossier.asset_id })">
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Edit
+    </a>
+    <a class="btn btn-lg btn-danger pull-right" data-ng-click="vm.remove()">
+      <i class="fa fa-trash"></i>&nbsp; Remove
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span data-ng-bind="vm.dossier.created | date:'mediumDate'"></span>
+      by
+      <span data-ng-if="vm.dossier.user"
+            data-ng-bind="vm.dossier.user.displayName"></span>
+      <span data-ng-if="!vm.dossier.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" data-ng-bind="vm.dossier.content"></p>
+</section>
