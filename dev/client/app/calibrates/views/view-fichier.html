@@ -6,13 +6,13 @@
     <p data-ng-bind="vm.fichier.schedule"></p>
     <p data-ng-bind="vm.fichier.next_cal | date:'MM/dd/yyyy'"></p>
     <br>
-    <div class="col-sm-12" data-ng-repeat="dossier in vm.fichier.ECMS_Attributes">
-      <div class="row alert alert-info">#{{$index+1}} set of equipment asset (file) dossiers</div>
+    <div class="col-sm-12" data-ng-repeat="document in vm.fichier.ECMS_Attributes">
+      <div class="row alert alert-info">#{{$index+1}} set of equipment asset (file) documents</div>
       <div class="row offset-sm-2">
         <p>Display file content here</p>
-        <div class="">File name <i>{{dossier.filename}}</i></div>
-        <div class="" data-ng-bind="dossier.createdAt"></div>
-        <div class="" data-ng-bind="dossier.updatedAt"></div>
+        <div class="">File name <i>{{document.filename}}</i></div>
+        <div class="" data-ng-bind="document.createdAt"></div>
+        <div class="" data-ng-bind="document.updatedAt"></div>
       </div>
       <br>
     </div>
