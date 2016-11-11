@@ -9,16 +9,30 @@
   EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve'];
 
   function EquipmentsController ($scope, $state, $window, equipment) {
-    var vm = this;
+    var vm                = this;
 
-    vm.equipment = equipment;
+    vm.equipment          = equipment;
 
-    // vm.pageTitle = $state.current.data.pageTitle;
-    vm.error = null;
-    vm.form = {};
-    vm.remove = remove;
-    vm.save = save;
-    vm.hideFileUploader = false;
+    // vm.pageTitle       = $state.current.data.pageTitle;
+    vm.error              = null;
+    vm.form               = {};
+    vm.remove             = remove;
+    vm.save               = save;
+    vm.hideFileUploader   = false;
+    vm.hideFichierList    = true;
+    vm.useFileUploader    = true;
+
+    if(vm.useFileUploader)
+    $scope.$watch('vm.incrementer', function(newVal, oldVal){
+      var element = angular.element( document.querySelector( '#documentID' ) );
+      element.remove();
+      if (newVal){
+        vm.equipment.documents = [];
+        _.times(newVal, function(){
+          return vm.equipment.documents.push({file: 'placeholder'+(vm.equipment.documents.length+1)});
+        });
+      }
+    });
 
     // Remove existing Equipment
     function remove() {

@@ -1,6 +1,7 @@
 var app = angular.module('plunker');
 
 app.service('RestfulService', RestfulServiceFn);
+app.filter('range', range);
 
 RestfulServiceFn.$inject = ['$http'];
 
@@ -15,4 +16,13 @@ function RestfulServiceFn($http){
         onError(err);
       })
   }
+}
+
+function range() {
+  return function(input, total) {
+    total = parseInt(total);
+    for (var i=0; i<total; i++)
+      input.push(i);
+    return input;
+  };
 }
