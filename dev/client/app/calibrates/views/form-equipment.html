@@ -3,7 +3,7 @@
     <h1>{{vm.equipment.asset_id ? 'Edit Equipment' : 'New Equipment'}}</h1>
   </div>
   <div class="col-md-12">
-    <form name="vm.form.equipmentForm" class="" ng-submit="vm.save(vm.form.equipmentForm.$valid)" ng-init="fieldTitle='Existing data'" novalidate>
+    <form name="vm.form.equipmentForm" class="" ng-submit="vm.save(vm.form.equipmentForm.$valid)" ng-init="fieldTitle=vm.equipment.asset_id ? 'Update existing data' : 'Enter new data'" novalidate>
       <fieldset>
         <legend>{{fieldTitle}}</legend>
         <div ng-show="vm.error" class="text-danger">

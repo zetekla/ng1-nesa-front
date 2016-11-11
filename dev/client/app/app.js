@@ -1,4 +1,4 @@
-var app = angular.module('plunker', ['ui.router', 'calibrates']);
+var app = angular.module('plunker', ['angularFileUpload', 'ui.bootstrap', 'ui.router', 'calibrates']);
     app.config(CalibratesRouteConfig);
 
 

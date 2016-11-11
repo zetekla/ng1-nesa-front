@@ -27,7 +27,8 @@ var vendor = {
     './public/lib/angular-sanitize/angular-sanitize.js',
     './public/lib/angular-touch/angular-touch.js',
     './public/lib/lodash/dist/lodash.js',
-    './public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+    './public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+    './public/lib/angular-file-upload/dist/angular-file-upload.js'
   ],
   watch: './dev/client/app/vendor.js'
 };
