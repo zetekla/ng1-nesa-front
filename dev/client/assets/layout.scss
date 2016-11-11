@@ -24,6 +24,19 @@ body { background-color: white; padding: 0; margin: 8px; }
   width: auto;
 }
 
+.stripedblue {
+  //color:#007FFF;
+  background-color:#DBE9F4;
+}
+.stripedbeige {
+  //color:#CC0000;
+  background-color:#F5F5DC;
+}
+
+.error-text {
+  color: red;
+}
+
 /*
 fieldset {
   display: block;

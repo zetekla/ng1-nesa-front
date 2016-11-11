@@ -45,7 +45,8 @@
         <th class="text-nowrap">UpdatedAt</th>
       </tr>
       </thead>
-      <tbody ng-repeat="equipment in vm.equipments">
+      <tbody ng-repeat="equipment in vm.equipments" ng-class-even="'stripedblue'"
+             ng-class-odd="'stripedbeige'">
         <tr>
           <th scope="row" rowspan="equipment.ECMS_Attributes.length+1">{{$index+1}}</th>
           <td rowspan="equipment.ECMS_Attributes.length+1" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })"><a href="asset#{{ equipment.asset_id }}">{{equipment.asset_number}}</a></td>
@@ -69,9 +70,10 @@
           <td></td>
           <td></td>
           <!--<td>File content <i>{{dossier.file | json}}</i></td>-->
-          <td class="bg-faded" data-ui-sref="equipments.fichierView({ file_id: dossier.file_id })"><a href="file#{{ dossier.file_id }}"><i>{{dossier.filename}}</i></a></td>
-          <td class="bg-faded" data-ng-bind="dossier.createdAt"></td>
-          <td class="bg-faded" data-ng-bind="dossier.updatedAt"></td>
+          <td data-ui-sref="equipments.fichierView({ file_id: dossier.file_id })"><a href="file#{{ dossier.file_id }}"><i>{{dossier.filename}}</i></a></td>
+          <td data-ng-bind="dossier.createdAt"></td>
+          <td data-ng-bind="dossier.updatedAt"></td>
+          <td></td>
         </tr>
       </tbody>
     </table>

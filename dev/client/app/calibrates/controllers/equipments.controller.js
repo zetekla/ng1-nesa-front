@@ -21,6 +21,8 @@
     vm.hideFileUploader   = false;
     vm.hideFichierList    = true;
     vm.useFileUploader    = true;
+    var usePlaceHolder    = true,
+        useRandomized     = true;
 
     if(vm.useFileUploader)
     $scope.$watch('vm.incrementer', function(newVal, oldVal){
@@ -29,10 +31,13 @@
       if (newVal){
         vm.equipment.documents = [];
         _.times(newVal, function(){
-          return vm.equipment.documents.push({file: 'placeholder'+(vm.equipment.documents.length+1)});
+          var int = (useRandomized) ? (_.random(1,100)): (vm.equipment.documents.length+1),
+            file  = (usePlaceHolder) ? 'placeholder'+ int : null;
+          return vm.equipment.documents.push({file: file, filename: file});
         });
       }
     });
+
 
     // Remove existing Equipment
     function remove() {

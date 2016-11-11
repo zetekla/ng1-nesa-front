@@ -97,23 +97,23 @@
           <div class="row alert alert-warning">
             <p class="text-lg-center">FILE ADDING SECTION</p>
             <div class="col-sm-6">
-              <label class="control-label" for="incrementer">Specify how many files:
-                <div class="controls input-group input-group-lg">
-                  <span class="input-group-addon">Number</span>
-                  <input id="incrementer" name="incrementer" type="number" ng-init="vm.incrementer=0" ng-model="vm.incrementer" class="form-control" min="0" max="99">
-                </div>
-              </label>
+              <label class="control-label" for="incrementer">Specify how many files:</label>
+              <div class="controls input-group input-group-lg">
+                <span class="input-group-addon">Number</span>
+                <input id="incrementer" name="incrementer" type="number" ng-init="vm.incrementer=0" ng-model="vm.incrementer" class="form-control" min="0" max="99" ng-pattern="/^\d+$/">
+                <!--<span class="error-text" ng-show="vm.form.equipmentForm.incrementer.$dirty && vm.form.equipmentForm.incrementer.$invalid">Must Enter a Number (ex: 2) </span>-->
+              </div>
             </div>
           </div>
           <!--<div ng-hide="!vm.incrementer">-->
             <!--<span ng-init="vm.equipment.documents = []"></span>-->
-            <div ng-repeat="document in vm.equipment.documents | range: 'vm.equipment.documents.length'">
+            <div ng-repeat="document in vm.equipment.documents">
               <div class = "row" id="documentID">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label class="control-label" for="fileUploader">Uploader Pane #{{ $index+1 }}</label>
+                    <label class="control-label" for="documentFile">Uploader Pane #{{ $index+1 }}</label>
                     <div class="controls input-group input-group-lg">
-                      <input id="fileUploader" name="file" type="text" ng-model="document.file" class="form-control" placeholder="Browse..">{{ document.file }}
+                      <input id="documentFile" name="file" type="text" ng-model="document.file" class="form-control" placeholder="Browse..">{{ document.file }}
                     </div>
                   </div>
                 </div>
@@ -146,9 +146,9 @@
             </div>
           </div>
         </div>
-<!--        <div ng-messages="vm.form.equipmentForm.model.$error" role="alert">
-          <p class="help-block error-text" ng-message="required">Equipment model is required.</p>
-        </div>-->
+        <div ng-messages="vm.form.equipmentForm.incrementer.$error" ng-if="vm.form.equipmentForm.incrementer.$dirty && vm.form.equipmentForm.incrementer.$invalid" role="alert">
+          <p class="help-block error-text" ng-message="pattern">Check number input.</p>
+        </div>
       </fieldset>
     </form>
   </div>

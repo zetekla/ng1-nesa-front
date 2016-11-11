@@ -7,10 +7,11 @@
     <h4 data-ng-bind="vm.equipment.next_cal | date:'MM/dd/yyyy'"></h4>
     <h4 data-ng-bind="vm.equipment.ECMS_Location.desc"></h4>
     <br>
-    <div class="col-sm-12" data-ng-repeat="dossier in vm.equipment.ECMS_Attributes">
-      <div class="row alert alert-info">#{{$index+1}} set of equipment asset (file) dossiers</div>
-      <div class="row offset-sm-2">
-        <div class="">File name <i>{{dossier.filename}}</i></div>
+    <div class="col-sm-12" data-ng-repeat="dossier in vm.equipment.ECMS_Attributes" ng-class-even="'stripedblue'"
+         ng-class-odd="'stripedbeige'">
+      <span class="text-sm-left">#{{$index+1}} set of equipment asset (file) dossiers</span>
+      <div class="row offset-sm-5">
+        <div class="">File name: <i>{{dossier.filename}}</i></div>
         <div class="" data-ng-bind="dossier.createdAt"></div>
         <div class="" data-ng-bind="dossier.updatedAt"></div>
       </div>

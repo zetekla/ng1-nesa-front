@@ -28,7 +28,8 @@ var vendor = {
     './public/lib/angular-touch/angular-touch.js',
     './public/lib/lodash/dist/lodash.js',
     './public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-    './public/lib/angular-file-upload/dist/angular-file-upload.js'
+    './public/lib/angular-file-upload/dist/angular-file-upload.js',
+    './public/lib/angular-messages/angular-messages.js' // https://www.sitepoint.com/easy-form-validation-angularjs-ngmessages/
   ],
   watch: './dev/client/app/vendor.js'
 };
