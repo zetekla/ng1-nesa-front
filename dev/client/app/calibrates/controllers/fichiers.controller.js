@@ -4,20 +4,30 @@
   // Equipments controller
   angular
     .module('calibrates')
-    .controller('fichiersController', fichiersController);
+    .controller('FichiersController', FichiersController);
 
-  fichiersController.$inject = ['$scope', '$state', '$window', 'fichierResolve'];
+  FichiersController.$inject = ['$scope', '$state', '$window', 'fichierResolve'];
 
-  function fichiersController ($scope, $state, $window, fichier) {
+  function FichiersController ($scope, $state, $window, fichier) {
     var vm = this;
     vm.fichier = fichier;
 
     console.log('Fichier: ', fichier);
+    // fichier.$resolve(function(data){  }) ;
+
 
     vm.error = null;
     vm.form = {};
+    vm.remove = remove;
     vm.save = save;
     vm.hideFileUploader = false;
+
+    // Remove existing Equipment
+    function remove() {
+      if ($window.confirm('Are you sure you want to delete?')) {
+        vm.fichier.$remove($state.go('equipments.list'));
+      }
+    }
 
     // Save Equipment
     function save(isValid) {
@@ -32,7 +42,7 @@
         .catch(errorCallback);
 
       function successCallback(res) {
-        // $state.go('equipments.view', {asset_id: res.asset_id});
+        $state.go('equipments.view', {asset_id: res.asset_id});
       }
 
       function errorCallback(res) {

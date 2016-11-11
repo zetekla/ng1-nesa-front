@@ -4,11 +4,12 @@
 
   angular
     .module('calibrates')
-    .factory('FichiersService', FichiersService);
+    .factory('FichierService', FichierService);
 
-  FichiersService.$inject = ['$resource'];
+  FichierService.$inject = ['$resource'];
+  // FichiersService.$inject = ['$resource'];
 
-  function FichiersService($resource) {
+  function FichierService($resource) {
     var Fichier = $resource('http://localhost:3000/equipments/files/:file_id', {
       file_id: '@file_id'
     }, {
@@ -51,4 +52,16 @@
       console.log(error);
     }
   }
+
+  /*function FichiersService($resource) {
+    var Fichier = $resource('http://localhost:3000/equipments/:asset_id', {
+      asset_id: '@asset_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+
+    return Fichier;
+  }*/
 }());

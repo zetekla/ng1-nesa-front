@@ -1,0 +1,80 @@
+<div>
+  <br>
+  <div class="page-header">
+    <h1>Equipments</h1>
+  </div>
+  <br>
+  <div class="list-group">
+  <div class="row">
+    <div class="col-lg-7">
+      <div class="input-group input-group-lg">
+        <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div>
+    </div>
+    <div class="col-lg-5 text-center">
+      <button class="btn btn-lg btn-primary" type="button" data-ui-sref="equipments.create">
+        <i class="glyphicon glyphicon-plus"></i>
+        Add equipment
+      </button>
+      <button class="btn btn-lg btn-primary" type="button">
+        <i class="glyphicon glyphicon-plus"></i>
+        Add record
+      </button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <table class="table table-hover table-bordered col-12">
+      <thead>
+      <tr class="bg-info">
+        <th class="text-nowrap text-center" rowspan="2">#</th>
+        <th class="text-nowrap text-center" rowspan="2">Asset Tag Number</th>
+        <th class="text-nowrap" rowspan="2">Model Number</th>
+        <th class="text-nowrap" rowspan="2">Location</th>
+        <th class="text-nowrap" rowspan="2">Last Calibration Date</th>
+        <th class="text-nowrap" rowspan="2">Next Calibration Date</th>
+        <th class="text-nowrap" colspan="3">File Info</th>
+        <th class="text-nowrap" rowspan="2">Actions</th>
+      </tr>
+      <tr class="bg-info">
+        <th class="text-nowrap">File</th>
+        <th class="text-nowrap">CreatedAt</th>
+        <th class="text-nowrap">UpdatedAt</th>
+      </tr>
+      </thead>
+      <tbody ng-repeat="equipment in vm.equipments">
+        <tr>
+          <th scope="row" rowspan="equipment.ECMS_Attributes.length+1">{{$index+1}}</th>
+          <td rowspan="equipment.ECMS_Attributes.length+1" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })"><a href="asset#{{ equipment.asset_id }}">{{equipment.asset_number}}</a></td>
+          <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.model}}</td>
+          <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.ECMS_Location.desc}}</td>
+          <td><button type="button" class="btn btn-info" ng-click="changeCalDate()">{{equipment.last_cal | date:'MM/dd/yyyy'}}</button></td>
+          <td>{{equipment.next_cal | date:'MM/dd/yyyy'}}</td>
+          <td data-ui-sref="equipments.fichierView({ file_id: equipment.ECMS_Attributes[0].file_id })"><a href="file#{{ equipment.ECMS_Attributes[0].file_id }}">{{equipment.ECMS_Attributes[0].filename}}</a></td>
+          <td>{{equipment.ECMS_Attributes[0].createdAt}}</td>
+          <td>{{equipment.ECMS_Attributes[0].updatedAt}}</td>
+          <td>
+            <button type="button" class="btn btn-warning" data-ui-sref="equipments.fichierCreate({ asset_id: equipment.asset_id })">Add New Cal Record
+          </td>
+        </tr>
+        <tr data-ng-repeat="dossier in equipment.ECMS_Attributes | limitTo:20:1">
+          <!--<tr ng-show="displayFile" ng-init="displayFile=false">-->
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <!--<td>File content <i>{{dossier.file | json}}</i></td>-->
+          <td class="bg-faded" data-ui-sref="equipments.fichierView({ file_id: dossier.file_id })"><a href="file#{{ dossier.file_id }}"><i>{{dossier.filename}}</i></a></td>
+          <td class="bg-faded" data-ng-bind="dossier.createdAt"></td>
+          <td class="bg-faded" data-ng-bind="dossier.updatedAt"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>

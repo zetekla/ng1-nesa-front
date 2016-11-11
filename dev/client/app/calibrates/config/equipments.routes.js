@@ -67,7 +67,7 @@
       .state('equipments.fichierView', {
         url: '/files/:file_id',
         templateUrl: './app/calibrates/views/view-fichier.html',
-        controller: 'fichiersController',
+        controller: 'FichiersController',
         controllerAs: 'vm',
         resolve: {
           fichierResolve: getFichier
@@ -79,10 +79,10 @@
       .state('equipments.fichierCreate', {
         url: '/:asset_id/fichierCreate',
         templateUrl: './app/calibrates/views/form-fichier.html',
-        controller: 'fichiersController',
+        controller: 'EquipmentsController',
         controllerAs: 'vm',
         resolve: {
-          fichierResolve: getFichier
+          equipmentResolve: getEquipment
         },
         data: {
           roles: ['user', 'admin'],
@@ -120,19 +120,19 @@
     return new EquipmentsService();
   }
 
-  /* Fichiers */
-  getFichier.$inject = ['$stateParams', 'FichiersService'];
+  /* Fichier */
+  getFichier.$inject = ['$stateParams', 'FichierService'];
 
-  function getFichier($stateParams, FichiersService) {
+  function getFichier($stateParams, FichierService) {
     console.log($stateParams);
-    return FichiersService.get({
+    return FichierService.get({
       file_id: $stateParams.file_id
     }).$promise;
   }
 
-  newFichier.$inject = ['FichiersService'];
+  newFichier.$inject = ['FichierService'];
 
-  function newFichier(FichiersService) {
-    return new FichiersService();
+  function newFichier(FichierService) {
+    return new FichierService();
   }
 })();
