@@ -54,6 +54,14 @@
       function callback(vendor){
         console.log(vendor);
       }
+
+      System.import('./app/config/default.js')
+        .then(kallback, console.error.bind(console));
+
+      function kallback(config){
+        // console.log(config);
+        // must figure a way to have main.bundle script inside this
+      }
     </script>
     <!-- optionally -->
   <!-- endbuild -->

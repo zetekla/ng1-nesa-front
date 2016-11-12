@@ -24,8 +24,8 @@
 
     // Remove existing Equipment
     function remove() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.dossier.$remove($state.go('equipments.list'));
+      if ($window.confirm('Are you sure you want to delete this Dossier?')) {
+        vm.dossier.$remove($state.go('equipments.view', {asset_id: dossier.asset_id}));
       }
     }
 

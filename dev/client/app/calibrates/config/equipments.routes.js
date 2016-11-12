@@ -64,18 +64,6 @@
           pageTitle: 'Equipment {{ equipmentResolve.asset_id }}'
         }
       })
-      .state('equipments.dossierView', {
-        url: '/files/:file_id',
-        templateUrl: './app/calibrates/views/view-dossier.html',
-        controller: 'DossiersController',
-        controllerAs: 'vm',
-        resolve: {
-          dossierResolve: getDossier
-        },
-        data:{
-          pageTitle: 'Equipment {{ dossierResolve.file_id }}'
-        }
-      })
       .state('equipments.dossierCreate', {
         url: '/:asset_id/dossierCreate',
         templateUrl: './app/calibrates/views/form-dossier.html',
@@ -89,19 +77,30 @@
           pageTitle : 'Dossier Create'
         }
       })
-      /*
-        .state('equipments.assetFileView',{
-          url:'/:asset_id/:file_id'
-
-        .state('equipments.assetFileEdit', {
-          url:'/:asset_id/:file_id/edit   => need file_id be sent as a param to update the correct set of files
-          file_id ~~ id in attrs table.
-          file_id is used to delete a right file in the database.
-
-          It's a good practice to develop full CRUD operations and then strip away the unnecessary front-end functionality.
-           and enhance back-end security, ACL,...
-      */
-
+      .state('equipments.dossierEdit', {
+        url: '/files/:file_id/edit',
+        templateUrl: './app/calibrates/views/form-dossier.html',
+        controller: 'DossiersController',
+        controllerAs: 'vm',
+        resolve: {
+          dossierResolve: getDossier
+        },
+        data:{
+          pageTitle: 'Dossier {{ dossierResolve.file_id }}'
+        }
+      })
+      .state('equipments.dossierView', {
+        url: '/files/:file_id',
+        templateUrl: './app/calibrates/views/view-dossier.html',
+        controller: 'DossiersController',
+        controllerAs: 'vm',
+        resolve: {
+          dossierResolve: getDossier
+        },
+        data:{
+          pageTitle: 'Dossier {{ dossierResolve.file_id }}'
+        }
+      })
     ;
   }
 

@@ -8,6 +8,7 @@ module.exports = {
     src: [
       './dev/client/app/**/*.js',
       '!./dev/client/app/vendor.js',
+      '!./dev/client/app/config/*.js',
       'test/client/jasmineBootstrap.js'
     ],
     watch: [
