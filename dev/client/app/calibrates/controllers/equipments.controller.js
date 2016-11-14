@@ -58,8 +58,9 @@
     // Remove existing Equipment
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        // vm.equipment.slice(clicked element, 1);
-        vm.equipment.$remove($state.go('equipments.list'));
+        vm.equipment.$remove({}, function(){
+          $state.go('equipments.list');
+        });
       }
     }
 

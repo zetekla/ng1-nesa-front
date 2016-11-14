@@ -18,14 +18,17 @@
 
     vm.error = null;
     vm.form = {};
-    vm.dossierRemove = remove;
+    vm.remove = remove;
     vm.save = save;
     vm.hideFileUploader = false;
 
     // Remove existing Dossier
     function remove() {
       if ($window.confirm('Are you sure you want to delete this Dossier?')) {
-        vm.dossier.$remove($state.go('equipments.dossierView', {file_id: dossier.ECMS_Attributes[0].file_id}));
+        var asset_id = vm.dossier.asset_id;
+        vm.dossier.$remove({file_id: vm.dossier.ECMS_Attributes[0].file_id}, function(){
+          $state.go('equipments.view', {asset_id: asset_id});
+        });
       }
     }
 
