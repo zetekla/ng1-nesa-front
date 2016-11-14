@@ -37,6 +37,16 @@ body { background-color: white; padding: 0; margin: 8px; }
   color: red;
 }
 
+.valign-center {
+  vertical-align: middle !important;
+}
+
+.cell-center {
+  text-align: center;
+}
+
+// Alignment for every column in row https://github.com/twbs/bootstrap/issues/17122
+
 /*
 fieldset {
   display: block;

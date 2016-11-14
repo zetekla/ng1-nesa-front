@@ -8,3 +8,14 @@
   @extend .nopad;
   @extend .inline-block;
 }
+
+.cell-middle {
+  @extend .valign-center;
+  @extend .cell-center;
+}
+
+.table-middle {
+  td, th, tr {
+    @extend .cell-middle;
+  }
+}

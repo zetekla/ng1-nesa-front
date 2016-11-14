@@ -7,11 +7,24 @@
 /*  calibratesApp.controller('EquipmentsCreateController' , EquipmentsCreateController);
   calibratesApp.controller('EquipmentsEditController' , EquipmentsEditController);*/
 
-  EquipmentsListController.$inject = ['EquipmentsService'];
+  EquipmentsListController.$inject = ['$state', 'EquipmentsService', 'DossierService'];
 
-  function EquipmentsListController(EquipmentsService) {
+  function EquipmentsListController($state, EquipmentsService, DossierService) {
     var vm = this;
     vm.equipments = EquipmentsService.query();
+
+    vm.remove     = function (data) {
+      if(data){
+        if(_.has(data, 'asset_id'))
+          EquipmentsService.remove(data).$promise.then(function(){
+            $state.reload();
+          });
+        if(_.has(data, 'file_id'))
+          DossierService.remove(data).$promise.then(function(){
+            $state.reload();
+          });
+      }
+    };
   }
 
   /*

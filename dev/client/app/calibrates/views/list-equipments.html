@@ -1,53 +1,53 @@
-<div>
+<section>
   <br>
   <div class="page-header">
     <h1>Equipments</h1>
   </div>
   <br>
   <div class="list-group">
-  <div class="row">
-    <div class="col-lg-7">
-      <div class="input-group input-group-lg">
-        <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Go!</button>
-        </span>
+    <div class="row">
+      <div class="col-lg-7">
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <button class="btn btn-lg btn-primary" type="button" data-ui-sref="equipments.create">
+          <i class="fa fa-plus"></i>
+          Add equipment
+        </button>
+        <button class="btn btn-lg btn-primary" type="button">
+          <i class="fa fa-paperclip"></i>
+          Add record
+        </button>
       </div>
     </div>
-    <div class="col-lg-5 text-center">
-      <button class="btn btn-lg btn-primary" type="button" data-ui-sref="equipments.create">
-        <i class="glyphicon glyphicon-plus"></i>
-        Add equipment
-      </button>
-      <button class="btn btn-lg btn-primary" type="button">
-        <i class="glyphicon glyphicon-plus"></i>
-        Add record
-      </button>
-    </div>
-  </div>
   <br>
   <div class="row">
-    <table class="table table-bordered col-12">
+    <table class="table table-bordered col-xs-12 table-middle">
       <thead>
       <tr class="bg-info">
-        <th class="text-nowrap text-center" rowspan="2">#</th>
-        <th class="text-nowrap text-center" rowspan="2">Asset Tag Number</th>
+        <th class="text-nowrap" rowspan="2">#</th>
+        <th class="text-nowrap" rowspan="2">Asset Tag Number</th>
         <th class="text-nowrap" rowspan="2">Model Number</th>
         <th class="text-nowrap" rowspan="2">Location</th>
         <th class="text-nowrap" rowspan="2">Last Calibration Date</th>
         <th class="text-nowrap" rowspan="2">Next Calibration Date</th>
-        <th class="text-nowrap" colspan="3">File Info</th>
+        <th class="text-nowrap" colspan="4">File Info</th>
+        <th class="text-nowrap" rowspan="2">Equipment</th>
         <th class="text-nowrap" rowspan="2">Actions</th>
       </tr>
       <tr class="bg-info">
         <th class="text-nowrap">File</th>
         <th class="text-nowrap">CreatedAt</th>
         <th class="text-nowrap">UpdatedAt</th>
+        <th class="text-nowrap">Dossier</th>
       </tr>
       </thead>
-      <tbody ng-repeat="equipment in vm.equipments" ng-class-even="'stripedblue'"
-             ng-class-odd="'stripedbeige'">
-        <tr>
+      <tbody ng-repeat="equipment in vm.equipments" ng-class-even="'stripedblue'" ng-class-odd="'stripedbeige'">
           <th scope="row" rowspan="{{equipment.ECMS_Attributes.length}}">{{$index+1}}</th>
           <td rowspan="{{equipment.ECMS_Attributes.length}}" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })"><a href="asset#{{ equipment.asset_id }}">{{equipment.asset_number}}</a></td>
           <td rowspan="{{equipment.ECMS_Attributes.length}}">{{equipment.model}}</td>
@@ -57,8 +57,14 @@
           <td data-ui-sref="equipments.dossierView({ file_id: equipment.ECMS_Attributes[0].file_id })"><a href="file#{{ equipment.ECMS_Attributes[0].file_id }}">{{equipment.ECMS_Attributes[0].filename}}</a></td>
           <td>{{equipment.ECMS_Attributes[0].createdAt}}</td>
           <td>{{equipment.ECMS_Attributes[0].updatedAt}}</td>
-          <td rowspan="{{equipment.ECMS_Attributes.length}}>
-            <button type="button" class="btn btn-warning btn-lg" data-ui-sref="equipments.dossierCreate({ asset_id: equipment.asset_id })">Add New Cal Record
+          <td>
+            <button type="button" class="btn btn-danger btn-lg" ng-click="vm.remove({ file_id: equipment.ECMS_Attributes[0].file_id })"><i class="fa fa-remove"></i>&nbsp; file#{{ equipment.ECMS_Attributes[0].file_id }}
+          </td>
+          <td rowspan="{{equipment.ECMS_Attributes.length}}">
+            <button type="button" class="btn btn-danger btn-lg" ng-click="vm.remove({ asset_id: equipment.asset_id })"><i class="fa fa-trash"></i>&nbsp; equipment
+          </td>
+          <td rowspan="{{equipment.ECMS_Attributes.length}}">
+            <button type="button" class="btn btn-warning btn-lg" data-ui-sref="equipments.dossierCreate({ asset_id: equipment.asset_id })"><i class="fa fa-paperclip"></i>&nbsp; Record
           </td>
         </tr>
         <tr data-ng-repeat="document in equipment.ECMS_Attributes | limitTo:20:1">
@@ -67,10 +73,12 @@
           <td data-ui-sref="equipments.dossierView({ file_id: document.file_id })"><a href="file#{{ document.file_id }}"><i>{{document.filename}}</i></a></td>
           <td data-ng-bind="document.createdAt"></td>
           <td data-ng-bind="document.updatedAt"></td>
-          <td></td>
+          <td>
+            <button type="button" class="btn btn-danger btn-lg" ng-click="vm.remove({ file_id: document.file_id })"><i class="fa fa-remove"></i>&nbsp; file#{{ document.file_id }}
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
   </div>
-</div>
+</section>
