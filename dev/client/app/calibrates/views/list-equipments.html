@@ -27,7 +27,7 @@
   </div>
   <br>
   <div class="row">
-    <table class="table table-hover table-bordered col-12">
+    <table class="table table-bordered col-12">
       <thead>
       <tr class="bg-info">
         <th class="text-nowrap text-center" rowspan="2">#</th>
@@ -48,27 +48,21 @@
       <tbody ng-repeat="equipment in vm.equipments" ng-class-even="'stripedblue'"
              ng-class-odd="'stripedbeige'">
         <tr>
-          <th scope="row" rowspan="equipment.ECMS_Attributes.length+1">{{$index+1}}</th>
-          <td rowspan="equipment.ECMS_Attributes.length+1" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })"><a href="asset#{{ equipment.asset_id }}">{{equipment.asset_number}}</a></td>
-          <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.model}}</td>
-          <td rowspan="equipment.ECMS_Attributes.length+1">{{equipment.ECMS_Location.desc}}</td>
-          <td><button type="button" class="btn btn-info" ng-click="changeCalDate()">{{equipment.last_cal | date:'MM/dd/yyyy'}}</button></td>
-          <td>{{equipment.next_cal | date:'MM/dd/yyyy'}}</td>
+          <th scope="row" rowspan="{{equipment.ECMS_Attributes.length}}">{{$index+1}}</th>
+          <td rowspan="{{equipment.ECMS_Attributes.length}}" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })"><a href="asset#{{ equipment.asset_id }}">{{equipment.asset_number}}</a></td>
+          <td rowspan="{{equipment.ECMS_Attributes.length}}">{{equipment.model}}</td>
+          <td rowspan="{{equipment.ECMS_Attributes.length}}">{{equipment.ECMS_Location.desc}}</td>
+          <td rowspan="{{equipment.ECMS_Attributes.length}}"><button type="button" class="btn btn-info" ng-click="changeCalDate()">{{equipment.last_cal | date:'MM/dd/yyyy'}}</button></td>
+          <td rowspan="{{equipment.ECMS_Attributes.length}}">{{equipment.next_cal | date:'MM/dd/yyyy'}}</td>
           <td data-ui-sref="equipments.dossierView({ file_id: equipment.ECMS_Attributes[0].file_id })"><a href="file#{{ equipment.ECMS_Attributes[0].file_id }}">{{equipment.ECMS_Attributes[0].filename}}</a></td>
           <td>{{equipment.ECMS_Attributes[0].createdAt}}</td>
           <td>{{equipment.ECMS_Attributes[0].updatedAt}}</td>
-          <td>
-            <button type="button" class="btn btn-warning" data-ui-sref="equipments.dossierCreate({ asset_id: equipment.asset_id })">Add New Cal Record
+          <td rowspan="{{equipment.ECMS_Attributes.length}}>
+            <button type="button" class="btn btn-warning btn-lg" data-ui-sref="equipments.dossierCreate({ asset_id: equipment.asset_id })">Add New Cal Record
           </td>
         </tr>
         <tr data-ng-repeat="document in equipment.ECMS_Attributes | limitTo:20:1">
           <!--<tr ng-show="displayFile" ng-init="displayFile=false">-->
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
           <!--<td>File content <i>{{document.file | json}}</i></td>-->
           <td data-ui-sref="equipments.dossierView({ file_id: document.file_id })"><a href="file#{{ document.file_id }}"><i>{{document.filename}}</i></a></td>
           <td data-ng-bind="document.createdAt"></td>

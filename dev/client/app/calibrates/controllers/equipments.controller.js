@@ -6,12 +6,28 @@
     .module('calibrates')
     .controller('EquipmentsController', EquipmentsController);
 
-  EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve'];
+  EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve', 'EquipmentsService'];
 
-  function EquipmentsController ($scope, $state, $window, equipment) {
-    var vm                = this;
+  function EquipmentsController ($scope, $state, $window, equipment, EquipmentsService) {
+    var vm                = this
+      , hints = {
+          model: [],
+          asset_number: [],
+          location: []
+    };
 
     vm.equipment          = equipment;
+
+    if (!vm.equipment.asset_id) {
+      EquipmentsService.query(function(equipments){
+        _.map(equipments, function(equipment){
+          hints.model.push(equipment.model);
+          hints.asset_number.push(equipment.asset_number);
+          hints.location.push(equipment.ECMS_Location.desc);
+        });
+      });
+      console.log(hints);
+    }
 
     // vm.pageTitle       = $state.current.data.pageTitle;
     vm.error              = null;
@@ -42,6 +58,7 @@
     // Remove existing Equipment
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
+        // vm.equipment.slice(clicked element, 1);
         vm.equipment.$remove($state.go('equipments.list'));
       }
     }

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  // Equipments controller
+  // Dossiers controller
   angular
     .module('calibrates')
     .controller('DossiersController', DossiersController);
@@ -18,18 +18,18 @@
 
     vm.error = null;
     vm.form = {};
-    vm.remove = remove;
+    vm.dossierRemove = remove;
     vm.save = save;
     vm.hideFileUploader = false;
 
-    // Remove existing Equipment
+    // Remove existing Dossier
     function remove() {
       if ($window.confirm('Are you sure you want to delete this Dossier?')) {
-        vm.dossier.$remove($state.go('equipments.view', {asset_id: dossier.asset_id}));
+        vm.dossier.$remove($state.go('equipments.dossierView', {file_id: dossier.ECMS_Attributes[0].file_id}));
       }
     }
 
-    // Save Equipment
+    // Save Dossier
     function save(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.dossiersForm');
