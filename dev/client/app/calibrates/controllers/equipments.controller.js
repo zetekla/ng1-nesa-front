@@ -9,11 +9,12 @@
   EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve', 'EquipmentsService'];
 
   function EquipmentsController ($scope, $state, $window, equipment, EquipmentsService) {
-    var vm                = this
-      , hints = {
-          model: [],
-          asset_number: [],
-          location: []
+    var vm                = this;
+
+    vm.hints = {
+      model: [],
+      asset_number: [],
+      location: []
     };
 
     vm.equipment          = equipment;
@@ -21,12 +22,11 @@
     if (!vm.equipment.asset_id) {
       EquipmentsService.query(function(equipments){
         _.map(equipments, function(equipment){
-          hints.model.push(equipment.model);
-          hints.asset_number.push(equipment.asset_number);
-          hints.location.push(equipment.ECMS_Location.desc);
+          vm.hints.model.push(equipment.model);
+          vm.hints.asset_number.push(equipment.asset_number);
+          vm.hints.location.push(equipment.ECMS_Location.desc);
         });
       });
-      console.log(hints);
     }
 
     // vm.pageTitle       = $state.current.data.pageTitle;
