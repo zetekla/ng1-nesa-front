@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        <div class="row" ng-hide="!(vm.equipment.asset_id && vm.useFileUploader)">
+        <div class="row" ng-hide="!vm.useFileUploader">
           <div class="row alert alert-warning">
             <p class="text-lg-center">FILE ADDING SECTION</p>
             <div class="col-sm-6">
@@ -123,7 +123,7 @@
         </div>
 
         <!--File Uploader http://nervgh.github.io/pages/angular-file-upload/examples/simple/ -->
-        <div class="row" ng-hide="vm.hideFileUploader || vm.equipment.asset_id">
+        <div class="row" ng-hide="vm.useFileUploader">
           <div class="row alert alert-warning">Upload calibration.equipment.asset file using the inputs below</div>
           <div class = "row">
             <div class="col-sm-6">

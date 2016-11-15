@@ -18,7 +18,7 @@
 
       equipments.then(function(equipments){
         vm.hints = { model: [], asset_number: [], location: [] };
-        // vm.hints.model = _.map(equipments, 'model');
+
         _.map(equipments, function(equipment){
           vm.hints.model.push(equipment.model);
           vm.hints.asset_number.push(equipment.asset_number);
