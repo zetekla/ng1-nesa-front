@@ -10,21 +10,23 @@
 
   function EquipmentsController ($scope, $state, $window, equipment, EquipmentsService) {
     var vm                = this;
-
-    vm.hints = {
-      model: [],
-      asset_number: [],
-      location: []
-    };
-
     vm.equipment          = equipment;
 
     if (!vm.equipment.asset_id) {
-      EquipmentsService.query(function(equipments){
+      var equipments = EquipmentsService.query().$promise;
+
+      equipments.then(function(equipments){
+        vm.hints = { model: [], asset_number: [], location: [] };
+        // vm.hints.model = _.map(equipments, 'model');
         _.map(equipments, function(equipment){
           vm.hints.model.push(equipment.model);
           vm.hints.asset_number.push(equipment.asset_number);
           vm.hints.location.push(equipment.ECMS_Location.desc);
+        });
+
+        $scope.$watch('vm.equipment.model', function(newVal, oldVal){
+          if (newVal!==oldVal) vm.hints.asset_number = [];
+          vm.hints.asset_number = _(equipments).chain().filter({'model' : newVal}).map('asset_number').value();
         });
       });
     }
