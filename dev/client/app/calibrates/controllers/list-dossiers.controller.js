@@ -5,11 +5,11 @@
 
   calibratesApp.controller('DossiersListController' , DossiersListController);
 
-  DossiersListController.$inject = ['DossierService'];
+  DossiersListController.$inject = ['DossiersService'];
 
-  function DossiersListController(DossierService) {
+  function DossiersListController(DossiersService) {
     var vm = this;
-    vm.dossiers = DossierService.query();
+    vm.dossiers = DossiersService.query();
   }
 
 })();

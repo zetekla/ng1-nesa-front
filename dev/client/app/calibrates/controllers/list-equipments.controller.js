@@ -5,9 +5,9 @@
 
   calibratesApp.controller('EquipmentsListController' , EquipmentsListController);
 
-  EquipmentsListController.$inject = ['$state', 'EquipmentsService', 'DossierService'];
+  EquipmentsListController.$inject = ['$state', 'EquipmentsService', 'DossiersService'];
 
-  function EquipmentsListController($state, EquipmentsService, DossierService) {
+  function EquipmentsListController($state, EquipmentsService, DossiersService) {
     var vm = this;
     vm.equipments = EquipmentsService.query();
 
@@ -18,7 +18,7 @@
             $state.reload();
           });
         if(_.has(record, 'file_id'))
-          DossierService.remove(record).$promise.then(function(){
+          DossiersService.remove(record).$promise.then(function(){
             $state.reload();
           });
       }

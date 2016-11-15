@@ -119,17 +119,17 @@
   }
 
   /* Dossier */
-  getDossier.$inject = ['$stateParams', 'DossierService'];
+  getDossier.$inject = ['$stateParams', 'DossiersService'];
 
-  function getDossier($stateParams, DossierService) {
-    return DossierService.get({
+  function getDossier($stateParams, DossiersService) {
+    return DossiersService.get({
       file_id: $stateParams.file_id
     }).$promise;
   }
 
-  newDossier.$inject = ['DossierService'];
+  newDossier.$inject = ['DossiersService'];
 
-  function newDossier(DossierService) {
-    return new DossierService();
+  function newDossier(DossiersService) {
+    return new DossiersService();
   }
 })();
