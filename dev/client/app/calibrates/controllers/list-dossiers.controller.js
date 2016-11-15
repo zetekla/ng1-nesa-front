@@ -10,7 +10,6 @@
   function DossiersListController(DossierService) {
     var vm = this;
     vm.dossiers = DossierService.query();
-    // console.log(vm.dossiers);
   }
 
 })();

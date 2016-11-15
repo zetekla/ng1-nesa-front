@@ -10,7 +10,7 @@
 
   function DossiersController ($scope, $state, $window, dossier) {
     var vm = this;
-    vm.dossier = dossier;
+    vm.equipment = dossier;
 
     console.log('Dossier: ', dossier);
     // dossier.$resolve(function(data){  }) ;
@@ -22,11 +22,18 @@
     vm.save = save;
     vm.hideFileUploader = false;
 
+    if (vm.equipment.ECMS_Attributes[0].file_id){
+      vm.equipment.documents = [{
+        file:     vm.equipment.ECMS_Attributes[0].file,
+        filename: vm.equipment.ECMS_Attributes[0].filename
+      }];
+    } else vm.equipment.documents = [];
+
     // Remove existing Dossier
     function remove() {
       if ($window.confirm('Are you sure you want to delete this Dossier?')) {
-        var asset_id = vm.dossier.asset_id;
-        vm.dossier.$remove({file_id: vm.dossier.ECMS_Attributes[0].file_id}, function(){
+        var asset_id = vm.equipment.asset_id;
+        vm.equipment.$remove({file_id: vm.equipment.ECMS_Attributes[0].file_id}, function(){
           $state.go('equipments.view', {asset_id: asset_id});
         });
       }
@@ -40,7 +47,7 @@
       }
 
       // Create a new article, or update the current instance
-      vm.dossier.createOrUpdate()
+      vm.equipment.createOrUpdate()
         .then(successCallback)
         .catch(errorCallback);
 

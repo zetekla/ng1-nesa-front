@@ -6,10 +6,10 @@
     .module('calibrates')
     .factory('DossierService', DossierService);
 
-  DossierService.$inject = ['$resource'];
+  DossierService.$inject = ['$resource', 'EquipmentsService'];
   // DossiersService.$inject = ['$resource'];
 
-  function DossierService($resource) {
+  function DossierService($resource, EquipmentsService) {
     var Dossier = $resource('http://localhost:3000/equipments/files/:file_id', {
       file_id: '@file_id'
     }, {
@@ -28,10 +28,14 @@
     return Dossier;
 
     function createOrUpdate(dossier) {
-      if (dossier.file_id) {
+      if (dossier.ECMS_Attributes[0].file_id) {
+        console.log('update dossier ', dossier);
+        /*var data = _.pick(dossier.ECMS_Attributes[0], ['file', 'asset_number', 'filename']);
+        console.log('update data ', data);*/
         return dossier.$update(onSuccess, onError);
       } else {
-        return dossier.$save(onSuccess, onError);
+        console.log('save dossier ');
+        return EquipmentsService.$save(dossier, onSuccess, onError);
       }
 
       // Handle successful response

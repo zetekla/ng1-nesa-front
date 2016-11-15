@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h2>{{vm.dossier.file_id ? 'Edit Dossier' : 'New Dossier'}}</h2>
+    <h2>{{vm.equipment.ECMS_Attributes[0].file_id ? 'Edit Dossier' : 'New Dossier'}}</h2>
   </div>
   <div class="col-md-12">
     <form name="vm.form.dossiersForm" class="" ng-submit="vm.save(vm.form.dossiersForm.$valid)" novalidate>
@@ -15,14 +15,14 @@
               <label class="control-label" for="assetNumber">label1</label>
               <div class="controls input-group">
                 <span class="input-group-addon">Asset Number</span>
-                <input id="assetNumber" ng-readonly="vm.dossier.asset_id" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control" placeholder="assetNumber" required>
+                <input id="assetNumber" ng-readonly="vm.equipment.asset_id" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control" placeholder="assetNumber" required>
               </div>
             </div>
             <div class="col-sm-4 form-group">
               <label class="control-label" for="model">label2</label>
               <div class="controls input-group">
                 <span class="input-group-addon">Model</span>
-                <input id="model" ng-readonly="vm.dossier.asset_id" name="model" type="text" ng-model="vm.equipment.model" class="form-control" placeholder="model">
+                <input id="model" ng-readonly="vm.equipment.asset_id" name="model" type="text" ng-model="vm.equipment.model" class="form-control" placeholder="model">
               </div>
             </div>
             <div class="col-sm-4 form-group">
@@ -42,7 +42,7 @@
             <div class="col-sm-6">
               <label class="control-label" for="filename">Experiment Filename</label>
               <div class="controls input-group input-group-lg">
-                <input id="filename" name="file" type="text" ng-model="vm.equipment.documents.filename" class="form-control" placeholder="xyz._">
+                <input id="filename" name="filename" type="text" ng-model="vm.equipment.documents[0].filename" class="form-control" placeholder="xyz._">
               </div>
             </div>
             <div class="col-sm-6">
@@ -50,7 +50,7 @@
                 <label class="control-label" for="fileUploader">Uploader Pane</label>
                 <div class="controls input-group input-group-lg">
                   <span class="input-group-addon"><i class="fa fa-upload"></i></span>
-                  <input id="fileUploader" name="file" type="text" ng-model="vm.equipment.documents.file" class="form-control" placeholder="Browse..">
+                  <input id="fileUploader" name="file" type="text" ng-model="vm.equipment.documents[0].file" class="form-control" placeholder="Browse..">
                 </div>
               </div>
             </div>
@@ -60,7 +60,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <button type="submit" class="btn btn-lg btn-success">{{vm.equipment.asset_id ? 'Upload' : 'new Upload'}}</button>
+              <button type="submit" class="btn btn-lg btn-success">{{vm.equipment.ECMS_Attributes[0].file_id ? 'Upload' : 'new Upload'}}</button>
             </div>
           </div>
         </div>
