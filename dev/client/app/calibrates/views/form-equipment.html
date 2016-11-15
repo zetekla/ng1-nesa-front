@@ -15,19 +15,19 @@
               <div class="form-group">
                 <label class="control-label" for="model">Model</label>
                 <div class="controls">
-                  <input id="model" ng-readonly="vm.equipment.asset_id" name="model" type="text" ng-model="vm.equipment.model" uib-typeahead="model for model in vm.hints.model | filter:$viewValue | limitTo:8" class="form-control form-control-lg" placeholder="model">
+                  <input id="model" ng-readonly="vm.equipment.asset_id" name="model" type="text" ng-model="vm.equipment.model" uib-typeahead="model for model in vm.hints.model | filter:$viewValue | limitTo:8" class="form-control form-control-lg" placeholder="model" autocomplete="off">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="assetNumber">Asset Number</label>
                 <div class="controls">
-                  <input id="assetNumber" ng-readonly="vm.equipment.asset_id" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" uib-typeahead="asset_number for asset_number in vm.hints.asset_number | filter:$viewValue | limitTo:8" class="form-control form-control-lg" placeholder="asset number" required>
+                  <input id="assetNumber" ng-readonly="vm.equipment.asset_id" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" uib-typeahead="asset_number for asset_number in vm.hints.asset_number | filter:$viewValue | limitTo:8" class="form-control form-control-lg" placeholder="asset number" autocomplete="off" required>
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label" for="location">Location</label>
                 <div class="controls">
-                  <input id="location" name="location" type="text" ng-model="vm.equipment.ECMS_Location.desc" uib-typeahead="location for location in vm.hints.location | filter:$viewValue | limitTo:8" class="form-control form-control-lg" placeholder="location">
+                  <input id="location" name="location" type="text" ng-model="vm.equipment.ECMS_Location.desc" uib-typeahead="location for location in vm.hints.location | filter:$viewValue | limitTo:8" class="form-control form-control-lg" autocomplete="off" placeholder="location">
                 </div>
               </div>
             </div>
