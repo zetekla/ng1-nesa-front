@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-lg-7">
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
+          <input type="text" class="form-control" ng-model="vm.searchText" placeholder="Search...">
           <span class="input-group-btn">
             <button class="btn btn-default" type="button">Go!</button>
           </span>
@@ -24,6 +24,8 @@
           Add record
         </button>
       </div>
+      <span ng-hide="!vm.searchText"> Search for "{{vm.searchText}}" </span>
+      <span ng-hide="vm.searchText"> Search... </span>
     </div>
   <br>
   <div class="row">
@@ -47,7 +49,7 @@
         <th class="text-nowrap">Dossier</th>
       </tr>
       </thead>
-      <tbody ng-repeat="equipment in vm.equipments" ng-class-even="'stripedblue'" ng-class-odd="'stripedbeige'">
+      <tbody ng-repeat="equipment in vm.equipments | filter:vm.searchText" ng-class-even="'stripedblue'" ng-class-odd="'stripedbeige'">
           <th scope="row" rowspan="{{equipment.ECMS_Attributes.length}}">{{$index+1}}</th>
           <td rowspan="{{equipment.ECMS_Attributes.length}}" data-ui-sref="equipments.view({ asset_id: equipment.asset_id })"><a href="asset#{{ equipment.asset_id }}">{{equipment.asset_number}}</a></td>
           <td rowspan="{{equipment.ECMS_Attributes.length}}">{{equipment.model}}</td>
