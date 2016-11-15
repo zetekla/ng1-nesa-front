@@ -11,8 +11,9 @@
   function DossiersController ($scope, $state, $window, dossier) {
     var vm = this;
     vm.equipment = dossier;
+    vm.state = $state.params;
 
-    console.log('Dossier: ', dossier);
+    console.log('Dossier: ', vm.equipment, vm.state);
     // dossier.$resolve(function(data){  }) ;
 
 
@@ -20,14 +21,6 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    vm.hideFileUploader = false;
-
-    if (vm.equipment.ECMS_Attributes[0].file_id){
-      vm.equipment.documents = [{
-        file:     vm.equipment.ECMS_Attributes[0].file,
-        filename: vm.equipment.ECMS_Attributes[0].filename
-      }];
-    } else vm.equipment.documents = [];
 
     // Remove existing Dossier
     function remove() {

@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h2>{{vm.equipment.ECMS_Attributes[0].file_id ? 'Edit Dossier' : 'New Dossier'}}</h2>
+    <h2>{{vm.state.file_id ? 'Edit Dossier' : 'New Dossier for Equipment'}}</h2>
   </div>
   <div class="col-md-12">
     <form name="vm.form.dossiersForm" class="" ng-submit="vm.save(vm.form.dossiersForm.$valid)" novalidate>
@@ -36,21 +36,50 @@
         </div>
 
         <!--File Uploader http://nervgh.github.io/pages/angular-file-upload/examples/simple/ -->
-        <div class="row" ng-hide="vm.hideFileUploader">
-          <div class="row alert alert-warning">Upload Dossier using the inputs below</div>
-          <div class = "row">
-            <div class="col-sm-6">
-              <label class="control-label" for="filename">Experiment Filename</label>
-              <div class="controls input-group input-group-lg">
-                <input id="filename" name="filename" type="text" ng-model="vm.equipment.documents[0].filename" class="form-control" placeholder="xyz._">
+        <div class="row">
+          <div class="row" data-ng-if="vm.state.file_id">
+            <div class="row alert alert-warning">DOSSIER UPDATE SECTION</div>
+            <div class = "row">
+              <div class="col-sm-6">
+                <label class="control-label" for="filename">Experiment Filename</label>
+                <div class="controls input-group input-group-lg">
+                  <input id="filename" name="filename" type="text" ng-model="vm.equipment.ECMS_Attributes[0].filename" class="form-control" placeholder="xyz._">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="control-label" for="fileUploader">Uploader Pane</label>
+                  <div class="controls input-group input-group-lg">
+                    <span class="input-group-addon"><i class="fa fa-upload"></i></span>
+                    <input id="fileUploader" name="file" type="text" ng-model="vm.equipment.ECMS_Attributes[0].file" class="form-control" placeholder="Browse..">
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label class="control-label" for="fileUploader">Uploader Pane</label>
-                <div class="controls input-group input-group-lg">
-                  <span class="input-group-addon"><i class="fa fa-upload"></i></span>
-                  <input id="fileUploader" name="file" type="text" ng-model="vm.equipment.documents[0].file" class="form-control" placeholder="Browse..">
+          </div>
+          <div class="row" data-ng-if="!vm.state.file_id">
+            <div class="row" ng-hide="vm.hideFileUploader">
+              <div class="row alert alert-warning">
+                <p class="text-lg-center">FILE ADDING SECTION</p>
+                <div class="col-sm-6">
+                  <label class="control-label" for="incrementer">Specify how many files:</label>
+                  <div class="controls input-group input-group-lg">
+                    <span class="input-group-addon">Number</span>
+                    <input id="incrementer" name="incrementer" type="number" ng-init="vm.incrementer=0" ng-model="vm.incrementer" class="form-control" min="0" max="99" ng-pattern="/^\d+$/">
+                    <!--<span class="error-text" ng-show="vm.form.equipmentForm.incrementer.$dirty && vm.form.equipmentForm.incrementer.$invalid">Must Enter a Number (ex: 2) </span>-->
+                  </div>
+                </div>
+              </div>
+              <div ng-repeat="document in vm.equipment.documents">
+                <div class = "row" id="documentID">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="control-label" for="documentFile">Uploader Pane #{{ $index+1 }}</label>
+                      <div class="controls input-group input-group-lg">
+                        <input id="documentFile" name="file" type="text" ng-model="document.file" class="form-control" placeholder="Browse..">{{ document.file }}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -58,9 +87,14 @@
         </div>
 
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-2">
             <div class="form-group">
-              <button type="submit" class="btn btn-lg btn-success">{{vm.equipment.ECMS_Attributes[0].file_id ? 'Upload' : 'new Upload'}}</button>
+              <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{vm.state.file_id ? 'Update' : 'Create'}}</button>
+            </div>
+          </div>
+          <div class="col-sm-2" ng-hide="!vm.state.file_id">
+            <div class="form-group" ng-hide="!vm.state.file_id">
+              <button type="button" class="btn btn-warning btn-lg" data-ui-sref="equipments.dossierCreate({ asset_id: vm.equipment.asset_id })"><i class="fa fa-paperclip"></i>&nbsp; Record</button>
             </div>
           </div>
         </div>

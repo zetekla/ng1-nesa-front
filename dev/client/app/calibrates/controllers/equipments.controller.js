@@ -8,12 +8,13 @@
 
   EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve', 'EquipmentsService'];
 
-  function EquipmentsController ($scope, $state, $window, equipment, EquipmentsService) {
+  function EquipmentsController ($scope, $state, $window, equipment, Service) {
     var vm                = this;
     vm.equipment          = equipment;
+    vm.state              = $state.params;
 
     if (!vm.equipment.asset_id) {
-      var equipments = EquipmentsService.query().$promise;
+      var equipments = Service.query().$promise;
 
       equipments.then(function(equipments){
         vm.hints = { model: [], asset_number: [], location: [] };
@@ -36,8 +37,11 @@
     vm.form               = {};
     vm.remove             = remove;
     vm.save               = save;
+
+    vm.hideDossierList    = false;
+
     vm.hideFileUploader   = false;
-    vm.hideDossierList    = true;
+
     vm.useFileUploader    = true;
     var usePlaceHolder    = true,
         useRandomized     = true;

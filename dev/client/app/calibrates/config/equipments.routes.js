@@ -107,7 +107,6 @@
   getEquipment.$inject = ['$stateParams', 'EquipmentsService'];
 
   function getEquipment($stateParams, EquipmentsService) {
-    console.log($stateParams);
     return EquipmentsService.get({
       asset_id: $stateParams.asset_id
     }).$promise;
@@ -123,7 +122,6 @@
   getDossier.$inject = ['$stateParams', 'DossierService'];
 
   function getDossier($stateParams, DossierService) {
-    console.log($stateParams);
     return DossierService.get({
       file_id: $stateParams.file_id
     }).$promise;

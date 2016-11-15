@@ -4,8 +4,6 @@
   var calibratesApp = angular.module('calibrates');
 
   calibratesApp.controller('EquipmentsListController' , EquipmentsListController);
-/*  calibratesApp.controller('EquipmentsCreateController' , EquipmentsCreateController);
-  calibratesApp.controller('EquipmentsEditController' , EquipmentsEditController);*/
 
   EquipmentsListController.$inject = ['$state', 'EquipmentsService', 'DossierService'];
 
@@ -26,24 +24,4 @@
       }
     };
   }
-
-  /*
-  EquipmentsCreateController.$inject = ['EquipmentsService'];
-
-  function EquipmentsCreateController(EquipmentsService) {
-    var vm = this;
-
-    vm.equipments = EquipmentsService.query();
-  }
-
-  EquipmentsEditController.$inject = ['EquipmentsService'];
-
-  function EquipmentsEditController(EquipmentsService) {
-    var vm = this;
-
-    vm.equipments = EquipmentsService.get((data) => {
-      vm.equipments = data.calibrates;
-      console.log(equipments);
-    })
-  }*/
 })();

@@ -32,7 +32,7 @@
         console.log('update dossier ', dossier);
         /*var data = _.pick(dossier.ECMS_Attributes[0], ['file', 'asset_number', 'filename']);
         console.log('update data ', data);*/
-        return dossier.$update(onSuccess, onError);
+        return dossier.$update(dossier.ECMS_Attributes[0], onSuccess, onError);
       } else {
         console.log('save dossier ');
         return EquipmentsService.$save(dossier, onSuccess, onError);

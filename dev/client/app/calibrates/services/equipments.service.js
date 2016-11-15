@@ -18,7 +18,7 @@
     }/*,{
       stripTrailingSlashes: false
     }*/);
-    
+
     angular.extend(Equipment.prototype, {
       createOrUpdate: function () {
         var equipment = this;
@@ -30,8 +30,12 @@
 
     function createOrUpdate(equipment) {
       if (equipment.asset_id) {
-        var documents = _.pick(equipment, ['asset_id', 'documents', '$save']);
-        documents.$save(onSuccess, onError);
+
+        if (_.has(equipment, 'documents'))
+        if (equipment.documents) {
+          var documents = _.pick(equipment, ['asset_id', 'documents', '$save']);
+          documents.$save(onSuccess, onError);
+        }
 
         return equipment.$update(onSuccess, onError);
       } else {
@@ -50,7 +54,7 @@
         handleError(error);
       }
     }
-    
+
     function handleError(error) {
       // Log error
       console.log(error);
