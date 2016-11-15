@@ -9,7 +9,7 @@
     <br>
     <div class="col-sm-12" data-ng-repeat="document in vm.equipment.ECMS_Attributes" ng-class-even="'stripedblue'"
          ng-class-odd="'stripedbeige'">
-      <span class="text-sm-left" data-ui-sref="equipments.dossierView({ file_id: document.file_id })"><a href="file#{{ document.file_id }}">{{$index+1}}. Dossier #{{ document.file_id }}</a></span>
+      <span class="text-sm-left" data-ui-sref="equipments.dossierView({ file_id: document.file_id })"><a href="//file#{{ document.file_id }}">{{$index+1}}. Dossier #{{ document.file_id }}</a></span>
       <div class="row offset-sm-3">
         <div class="">File name: <i>{{document.filename}}</i></div>
         <div class="" data-ng-bind="document.createdAt"></div>

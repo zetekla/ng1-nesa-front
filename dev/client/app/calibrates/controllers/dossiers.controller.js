@@ -10,12 +10,8 @@
 
   function DossiersController ($scope, $state, $window, dossier) {
     var vm = this;
-    vm.equipment = dossier;
+    vm.equipment = dossier; // dossier.$resolve(function(data){  }) ;
     vm.state = $state.params;
-
-    console.log('Dossier: ', vm.equipment, vm.state);
-    // dossier.$resolve(function(data){  }) ;
-
 
     vm.error = null;
     vm.form = {};

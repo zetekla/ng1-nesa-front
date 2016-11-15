@@ -12,6 +12,7 @@
     var vm                = this;
     vm.equipment          = equipment;
     vm.state              = $state.params;
+    vm.searchText         = false;
 
     if (!vm.equipment.asset_id) {
       var equipments = Service.query().$promise;

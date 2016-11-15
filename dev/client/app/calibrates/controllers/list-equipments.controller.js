@@ -11,14 +11,14 @@
     var vm = this;
     vm.equipments = EquipmentsService.query();
 
-    vm.remove     = function (data) {
-      if(data){
-        if(_.has(data, 'asset_id'))
-          EquipmentsService.remove(data).$promise.then(function(){
+    vm.remove     = function (record) {
+      if(record){
+        if(_.has(record, 'asset_id'))
+          EquipmentsService.remove(record).$promise.then(function(){
             $state.reload();
           });
-        if(_.has(data, 'file_id'))
-          DossierService.remove(data).$promise.then(function(){
+        if(_.has(record, 'file_id'))
+          DossierService.remove(record).$promise.then(function(){
             $state.reload();
           });
       }

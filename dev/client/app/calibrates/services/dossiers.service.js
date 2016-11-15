@@ -29,12 +29,10 @@
 
     function createOrUpdate(dossier) {
       if (dossier.ECMS_Attributes[0].file_id) {
-        console.log('update dossier ', dossier);
         /*var data = _.pick(dossier.ECMS_Attributes[0], ['file', 'asset_number', 'filename']);
         console.log('update data ', data);*/
         return dossier.$update(dossier.ECMS_Attributes[0], onSuccess, onError);
       } else {
-        console.log('save dossier ');
         return EquipmentsService.$save(dossier, onSuccess, onError);
       }
 
@@ -56,16 +54,4 @@
       console.log(error);
     }
   }
-
-  /*function DossiersService($resource) {
-    var Dossier = $resource('http://localhost:3000/equipments/:asset_id', {
-      asset_id: '@asset_id'
-    }, {
-      update: {
-        method: 'PUT'
-      }
-    });
-
-    return Dossier;
-  }*/
 }());
