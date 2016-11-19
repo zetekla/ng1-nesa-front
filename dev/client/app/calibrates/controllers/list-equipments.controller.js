@@ -11,6 +11,18 @@
     var vm = this;
     vm.equipments = EquipmentsService.query();
 
+    vm.equipments.$promise.then(function(equipments){
+      if (equipments) {
+        _.forEach(equipments, function(equipment){
+          if (_(equipment).chain().get('ECMS_Dossiers').size().value()){
+            equipment.ECMS_Dossiers = _.orderBy(equipment.ECMS_Dossiers, ['time_field'], ['desc']);
+          }
+        });
+
+        vm.equipments = equipments;
+      }
+    });
+
     vm.remove     = function (record) {
       if(record){
         if(_.has(record, 'asset_id'))
