@@ -19,6 +19,7 @@
 
       equipments.then(function(equipments){
         vm.hints = { model: [], asset_number: [], location: [] };
+        var asset_numbers = [], locations = [];
 
         _.map(equipments, function(equipment){
           vm.hints.model.push(equipment.model);
@@ -26,9 +27,21 @@
           vm.hints.location.push(equipment.ECMS_Location.desc);
         });
 
+        vm.hints.model    = _.uniq(vm.hints.model);
+        vm.hints.location = _.uniq(vm.hints.location);
+
         $scope.$watch('vm.equipment.model', function(newVal, oldVal){
           if (newVal!==oldVal) vm.hints.asset_number = [];
-          vm.hints.asset_number = _(equipments).chain().filter({'model' : newVal}).map('asset_number').value();
+          asset_numbers = vm.hints.asset_number = _(equipments).chain().filter({'model' : newVal}).map('asset_number').uniq().value();
+        });
+
+        $scope.$watch('vm.equipment.asset_number', function(newVal, oldVal){
+          if(newVal !== oldVal){
+            locations = _(equipments).chain().filter({'model' : vm.equipment.model, 'asset_number': newVal}).map('ECMS_Location.desc').uniq().value();
+
+            vm.locationDisabled = !!_.includes(asset_numbers, newVal);
+            vm.equipment.ECMS_Location.desc = vm.locationDisabled ? locations[0] : '';
+          }
         });
       });
     }
@@ -84,6 +97,7 @@
         .catch(errorCallback);
 
       function successCallback(res) {
+        console.log('SUCCESS!');
         $state.go('equipments.view', {asset_id: res.asset_id});
       }
 
