@@ -9,8 +9,7 @@
     return {
       restrict: "EA",
       scope: false,
-      template: "<div>Your name is : {{vm.name}}</div>"+
-      "Change your name : <input type='text' ng-model='vm.name' />"
+      templateUrl: './app/calibrates/views/components/name-input-tpl.html'
     }
   }
 })();

@@ -96,7 +96,7 @@
       }
     ];
 
-    vm.name         = "Ellen_Page";
+    vm.name         = 'Ellen_Page';
     vm.reverseName  = function(){
       vm.name = vm.name.split('').reverse().join('');
     };

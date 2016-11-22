@@ -44,9 +44,6 @@
       },
       // template: '<li ng-repeat="x in marvels">{{ x.name }} </li>'
       templateUrl: function(jQuery, attrs){
-        console.log(attrs);
-        var v = jQuery.find('prefID');
-        console.log('v: ', v);
         return './app/calibrates/views/components/marvels-list-tpl.html';
       }
       ,
