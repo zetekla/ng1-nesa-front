@@ -9,14 +9,14 @@
   DossiersController.$inject = ['$scope', '$state', '$window', 'dossierResolve'];
 
   function DossiersController ($scope, $state, $window, dossier) {
-    var vm = this;
-    vm.equipment = dossier; // dossier.$resolve(function(data){  }) ;
-    vm.state = $state.params;
+    var vm        = this;
+    vm.equipment  = dossier; // dossier.$resolve(function(data){  }) ;
+    vm.state      = $state.params;
 
-    vm.error = null;
-    vm.form = {};
-    vm.remove = remove;
-    vm.save = save;
+    vm.error      = null;
+    vm.form       = {};
+    vm.remove     = remove;
+    vm.save       = save;
 
     // Remove existing Dossier
     function remove() {
@@ -95,5 +95,10 @@
         "present": "chapter 15"
       }
     ];
+
+    vm.name         = "Ellen_Page";
+    vm.reverseName  = function(){
+      vm.name = vm.name.split('').reverse().join('');
+    };
   }
 })();

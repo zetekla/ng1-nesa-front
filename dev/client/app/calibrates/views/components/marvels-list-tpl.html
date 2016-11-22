@@ -3,6 +3,7 @@
   <div ng-if="vm.pref===2">
     <h2>{{vm.title}}</h2>
     <span>Pref: DISPLAY #{{vm.pref}}</span>
+    <span ng-hide="true" id="prefID">{{vm.pref}}</span>
     <ul ng-repeat="marvel in vm.marvels">
       <li>{{marvel.name}} {{marvel.present}}</li>
     </ul>
@@ -11,6 +12,7 @@
     <div>
       <h2>{{vm.title}}</h2>
       <span>Pref: DISPLAY #{{vm.pref}}</span>
+      <span ng-hide="true" id="prefID">{{vm.pref}}</span>
       <table border="1" style="color:#166CD7">
         <thead>
         <tr>
