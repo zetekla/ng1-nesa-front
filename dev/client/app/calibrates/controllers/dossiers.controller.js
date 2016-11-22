@@ -17,11 +17,43 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    
-    $scope.pref   = 1;
-    $scope.board  = 'Heroes List';
 
-    $scope.marvels = [
+    // Remove existing Dossier
+    function remove() {
+      if ($window.confirm('Are you sure you want to delete this Dossier?')) {
+        var asset_id = vm.equipment.asset_id;
+        vm.equipment.$remove({file_id: vm.equipment.ECMS_Dossiers[0].file_id}, function(){
+          $state.go('equipments.view', {asset_id: asset_id});
+        });
+      }
+    }
+
+    // Save Dossier
+    function save(isValid) {
+      if (!isValid) {
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.dossiersForm');
+        return false;
+      }
+
+      // Create a new article, or update the current instance
+      vm.equipment.createOrUpdate()
+        .then(successCallback)
+        .catch(errorCallback);
+
+      function successCallback(res) {
+        $state.go('equipments.view', {asset_id: res.asset_id});
+      }
+
+      function errorCallback(res) {
+        vm.error = res.data.message;
+      }
+    }
+
+
+    /* HEROES LIST COMPONENT */
+    $scope.board  = 'Heroes List';
+    $scope.pref   = 1;
+    $scope.kaban  = [
       {
         "name": "Ninja Turtle",
         "attribute": "agile tactic",
@@ -62,37 +94,6 @@
         "attribute": "magnetism, metal attraction",
         "present": "chapter 15"
       }
-    ]; 
-
-    // Remove existing Dossier
-    function remove() {
-      if ($window.confirm('Are you sure you want to delete this Dossier?')) {
-        var asset_id = vm.equipment.asset_id;
-        vm.equipment.$remove({file_id: vm.equipment.ECMS_Dossiers[0].file_id}, function(){
-          $state.go('equipments.view', {asset_id: asset_id});
-        });
-      }
-    }
-
-    // Save Dossier
-    function save(isValid) {
-      if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.dossiersForm');
-        return false;
-      }
-
-      // Create a new article, or update the current instance
-      vm.equipment.createOrUpdate()
-        .then(successCallback)
-        .catch(errorCallback);
-
-      function successCallback(res) {
-        $state.go('equipments.view', {asset_id: res.asset_id});
-      }
-
-      function errorCallback(res) {
-        vm.error = res.data.message;
-      }
-    }
+    ];
   }
 })();

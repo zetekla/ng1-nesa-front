@@ -3,22 +3,21 @@
 
   angular
     .module('calibrates')
-    .directive('dossierPaneComponent', [dossierPaneComponent]);
+    .directive('heroesListComponent', [heroesListComponent]);
 
-  function dossierPaneComponent (){
+  function heroesListComponent (){
     return {
       restrict: 'E',
       scope: {
-        heroes: '=marvels',
+        heroes: '=capcom',
         title: '=board',
         pref: '='
       },
       // template: '<li ng-repeat="x in heroes">{{ x.name }} </li>'
       templateUrl: function(jQuery, attrs){
         // return 'templates/tpl2.html';
-        return (attrs.pref =='2') ? './app/calibrates/views/components/tpl2.html': './app/calibrates/views/components/tpl1.html';
+        return (attrs.pref =='2') ? './app/calibrates/views/components/heroes-list-tpl2.html': './app/calibrates/views/components/heroes-list-tpl1.html';
       }
     }
   }
-
 })();
