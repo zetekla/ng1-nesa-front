@@ -17,6 +17,9 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    
+    $scope.pref   = 1;
+    $scope.board  = 'Heroes List';
 
     $scope.marvels = [
       {

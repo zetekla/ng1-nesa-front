@@ -74,6 +74,41 @@
       }
     });
 
+    // look, I'm another set of data to inject
+    $scope.marvels = [
+      {
+        "name": "Spider-Man",
+        "attribute": "agile tactic",
+        "present": "chapter 67"
+      },
+      {
+        "name": "Daredevil",
+        "attribute": "mystic hypnotization",
+        "present": "chapter 45"
+      },
+      {
+        "name": "Thor",
+        "attribute": "thunder bolt",
+        "present": "chapter 32"
+      },
+      {
+        "name": "Rogue",
+        "attribute": "physical swiftness",
+        "present": "chapter 4"
+      },
+      {
+        "name": "Phoenix",
+        "attribute": "fire element, fire ball",
+        "present": "chapter 6"
+      },
+      {
+        "name": "Psylocke",
+        "attribute": "psychic",
+        "present": "chapter 9"
+      }
+    ];
+
+
 
     // Remove existing Equipment
     function remove() {
