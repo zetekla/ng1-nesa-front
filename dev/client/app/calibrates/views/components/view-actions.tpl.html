@@ -1,0 +1,21 @@
+<div class="row">
+  <a ng-if="vm.state.asset_id" class="btn btn-lg btn-primary"
+     data-ui-sref="calibration.edit({ asset_id: vm.equipment.asset_id })">
+    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Edit
+  </a>
+  <a ng-if="vm.state.file_id" class="btn btn-lg btn-primary"
+     data-ui-sref="calibration.dossierEdit({ file_id: vm.equipment.ECMS_Dossiers[0].file_id })">
+    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Edit
+  </a>
+  <a class="btn btn-warning btn-lg" data-ui-sref="calibration.dossierCreate({ asset_id: vm.equipment.asset_id })">
+    <i class="fa fa-paperclip"></i>&nbsp; Record
+  </a>
+  <a ng-if="vm.state.asset_id" class="btn btn-lg btn-danger pull-right"
+     data-ng-click="vm.remove()">
+    <i class="fa fa-trash"></i>&nbsp; Remove
+  </a>
+  <a ng-if="vm.state.file_id" class="btn btn-lg btn-danger pull-right"
+     data-ng-click="vm.remove()">
+    <i class="fa fa-remove"></i>&nbsp; Remove
+  </a>
+</div>

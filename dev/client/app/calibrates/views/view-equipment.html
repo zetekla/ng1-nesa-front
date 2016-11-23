@@ -1,48 +1,10 @@
 <section>
   <p><strong>viewEquipment</strong> page {{vm.pageTitle}}</p>
   <div class="page-header">
-    <h2>{{vm.equipment.equipmentInfo}} {{vm.equipment.ECMS_Location.getLocation}}</h2>
-    <h5 class="row offset-sm-5" data-ng-bind="vm.equipment.last_cal | date:'MM/dd/yyyy'"></h5>
-    <h5 class="row offset-sm-5" data-ng-bind="vm.equipment.schedule"></h5>
-    <h5 class="row offset-sm-5" data-ng-bind="vm.equipment.next_cal | date:'MM/dd/yyyy'"></h5>
-    <h5 class="row offset-sm-5" data-ng-bind="vm.equipment.ECMS_Location.desc"></h5>
+    <equipment-details-component></equipment-details-component>
     <br>
-    <div class="col-sm-12" data-ng-repeat="document in vm.equipment.ECMS_Dossiers" ng-class-even="'stripedblue'"
-         ng-class-odd="'stripedbeige'">
-      <div class="row pull-left">
-        <span class="text-sm-left" data-ui-sref="calibration.dossierView({ file_id: document.file_id })"><a href="//file#{{ document.file_id }}">{{$index+1}}. Dossier #{{ document.file_id }}</a></span>
-        <div class="row col-sm-10 offset-sm-5">
-          <div class="">File name: <i>{{document.filename}}</i></div>
-          <div class="" data-ng-bind="document.createdAt"></div>
-          <div class="" data-ng-bind="document.updatedAt"></div>
-        </div>
-      </div>
-      <div class="row pull-right">
-        <button type="button" class="btn btn-danger btn-lg" ng-click="vm.dossierRemove({ file_id: document.file_id })"><i class="fa fa-remove"></i></button>
-      </div>
-    </div>
+    <dossiers-list-view-component></dossiers-list-view-component>
   </div>
-  <div class="row mt-2">
-    <a class="btn btn-lg btn-primary"
-       data-ui-sref="calibration.edit({ asset_id: vm.equipment.asset_id })">
-      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Edit
-    </a>
-    <a class="btn btn-warning btn-lg" data-ui-sref="calibration.dossierCreate({ asset_id: vm.equipment.asset_id })">
-      <i class="fa fa-paperclip"></i>&nbsp; Record
-    </a>
-    <a class="btn btn-lg btn-danger pull-right" data-ng-click="vm.remove()">
-      <i class="fa fa-trash"></i>&nbsp; Remove
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.equipment.createdAt | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.equipment.user"
-            data-ng-bind="vm.equipment.user.displayName"></span>
-      <span data-ng-if="!vm.equipment.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" data-ng-bind="vm.equipment.content"></p>
+  <view-actions-component></view-actions-component>
+  <user-interaction-info-component></user-interaction-info-component>
 </section>

@@ -44,7 +44,7 @@
       },
       // template: '<li ng-repeat="x in marvels">{{ x.name }} </li>'
       templateUrl: function(jQuery, attrs){
-        return './app/calibrates/views/components/marvels-list-tpl.html';
+        return './app/calibrates/views/components/marvels-list.tpl.html';
       }
       ,
       controller: marvelsListComponentController,

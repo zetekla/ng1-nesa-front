@@ -1,4 +1,8 @@
 /* restore "body" styling that were changes by "jasmine.css"... */
+//@include make-col-offset(2);
+
+@import '../../../public/lib/bootstrap/scss/bootstrap';
+
 body { background-color: white; padding: 0; margin: 8px; }
 /* ... but remain the "jasmine.css" styling for the Jasmine reporting */
 .jasmine_reporter { background-color: #eeeeee; padding: 0; margin: 0; }
@@ -65,7 +69,6 @@ body { background-color: white; padding: 0; margin: 8px; }
 .mt-0 {
   margin-top: 0 !important;
 }
-
 .mt-1 {
   margin-top: ($spacer-y*0.5) !important;
 }

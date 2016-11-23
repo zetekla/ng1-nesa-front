@@ -9,7 +9,7 @@
     return {
       restrict: "EA",
       scope: false,
-      templateUrl: './app/calibrates/views/components/name-input-tpl.html'
+      templateUrl: './app/calibrates/views/components/name-input.tpl.html'
     }
   }
 })();
