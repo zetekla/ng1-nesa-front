@@ -12,12 +12,12 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
-      .state('equipments', {
+      .state('calibration', {
         abstract: true,
-        url: '/equipments',
+        url: '/calibration',
         template: '<ui-view/>'
       })
-      .state('equipments.list', {
+      .state('calibration.list', {
         url: '',
         templateUrl: './app/calibrates/views/list-equipments.html',
         controller: 'EquipmentsListController',
@@ -26,8 +26,8 @@
           pageTitle: 'Equipments List'
         }
       })
-      .state('equipments.create', {
-        url: '/create',
+      .state('calibration.create', {
+        url: '/equipments/create',
         templateUrl: './app/calibrates/views/form-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
@@ -39,8 +39,8 @@
           pageTitle : 'Equipments Create'
         }
       })
-      .state('equipments.edit', {
-        url: '/:asset_id/edit',
+      .state('calibration.edit', {
+        url: '/equipments/:asset_id/edit',
         templateUrl: './app/calibrates/views/form-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
@@ -52,8 +52,8 @@
           pageTitle: 'Edit Equipment {{ equipmentResolve.asset_id }}'
         }
       })
-      .state('equipments.view', {
-        url: '/:asset_id',
+      .state('calibration.view', {
+        url: '/equipments/:asset_id',
         templateUrl: './app/calibrates/views/view-equipment.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
@@ -64,8 +64,8 @@
           pageTitle: 'Equipment {{ equipmentResolve.asset_id }}'
         }
       })
-      .state('equipments.dossierCreate', {
-        url: '/:asset_id/dossierCreate',
+      .state('calibration.dossierCreate', {
+        url: '/equipments/:asset_id/dossierCreate',
         templateUrl: './app/calibrates/views/form-dossier.html',
         controller: 'EquipmentsController',
         controllerAs: 'vm',
@@ -77,7 +77,7 @@
           pageTitle : 'Dossier Create'
         }
       })
-      .state('equipments.dossierEdit', {
+      .state('calibration.dossierEdit', {
         url: '/files/:file_id/edit',
         templateUrl: './app/calibrates/views/form-dossier.html',
         controller: 'DossiersController',
@@ -89,7 +89,7 @@
           pageTitle: 'Dossier {{ dossierResolve.file_id }}'
         }
       })
-      .state('equipments.dossierView', {
+      .state('calibration.dossierView', {
         url: '/files/:file_id',
         templateUrl: './app/calibrates/views/view-dossier.html',
         controller: 'DossiersController',
@@ -99,6 +99,19 @@
         },
         data:{
           pageTitle: 'Dossier {{ dossierResolve.file_id }}'
+        }
+      })
+      .state('calibration.dossierPane', {
+      url: '/dossierPane',
+      templateUrl: './app/calibrates/views/dossier-pane.html',
+      controller: 'DossiersController',
+      controllerAs: 'vm',
+        resolve: {
+          dossierResolve: newDossier
+        },
+        data:{
+          roles: ['user', 'admin'],
+          pageTitle : 'Dossier Create'
         }
       })
     ;

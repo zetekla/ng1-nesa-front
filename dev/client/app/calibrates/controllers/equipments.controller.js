@@ -13,6 +13,7 @@
     vm.equipment          = equipment;
     vm.state              = $state.params;
     vm.searchText         = false;
+    vm.locationDisabled   = false;
 
     if (!vm.equipment.asset_id) {
       var equipments = Service.query().$promise;
@@ -40,7 +41,9 @@
             locations = _(equipments).chain().filter({'model' : vm.equipment.model, 'asset_number': newVal}).map('ECMS_Location.desc').uniq().value();
 
             vm.locationDisabled = !!_.includes(asset_numbers, newVal);
-            vm.equipment.ECMS_Location.desc = vm.locationDisabled ? locations[0] : '';
+            vm.equipment.ECMS_Location = {
+              desc: vm.locationDisabled ? locations[0] : ''
+            };
           }
         });
       });
@@ -51,10 +54,10 @@
     vm.form               = {};
     vm.remove             = remove;
     vm.save               = save;
-    
+
     var usePlaceHolder    = true,
         useRandomized     = true;
-    
+
     $scope.$watch('vm.incrementer', function(newVal, oldVal){
       var element = angular.element( document.querySelector( '#documentID' ) );
       element.remove();
@@ -68,12 +71,12 @@
       }
     });
 
-
+    
     // Remove existing Equipment
     function remove() {
-      if ($window.confirm('Are you sure you want to delete?')) {
+      if ($window.confirm('Are you sure you want to delete this Equipment?')) {
         vm.equipment.$remove({}, function(){
-          $state.go('equipments.list');
+          $state.go('calibration.list');
         });
       }
     }
@@ -91,12 +94,11 @@
         .catch(errorCallback);
 
       function successCallback(res) {
-        console.log('SUCCESS!');
-        $state.go('equipments.view', {asset_id: res.asset_id});
+        return $state.go('calibration.view', {asset_id: res.asset_id});
       }
 
       function errorCallback(res) {
-        vm.error = res.data.message;
+        return vm.error = res.data.message;
       }
     }
 
@@ -136,7 +138,6 @@
         "present": "chapter 9"
       }
     ];
-    
-    vm.test = 'abc';
+
   }
 })();

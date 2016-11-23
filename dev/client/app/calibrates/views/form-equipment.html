@@ -27,7 +27,7 @@
               <div class="form-group">
                 <label class="control-label" for="location">Location</label>
                 <div class="controls">
-                  <input id="location" name="location" type="text" ng-readonly="vm.locationDisabled" ng-model="vm.equipment.ECMS_Location.desc" ng-init="vm.equipment.ECMS_Location.desc=''; vm.locationDisabled = false" uib-typeahead="location for location in vm.hints.location | filter:$viewValue | limitTo:8" class="form-control form-control-lg" autocomplete="off" placeholder="location">
+                  <input id="location" name="location" type="text" ng-readonly="vm.locationDisabled" ng-model="vm.equipment.ECMS_Location.desc" uib-typeahead="location for location in vm.hints.location | filter:$viewValue | limitTo:8" class="form-control form-control-lg" autocomplete="off" placeholder="location">
                 </div>
               </div>
             </div>

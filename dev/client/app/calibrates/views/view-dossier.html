@@ -8,7 +8,7 @@
     <br>
     <div class="col-sm-12" data-ng-repeat="document in vm.equipment.ECMS_Dossiers" ng-class-even="'stripedblue'"
          ng-class-odd="'stripedbeige'">
-      <span class="text-sm-left" data-ui-sref="equipments.dossierEdit({ file_id: document.file_id })"><a href="//file#{{ document.file_id }}">Dossier #{{ document.file_id }}</a></span>
+      <span class="text-sm-left" data-ui-sref="calibration.dossierEdit({ file_id: document.file_id })"><a href="//file#{{ document.file_id }}">Dossier #{{ document.file_id }}</a></span>
       <div class="row offset-sm-3">
         <p>Display file content here</p>
         <div class="">File name <i>{{document.filename}}</i></div>
@@ -20,10 +20,10 @@
   </div>
   <div class="row">
     <a class="btn btn-lg btn-primary"
-       data-ui-sref="equipments.dossierEdit({ file_id: vm.equipment.ECMS_Dossiers[0].file_id })">
+       data-ui-sref="calibration.dossierEdit({ file_id: vm.equipment.ECMS_Dossiers[0].file_id })">
       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Edit
     </a>
-    <a class="btn btn-warning btn-lg" data-ui-sref="equipments.dossierCreate({ asset_id: vm.equipment.asset_id })">
+    <a class="btn btn-warning btn-lg" data-ui-sref="calibration.dossierCreate({ asset_id: vm.equipment.asset_id })">
       <i class="fa fa-paperclip"></i>&nbsp; Record
     </a>
     <a class="btn btn-lg btn-danger pull-right" data-ng-click="vm.remove()">

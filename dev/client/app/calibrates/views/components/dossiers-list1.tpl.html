@@ -1,6 +1,6 @@
 <div class = "row">
   <div class="col-sm-12" ng-repeat="document in vm.equipment.ECMS_Dossiers">
-    <div class="row alert alert-info text-xs-left">Dossier #{{$index+1}}
+    <div class="row alert alert-info text-xs-left"><span class="text-sm-left" data-ui-sref="calibration.dossierView({ file_id: document.file_id })"><a href="//file#{{ document.file_id }}">{{$index+1}}. Dossier #{{ document.file_id }}</a></span>
       <!--<button ng-click="vm.dossierToggle(document.hide)">(+|-)</button>-->
     </div>
     <div class="col-sm-6">

@@ -23,7 +23,7 @@
       if ($window.confirm('Are you sure you want to delete this Dossier?')) {
         var asset_id = vm.equipment.asset_id;
         vm.equipment.$remove({file_id: vm.equipment.ECMS_Dossiers[0].file_id}, function(){
-          $state.go('equipments.view', {asset_id: asset_id});
+          $state.go('calibration.view', {asset_id: asset_id});
         });
       }
     }
@@ -41,7 +41,7 @@
         .catch(errorCallback);
 
       function successCallback(res) {
-        $state.go('equipments.view', {asset_id: res.asset_id});
+        $state.go('calibration.view', {asset_id: res.asset_id});
       }
 
       function errorCallback(res) {
