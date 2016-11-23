@@ -37,55 +37,11 @@
 
         <!-- File Uploader -->
         <div class="row">
-          <div class="row" data-ng-if="vm.state.file_id">
-            <div class="row alert alert-warning">DOSSIER UPDATE SECTION</div>
-            <div class = "row">
-              <div class="col-sm-6">
-                <label class="control-label" for="filename">Experiment Filename</label>
-                <div class="controls input-group input-group-lg">
-                  <input id="filename" name="filename" type="text" ng-model="vm.equipment.ECMS_Dossiers[0].filename" class="form-control" placeholder="xyz._">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label class="control-label" for="fileUploader">Uploader Pane</label>
-                  <div class="controls input-group input-group-lg">
-                    <span class="input-group-addon"><i class="fa fa-upload"></i></span>
-                    <input id="fileUploader" name="file" type="text" ng-model="vm.equipment.ECMS_Dossiers[0].file" class="form-control" placeholder="Browse..">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <file-pane-component></file-pane-component>
           <heroes-list-component capcom='kaban'pref="'user.pref'" board="'heroes list'">HEROES- can accommodate 2 sets of contents</heroes-list-component>
           <marvels-list-component marvels='marvels' pref='vm.pref' title='zxt'>MARVEL-1-SET of CONTENT across the board</marvels-list-component>
-          <div class="row" data-ng-if="!vm.state.file_id">
-            <div class="row" ng-hide="vm.hideFileUploader">
-              <div class="row alert alert-warning">
-                <p class="text-lg-center">FILE ADDING SECTION</p>
-                <div class="col-sm-6">
-                  <label class="control-label" for="incrementer">Specify how many files:</label>
-                  <div class="controls input-group input-group-lg">
-                    <span class="input-group-addon">Number</span>
-                    <input id="incrementer" name="incrementer" type="number" ng-init="vm.incrementer=0" ng-model="vm.incrementer" class="form-control" min="0" max="99" ng-pattern="/^\d+$/">
-                    <!--<span class="error-text" ng-show="vm.form.equipmentForm.incrementer.$dirty && vm.form.equipmentForm.incrementer.$invalid">Must Enter a Number (ex: 2) </span>-->
-                  </div>
-                </div>
-              </div>
-              <div ng-repeat="document in vm.equipment.documents">
-                <div class = "row" id="documentID">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="control-label" for="documentFile">Uploader Pane #{{ $index+1 }}</label>
-                      <div class="controls input-group input-group-lg">
-                        <input id="documentFile" name="file" type="text" ng-model="document.file" class="form-control" placeholder="Browse..">{{ document.file }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          <uploader-mockup-component data-ng-if="!vm.state.file_id"></uploader-mockup-component>
         </div>
 
         <div class="row">

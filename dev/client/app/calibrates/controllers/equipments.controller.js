@@ -51,16 +51,10 @@
     vm.form               = {};
     vm.remove             = remove;
     vm.save               = save;
-
-    vm.hideDossierList    = false;
-
-    vm.hideFileUploader   = false;
-
-    vm.useFileUploader    = true;
+    
     var usePlaceHolder    = true,
         useRandomized     = true;
-
-    if(vm.useFileUploader)
+    
     $scope.$watch('vm.incrementer', function(newVal, oldVal){
       var element = angular.element( document.querySelector( '#documentID' ) );
       element.remove();
@@ -142,5 +136,7 @@
         "present": "chapter 9"
       }
     ];
+    
+    vm.test = 'abc';
   }
 })();

@@ -9,7 +9,9 @@
   EquipmentsService.$inject = ['$resource'];
 
   function EquipmentsService($resource) {
-    var Equipment = $resource('http://localhost:3000/equipments/:asset_id', {
+    // var equipmentURI = 'http://localhost:3000/equipments/:asset_id';
+    var equipmentURI = 'http://esp21:3000/equipments/:asset_id';
+    var Equipment = $resource(equipmentURI, {
       asset_id: '@asset_id'
     }, {
       update: {
