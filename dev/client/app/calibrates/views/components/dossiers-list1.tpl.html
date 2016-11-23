@@ -1,7 +1,12 @@
 <div class = "row">
   <div class="col-sm-12" ng-repeat="document in vm.equipment.ECMS_Dossiers">
-    <div class="row alert alert-info text-xs-left"><span class="text-sm-left" data-ui-sref="calibration.dossierView({ file_id: document.file_id })"><a href="//file#{{ document.file_id }}">{{$index+1}}. Dossier #{{ document.file_id }}</a></span>
+    <div class="row">
+      <div class="alert alert-info text-xs-left">
+      <span class="text-sm-left" data-ui-sref="calibration.dossierView({ file_id: document.file_id })"><a href="//file#{{ document.file_id }}">{{$index+1}}. Dossier #{{ document.file_id }}</a></span>
       <!--<button ng-click="vm.dossierToggle(document.hide)">(+|-)</button>-->
+      <div class="pull-right">
+        <button type="button" class="btn btn-danger btn-sm" ng-click="vm.dossierRemove({ file_id: document.file_id })"><i class="fa fa-remove"></i></button>
+      </div>
     </div>
     <div class="col-sm-6">
       <div class="form-group">

@@ -68,6 +68,11 @@
               <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{vm.equipment.asset_id ? 'Update' : 'Create'}}</button>
             </div>
           </div>
+          <div class="pull-right" ng-hide="!vm.state.asset_id">
+            <div class="form-group" ng-hide="!vm.state.asset_id">
+              <button type="button" class="btn btn-danger btn-lg" data-ng-click="vm.remove()"><i class="fa fa-trash"></i>&nbsp;</button>
+            </div>
+          </div>
         </div>
         <div ng-messages="vm.form.equipmentForm.incrementer.$error" ng-if="vm.form.equipmentForm.incrementer.$dirty && vm.form.equipmentForm.incrementer.$invalid" role="alert">
           <p class="help-block error-text" ng-message="pattern">Check number input.</p>

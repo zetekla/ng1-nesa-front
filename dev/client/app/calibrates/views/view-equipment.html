@@ -9,16 +9,20 @@
     <br>
     <div class="col-sm-12" data-ng-repeat="document in vm.equipment.ECMS_Dossiers" ng-class-even="'stripedblue'"
          ng-class-odd="'stripedbeige'">
-      <span class="text-sm-left" data-ui-sref="calibration.dossierView({ file_id: document.file_id })"><a href="//file#{{ document.file_id }}">{{$index+1}}. Dossier #{{ document.file_id }}</a></span>
-      <div class="row offset-sm-3">
-        <div class="">File name: <i>{{document.filename}}</i></div>
-        <div class="" data-ng-bind="document.createdAt"></div>
-        <div class="" data-ng-bind="document.updatedAt"></div>
+      <div class="row pull-left">
+        <span class="text-sm-left" data-ui-sref="calibration.dossierView({ file_id: document.file_id })"><a href="//file#{{ document.file_id }}">{{$index+1}}. Dossier #{{ document.file_id }}</a></span>
+        <div class="row col-sm-10 offset-sm-5">
+          <div class="">File name: <i>{{document.filename}}</i></div>
+          <div class="" data-ng-bind="document.createdAt"></div>
+          <div class="" data-ng-bind="document.updatedAt"></div>
+        </div>
       </div>
-      <br>
+      <div class="row pull-right">
+        <button type="button" class="btn btn-danger btn-lg" ng-click="vm.dossierRemove({ file_id: document.file_id })"><i class="fa fa-remove"></i></button>
+      </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mt-2">
     <a class="btn btn-lg btn-primary"
        data-ui-sref="calibration.edit({ asset_id: vm.equipment.asset_id })">
       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; Edit

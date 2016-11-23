@@ -6,9 +6,9 @@
     .module('calibrates')
     .controller('EquipmentsController', EquipmentsController);
 
-  EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve', 'EquipmentsService'];
+  EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve', 'EquipmentsService', 'RecordService'];
 
-  function EquipmentsController ($scope, $state, $window, equipment, Service) {
+  function EquipmentsController ($scope, $state, $window, equipment, Service, RecordService) {
     var vm                = this;
     vm.equipment          = equipment;
     vm.state              = $state.params;
@@ -53,6 +53,7 @@
     vm.error              = null;
     vm.form               = {};
     vm.remove             = remove;
+    vm.dossierRemove      = function (record) { RecordService.remove(record); };
     vm.save               = save;
 
     var usePlaceHolder    = true,
@@ -71,7 +72,7 @@
       }
     });
 
-    
+
     // Remove existing Equipment
     function remove() {
       if ($window.confirm('Are you sure you want to delete this Equipment?')) {
