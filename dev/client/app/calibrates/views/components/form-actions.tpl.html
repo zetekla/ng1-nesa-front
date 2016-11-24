@@ -11,8 +11,10 @@
   </div>
   <div class="pull-right" ng-hide="!(vm.state.file_id || vm.state.asset_id)">
     <div class="form-group">
-      <button ng-if="vm.state.file_id" type="button" class="btn btn-danger btn-lg" data-ng-click="vm.remove()"><i class="fa fa-remove"></i>&nbsp; Remove</button>
-      <button ng-if="vm.state.asset_id" type="button" class="btn btn-danger btn-lg" data-ng-click="vm.remove()"><i class="fa fa-trash"></i>&nbsp; Remove</button>
+      <button type="button" class="btn btn-danger btn-lg" data-ng-click="vm.remove()">
+        <i ng-if="vm.state.file_id" class="fa fa-remove"></i>
+        <i ng-if="vm.state.asset_id" class="fa fa-trash"></i>&nbsp; Remove
+      </button>
     </div>
   </div>
 </div>

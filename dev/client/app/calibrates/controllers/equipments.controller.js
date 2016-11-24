@@ -32,7 +32,10 @@
         vm.hints.location = _.uniq(vm.hints.location);
 
         $scope.$watch('vm.equipment.model', function(newVal, oldVal){
-          if (newVal!==oldVal) vm.hints.asset_number = [];
+          if (newVal!==oldVal) {
+            vm.hints.asset_number     = [];
+            vm.equipment.asset_number = '';
+          }
           asset_numbers = vm.hints.asset_number = _(equipments).chain().filter({'model' : newVal}).map('asset_number').uniq().value();
         });
 
