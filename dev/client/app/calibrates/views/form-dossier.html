@@ -1,25 +1,27 @@
 <section>
-  <div class="page-header">
-    <h2>{{vm.state.file_id ? 'Edit Dossier' : 'New Dossier for Equipment'}}</h2>
-  </div>
-  <div class="col-md-12">
-    <form name="vm.form.dossiersForm" class="" ng-submit="vm.save(vm.form.dossiersForm.$valid)" novalidate>
-      <fieldset>
-        <legend>{{fieldTitle}}</legend>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
-        <template-form-component></template-form-component>
-        <!-- File Uploader -->
-        <div class="row">
-          <span class="footer" ng-if="vm.state.file_id">Editing an existing file is not likely to happen</span>
-          <!--<file-pane-component></file-pane-component>-->
-          <!--<heroes-list-component capcom='kaban'pref="'user.pref'" board="'heroes list'">HEROES- can accommodate 2 sets of contents</heroes-list-component>
-          <marvels-list-component marvels='marvels' pref='vm.pref' title='zxt'>MARVEL-1-SET of CONTENT across the board</marvels-list-component>-->
-          <uploader-mockup-component data-ng-if="!vm.state.file_id"></uploader-mockup-component>
-        </div>
-        <form-actions-component></form-actions-component>
-      </fieldset>
-    </form>
+  <div class="container">
+    <div class="page-header">
+      <h2>{{vm.state.file_id ? 'Edit Dossier' : 'New Dossier for Equipment'}}</h2>
+    </div>
+    <div class="col-md-12">
+      <form name="vm.form.dossiersForm" class="" ng-submit="vm.save(vm.form.dossiersForm.$valid)" novalidate>
+        <fieldset>
+          <legend>{{fieldTitle}}</legend>
+          <div ng-show="vm.error" class="text-danger">
+            <strong ng-bind="vm.error"></strong>
+          </div>
+          <template-form-component></template-form-component>
+          <!-- File Uploader -->
+          <div class="row">
+            <span class="footer" ng-if="vm.state.file_id">Editing an existing file is not likely to happen</span>
+            <!--<file-pane-component></file-pane-component>-->
+            <!--<heroes-list-component capcom='kaban'pref="'user.pref'" board="'heroes list'">HEROES- can accommodate 2 sets of contents</heroes-list-component>
+            <marvels-list-component marvels='marvels' pref='vm.pref' title='zxt'>MARVEL-1-SET of CONTENT across the board</marvels-list-component>-->
+            <uploader-mockup-component data-ng-if="!vm.state.file_id"></uploader-mockup-component>
+          </div>
+          <form-actions-component></form-actions-component>
+        </fieldset>
+      </form>
+    </div>
   </div>
 </section>
