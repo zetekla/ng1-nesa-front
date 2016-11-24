@@ -1,4 +1,4 @@
-var app = angular.module('plunker');
+let app = angular.module('plunker');
 
 app.service('RestfulService', RestfulServiceFn);
 app.filter('range', range);
@@ -21,7 +21,7 @@ function RestfulServiceFn($http){
 function range() {
   return function(input, total) {
     total = parseInt(total);
-    for (var i=0; i<total; i++)
+    for (let i=0; i<total; i++)
       input.push(i);
     return input;
   };

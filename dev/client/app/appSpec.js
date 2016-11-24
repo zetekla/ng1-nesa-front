@@ -1,6 +1,6 @@
 describe('Testing a Hello World controller', function() {
-  var $scope = null;
-  var ctrl = null;
+  let $scope = null;
+  let ctrl = null;
 
   //you need to indicate your module in a test
   beforeEach(module('plunker'));

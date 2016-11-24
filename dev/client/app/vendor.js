@@ -11,7 +11,7 @@ function browserRequire(_){
   }
 }
 
-var vendor = {
+let vendor = {
   js: [
     // './public/lib/json3/lib/json3.js',
     './node_modules/systemjs/dist/system.js',

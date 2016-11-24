@@ -1,4 +1,4 @@
-var app = angular.module('plunker');
+let app = angular.module('plunker');
 app.controller('tableDataCtrl', tableDataCtrl);
 
 tableDataCtrl.$inject = ['$scope', '$http'];

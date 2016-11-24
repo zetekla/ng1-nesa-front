@@ -7,7 +7,7 @@
 
   marvelsListComponentController.$inject = ['$scope'];
   function marvelsListComponentController($scope){
-    var vm    = this;
+    let vm    = this;
     vm.title  = 'Marvel List'; // okay
     vm.pref   = 2;
     vm.marvels = [
