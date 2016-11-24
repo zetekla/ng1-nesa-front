@@ -11,7 +11,9 @@
       "/fonts":               "./public/dist/fonts/",
       "/lib":                 "./public/dist/lib/",
       "/images":              "./public/dist/images/",
-      "/node_modules":        "./node_modules/"
+      "/node_modules":        "./node_modules/",
+      "/browser-sync":        "./public/dist/maps/",
+      "/public/dist":         "./public/dist/maps/"
     }
   }
 }

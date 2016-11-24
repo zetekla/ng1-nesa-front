@@ -9,9 +9,9 @@
   EquipmentsService.$inject = ['$resource'];
 
   function EquipmentsService($resource) {
-    // var equipmentURI = 'http://localhost:3000/equipments/:asset_id';
-    var equipmentURI = 'http://esp21:3000/equipments/:asset_id';
-    var Equipment = $resource(equipmentURI, {
+    // let equipmentURI = 'http://localhost:3000/equipments/:asset_id';
+    let equipmentURI = 'http://esp21:3000/equipments/:asset_id';
+    let Equipment = $resource(equipmentURI, {
       asset_id: '@asset_id'
     }, {
       update: {
@@ -23,7 +23,7 @@
 
     angular.extend(Equipment.prototype, {
       createOrUpdate: function () {
-        var equipment = this;
+        let equipment = this;
         return createOrUpdate(equipment);
       }
     });
@@ -35,7 +35,7 @@
 
         if (_.has(equipment, 'documents'))
         if (equipment.documents) {
-          var documents = _.pick(equipment, ['asset_id', 'documents', '$save']);
+          let documents = _.pick(equipment, ['asset_id', 'documents', '$save']);
           documents.$save(onSuccess, onError);
         }
 
@@ -51,7 +51,7 @@
 
       // Handle error response
       function onError(errorResponse) {
-        var error = errorResponse.data;
+        let error = errorResponse.data;
         // Handle error internally
         handleError(error);
       }

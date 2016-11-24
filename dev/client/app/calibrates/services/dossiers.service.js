@@ -10,9 +10,9 @@
   // DossiersService.$inject = ['$resource'];
 
   function DossiersService($resource, EquipmentsService) {
-    // var dossierURI = 'http://localhost:3000/equipments/files/:file_id';
-    var dossierURI = 'http://esp21:3000/equipments/files/:file_id';
-    var Dossier = $resource(dossierURI, {
+    // let dossierURI = 'http://localhost:3000/equipments/files/:file_id';
+    let dossierURI = 'http://esp21:3000/equipments/files/:file_id';
+    let Dossier = $resource(dossierURI, {
       file_id: '@file_id'
     }, {
       update: {
@@ -22,7 +22,7 @@
 
     angular.extend(Dossier.prototype, {
       createOrUpdate: function () {
-        var dossier = this;
+        let dossier = this;
         return createOrUpdate(dossier);
       }
     });
@@ -31,7 +31,7 @@
 
     function createOrUpdate(dossier) {
       if (dossier.ECMS_Dossiers[0].file_id) {
-        /*var data = _.pick(dossier.ECMS_Dossiers[0], ['file', 'asset_number', 'filename']);
+        /*let data = _.pick(dossier.ECMS_Dossiers[0], ['file', 'asset_number', 'filename']);
         console.log('update data ', data);*/
         return dossier.$update(dossier.ECMS_Dossiers[0], onSuccess, onError);
       } else {
@@ -45,7 +45,7 @@
 
       // Handle error response
       function onError(errorResponse) {
-        var error = errorResponse.data;
+        let error = errorResponse.data;
         // Handle error internally
         handleError(error);
       }

@@ -1,51 +1,53 @@
-var gulp = require('gulp'),
-  config = require('./gulp-config'),
+import gulp             from 'gulp';
+import config           from './gulp-config';
 
-  /*-- CSS --*/
-  sass                = require('gulp-sass'),
-  postcss             = require('gulp-postcss'),
-  autoprefixer        = require('autoprefixer'),
-  precss              = require('precss'),
-  cssnano             = require('cssnano'),
-  minify              = require('gulp-minify-css'),
+/*-- CSS --*/
+import sass             from 'gulp-sass';
+import postcss          from 'gulp-postcss';
+import autoprefixer     from 'autoprefixer';
+import precss           from 'precss';
+import cssnano          from 'cssnano';
+import minify           from 'gulp-minify-css';
+
+/*-- Mixed --*/
+import _                from 'lodash';
+import sourcemaps       from 'gulp-sourcemaps';
+import ext_replace      from 'gulp-ext-replace';
+import concat           from 'gulp-concat';
+import es               from 'event-stream';
+import bs               from 'browser-sync';
+let    browserSync  = bs.create();
+
+import runSequence      from 'run-sequence';
+import shell            from 'gulp-shell';
+// sanity
+import clean            from 'gulp-clean';
+// dependencies management
+import bower            from 'gulp-bower';
 
 
-  /*-- Mixed --*/
-  _                   = require('lodash'),
-  sourcemaps          = require('gulp-sourcemaps'),
-  ext_replace         = require('gulp-ext-replace'),
-  concat              = require('gulp-concat'),
-  es                  = require('event-stream'),
-  browserSync         = require('browser-sync').create(),
-  runSequence         = require('run-sequence'),
-  shell               = require('gulp-shell'),
-  // sanity
-  clean               = require('gulp-clean'),
-  // dependencies management
-  bower               = require('gulp-bower'),
-
-
-  /*-- Images --*/
-  imagemin            = require('gulp-imagemin'),
+/*-- Images --*/
+import imagemin     from 'gulp-imagemin';
 
 
   /*-- JS & TS --*/
-  uglify              = require('gulp-uglify'),
-  rename              = require('gulp-rename'),
+import babel            from 'gulp-babel';
+import uglify           from 'gulp-uglify';
+import rename           from 'gulp-rename';
 
-  angularFilesort     = require('gulp-angular-filesort'),
-  ngAnnotate          = require('gulp-ng-annotate'),
+import angularFilesort  from 'gulp-angular-filesort';
+import ngAnnotate       from 'gulp-ng-annotate';
 
-  typescript          = require('gulp-typescript'),
+import typescript       from 'gulp-typescript';
 
 
 
   /*-- Bundling --*/
-  htmlreplace         = require('gulp-html-replace'),
+import htmlreplace      from 'gulp-html-replace';
 
-  moment              = require('moment'),
+import moment           from 'moment';
 
-  bundleHash          = moment(new Date().getTime()).format('YYYY-MM-DD-HH-mm-ss'),
+let bundleHash        = moment(new Date().getTime()).format('YYYY-MM-DD-HH-mm-ss'),
   mainBundleName      = bundleHash + '.main.bundle.js',
   mainShortName       = 'main.bundle.js',
   vendorBundleName    = bundleHash + '.vendor.bundle.js',
@@ -58,11 +60,11 @@ gulp.task('shell', shell.task(['lite-server']));
 gulp.task('serve:dev', ['watch', 'shell']);
 
 gulp.task('dist', function(callback) {
-  runSequence('clean', 'copy_images', 'copy_fonts', 'copy_lib', 'copy_html', 'bundle', callback);
+  runSequence('clean', 'copy_images', 'copy_maps', 'copy_fonts', 'copy_lib', 'copy_html', 'bundle', callback);
 });
 
 gulp.task('serve', function(callback) {
-  runSequence('clean:dev', 'copy_images', 'copy_fonts', 'copy_lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', callback);
+  runSequence('clean:dev', 'copy_images', 'copy_maps', 'copy_fonts', 'copy_lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', callback);
 });
 
 gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
@@ -75,7 +77,7 @@ gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
     .pipe(gulp.dest(config.dist));
 });
 
-var tasks = {
+let tasks = {
   bundle_css: {
     dev:      () => gulp.src(config.styles.src.bundle)
                       .pipe(concat('styles.css'))
@@ -131,6 +133,7 @@ gulp.task('bundle:app', ['bundle:app:dev', 'bundle:app:dist']);
 
 gulp.task('bundle:app:dev', function () {
   var app = gulp.src(config.scripts.src)
+    .pipe(babel())
     .pipe(angularFilesort())
     .pipe(ngAnnotate());
 
@@ -138,6 +141,7 @@ gulp.task('bundle:app:dev', function () {
 });
 gulp.task('bundle:app:dist', function () {
   var app = gulp.src(config.scripts.src)
+    .pipe(babel())
     .pipe(angularFilesort())
     .pipe(ngAnnotate());
 
@@ -206,15 +210,19 @@ gulp.task('copy_images', function(){
     .pipe(gulp.dest(config.images.dest));
 });
 
+gulp.task('copy_maps', function(){
+  gulp.src('./node_modules/socket.io-client/socket.io.js.map')
+    .pipe(rename({basename: 'socket.io.min.1.5.0.js'}))
+    .pipe(gulp.dest(config.maps.dest));
+
+  return gulp.src(config.maps.src)
+    .pipe(gulp.dest(config.maps.dest));
+});
+
 gulp.task('copy_lib', function(){
   return gulp.src(config.jasmine.src)
     .pipe(gulp.dest(config.jasmine.dest));
 });
-
-/*gulp.task('copy-map-files', function(){
-  return gulp.src(config.vendor.map)
-    .pipe(gulp.dest(config.dist));
-});*/
 
 /*-- CLEANERS --*/
 gulp.task('clean', ['clean:dist']);

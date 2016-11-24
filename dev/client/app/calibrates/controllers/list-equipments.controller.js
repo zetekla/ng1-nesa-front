@@ -1,14 +1,14 @@
 (function () {
   'use strict';
 
-  var calibratesApp = angular.module('calibrates');
+  let calibratesApp = angular.module('calibrates');
 
   calibratesApp.controller('EquipmentsListController' , EquipmentsListController);
 
   EquipmentsListController.$inject = ['EquipmentsService', 'RecordService'];
 
   function EquipmentsListController(EquipmentsService, RecordService) {
-    var vm = this;
+    let vm = this;
     vm.equipments = EquipmentsService.query();
 
     vm.equipments.$promise.then(function(equipments){
@@ -23,6 +23,6 @@
       }
     });
 
-    vm.remove = function (record) { RecordService.remove(record); };
+    vm.remove = record => RecordService.remove(record);
   }
 })();

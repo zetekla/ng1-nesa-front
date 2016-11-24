@@ -9,7 +9,7 @@
   DossiersController.$inject = ['$scope', '$state', '$window', 'dossierResolve'];
 
   function DossiersController ($scope, $state, $window, dossier) {
-    var vm        = this;
+    let vm        = this;
     vm.equipment  = dossier; // dossier.$resolve(function(data){  }) ;
     vm.state      = $state.params;
 
@@ -21,7 +21,7 @@
     // Remove existing Dossier
     function remove() {
       if ($window.confirm('Are you sure you want to delete this Dossier?')) {
-        var asset_id = vm.equipment.asset_id;
+        let asset_id = vm.equipment.asset_id;
         vm.equipment.$remove({file_id: vm.equipment.ECMS_Dossiers[0].file_id}, function(){
           $state.go('calibration.view', {asset_id: asset_id});
         });

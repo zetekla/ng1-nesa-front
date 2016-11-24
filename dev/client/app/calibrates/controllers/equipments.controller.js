@@ -9,18 +9,18 @@
   EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve', 'EquipmentsService', 'RecordService'];
 
   function EquipmentsController ($scope, $state, $window, equipment, Service, RecordService) {
-    var vm                = this;
+    let vm                = this;
     vm.equipment          = equipment;
     vm.state              = $state.params;
     vm.searchText         = false;
     vm.locationDisabled   = false;
 
     if (!vm.equipment.asset_id) {
-      var equipments = Service.query().$promise;
+      let equipments = Service.query().$promise;
 
       equipments.then(function(equipments){
         vm.hints = { model: [], asset_number: [], location: [] };
-        var asset_numbers = [], locations = [];
+        let asset_numbers = [], locations = [];
 
         _.map(equipments, function(equipment){
           vm.hints.model.push(equipment.model);
@@ -56,20 +56,20 @@
     vm.error              = null;
     vm.form               = {};
     vm.remove             = remove;
-    vm.dossierRemove      = function (record) { RecordService.remove(record); };
+    vm.dossierRemove      = record => RecordService.remove(record);
     vm.save               = save;
 
-    var usePlaceHolder    = true,
+    let usePlaceHolder    = true,
         useRandomized     = true;
 
     $scope.$watch('vm.incrementer', function(newVal, oldVal){
-      var element = angular.element( document.querySelector( '#documentID' ) );
+      let element = angular.element( document.querySelector( '#documentID' ) );
       element.remove();
       if (newVal){
         vm.equipment.documents = [];
         _.times(newVal, function(){
-          var int = (useRandomized) ? (_.random(1,100)): (vm.equipment.documents.length+1),
-            file  = (usePlaceHolder) ? 'placeholder'+ int : null;
+          let int = (useRandomized) ? (_.random(1,100)): (vm.equipment.documents.length+1),
+            file  = (usePlaceHolder)? 'placeholder'+ int : null;
           return vm.equipment.documents.push({file: file, filename: file});
         });
       }
