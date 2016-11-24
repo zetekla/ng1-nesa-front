@@ -9,32 +9,7 @@
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
-        <div class="form-group" show-errors>
-          <div class = "row">
-            <div class="col-sm-4 form-group">
-              <label class="control-label" for="assetNumber">label1</label>
-              <div class="controls input-group">
-                <span class="input-group-addon">Asset Number</span>
-                <input id="assetNumber" ng-readonly="vm.equipment.asset_id" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" class="form-control" placeholder="assetNumber" required>
-              </div>
-            </div>
-            <div class="col-sm-4 form-group">
-              <label class="control-label" for="model">label2</label>
-              <div class="controls input-group">
-                <span class="input-group-addon">Model</span>
-                <input id="model" ng-readonly="vm.equipment.asset_id" name="model" type="text" ng-model="vm.equipment.model" class="form-control" placeholder="model">
-              </div>
-            </div>
-            <div class="col-sm-4 form-group">
-              <label class="control-label" for="location">label3</label>
-              <div class="controls input-group">
-                <span class="input-group-addon">Location</span>
-                <input id="location" name="location" type="text" ng-model="vm.equipment.ECMS_Location.desc" class="form-control" placeholder="location">
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <template-form-component></template-form-component>
         <!-- File Uploader -->
         <div class="row">
           <span class="footer" ng-if="vm.state.file_id">Editing an existing file is not likely to happen</span>
@@ -43,24 +18,7 @@
           <marvels-list-component marvels='marvels' pref='vm.pref' title='zxt'>MARVEL-1-SET of CONTENT across the board</marvels-list-component>-->
           <uploader-mockup-component data-ng-if="!vm.state.file_id"></uploader-mockup-component>
         </div>
-
-        <div class="row">
-          <div class="col-sm-2">
-            <div class="form-group">
-              <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{vm.state.file_id ? 'Update' : 'Create'}}</button>
-            </div>
-          </div>
-          <div class="col-sm-2" ng-hide="!vm.state.file_id">
-            <div class="form-group" ng-hide="!vm.state.file_id">
-              <button type="button" class="btn btn-warning btn-lg" data-ui-sref="calibration.dossierCreate({ asset_id: vm.equipment.asset_id })"><i class="fa fa-paperclip"></i>&nbsp; Record</button>
-            </div>
-          </div>
-          <div class="pull-right" ng-hide="!vm.state.file_id">
-            <div class="form-group" ng-hide="!vm.state.file_id">
-              <button type="button" class="btn btn-danger btn-lg" data-ng-click="vm.remove()"><i class="fa fa-remove"></i>&nbsp;</button>
-            </div>
-          </div>
-        </div>
+        <form-actions-component></form-actions-component>
       </fieldset>
     </form>
   </div>
