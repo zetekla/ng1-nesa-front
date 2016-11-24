@@ -49,7 +49,7 @@ module.exports = {
   },
   maps: {
     src: ['./public/lib/angular-file-upload/dist/angular-file-upload.js.map'],
-    dest: './public/dist/maps/'
+    dest: './public/dist/'
   },
   jasmine: {
     src: [

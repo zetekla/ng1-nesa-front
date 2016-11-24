@@ -20,6 +20,8 @@ let    browserSync  = bs.create();
 
 import runSequence      from 'run-sequence';
 import shell            from 'gulp-shell';
+// logger
+import notify           from 'gulp-notify';
 // sanity
 import clean            from 'gulp-clean';
 // dependencies management
@@ -47,7 +49,8 @@ import htmlreplace      from 'gulp-html-replace';
 
 import moment           from 'moment';
 
-let bundleHash        = moment(new Date().getTime()).format('YYYY-MM-DD-HH-mm-ss'),
+// let bundleHash        = moment(new Date().getTime()).format('YYYY-MM-DD-HH-mm-ss'), // 'MMM Do h:mm:ss A'
+let bundleHash        = moment().format('YYYY-MM-DD-HH-mm-ss'),
   mainBundleName      = bundleHash + '.main.bundle.js',
   mainShortName       = 'main.bundle.js',
   vendorBundleName    = bundleHash + '.vendor.bundle.js',
@@ -60,13 +63,17 @@ gulp.task('shell', shell.task(['lite-server']));
 gulp.task('serve:dev', ['watch', 'shell']);
 
 gulp.task('dist', function(callback) {
-  runSequence('clean', 'copy_images', 'copy_maps', 'copy_fonts', 'copy_lib', 'copy_html', 'bundle', callback);
+  runSequence('clean', 'copy', 'bundle', callback);
 });
 
 gulp.task('serve', function(callback) {
-  runSequence('clean:dev', 'copy_images', 'copy_maps', 'copy_fonts', 'copy_lib', 'bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'watch', 'shell', callback);
+  runSequence('clean:dev', 'copy:dev', 'bundle:dev', 'watch', 'shell', callback);
 });
 
+gulp.task('copy:dev', ['copy_images', 'copy_maps', 'copy_fonts', 'copy_lib']);
+gulp.task('copy',     ['copy_images', 'copy_maps', 'copy_fonts', 'copy_lib', 'copy_html']);
+
+gulp.task('bundle:dev', ['bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev']);
 gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
   return gulp.src('dev/client/index.html')
     .pipe(htmlreplace({
@@ -93,28 +100,34 @@ let tasks = {
     dist:     (vendor) => vendor
                 .pipe(sourcemaps.init())
                 .pipe(concat(vendorBundleName))
-                .pipe(uglify({ mangle: false }))
-                .pipe(sourcemaps.write('maps/'))
+                .pipe(uglify())
+                .pipe(sourcemaps.write('.'))
                 .pipe(gulp.dest(config.dist))
   },
   bundle_app: {
     dev:      (app) =>  app.pipe(concat(mainShortName))
-                          .pipe(gulp.dest(config.dist)),
+                          .pipe(ngAnnotate())
+                          .pipe(gulp.dest(config.dist))
+                          .pipe(notify({message: 'Compiled [dev] main.bundle.js (' + moment().format('YYYY-MM-DD-HH-mm-ss') + ')', onLast: true})),
     dist:     (app) =>  app.pipe(sourcemaps.init())
                           .pipe(concat(mainBundleName))
-                          .pipe(uglify({ mangle: false })) // review appSpec for mangle
-                          .pipe(sourcemaps.write('maps/'))
+                          .pipe(ngAnnotate())
+                          .on('error', notify.onError("Error: <%= error.message %>"))
+                          .pipe(uglify()) // review appSpec for mangle
+                          .on('error', notify.onError("Error: <%= error.message %>"))
+                          .pipe(sourcemaps.write('.'))
                           .pipe(gulp.dest(config.dist))
+                          .pipe(notify({message: 'Compiled [dist] main.bundle.js (' + moment().format('YYYY-MM-DD-HH-mm-ss') + ')', onLast: true}))
   },
-  build_css:            function(src, srcmaps, dest){
-    srcmaps = srcmaps || null;
+  build_css:            function(src, srcmaps = null, dest){
     return gulp.src(src)
       .pipe(sourcemaps.init())
       .pipe(sass().on('error', sass.logError))
       .pipe(postcss([precss, autoprefixer, cssnano]))
       .pipe(sourcemaps.write(srcmaps))
       .pipe(ext_replace('.css'))
-      .pipe(gulp.dest(dest));
+      .pipe(gulp.dest(dest))
+      .pipe(notify({message: 'Compiled scss (' + moment().format('YYYY-MM-DD-HH-mm-ss') + ')', onLast: true}));
   }
 };
 
@@ -134,16 +147,14 @@ gulp.task('bundle:app', ['bundle:app:dev', 'bundle:app:dist']);
 gulp.task('bundle:app:dev', function () {
   var app = gulp.src(config.scripts.src)
     .pipe(babel())
-    .pipe(angularFilesort())
-    .pipe(ngAnnotate());
+    .pipe(angularFilesort());
 
   return tasks.bundle_app.dev(app);
 });
 gulp.task('bundle:app:dist', function () {
   var app = gulp.src(config.scripts.src)
     .pipe(babel())
-    .pipe(angularFilesort())
-    .pipe(ngAnnotate());
+    .pipe(angularFilesort());
 
   return tasks.bundle_app.dist(app);
 });
