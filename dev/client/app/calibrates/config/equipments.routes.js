@@ -102,17 +102,16 @@
         }
       })
       .state('calibration.dossierPane', {
-      url: '/dossierPane',
-      templateUrl: './app/calibrates/views/dossier-pane.html',
-      controller: 'DossiersController',
-      controllerAs: 'vm',
-        resolve: {
-          dossierResolve: newDossier
-        },
-        data:{
-          roles: ['user', 'admin'],
-          pageTitle : 'Dossier Create'
-        }
+        url: '/dossierPane',
+        templateUrl: './app/calibrates/views/dossier-pane.html',
+        controller: 'DossiersPaneController',
+        controllerAs: 'vm'
+      })
+      .state('calibration.multerPane', {
+        url: '/multerPane' ,
+        templateUrl: './app/calibrates/views/multer-pane.html' ,
+        controller: 'MulterPaneController' ,
+        controllerAs: 'vm'
       })
     ;
   }

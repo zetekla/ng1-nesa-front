@@ -10,8 +10,8 @@
   // DossiersService.$inject = ['$resource'];
 
   function DossiersService($resource, EquipmentsService) {
-    // let dossierURI = 'http://localhost:3000/equipments/files/:file_id';
-    let dossierURI = 'http://esp21:3000/equipments/files/:file_id';
+    // let dossierURI = 'http://localhost:3003/equipments/files/:file_id';
+    let dossierURI = 'http://esp21:3003/equipments/files/:file_id';
     let Dossier = $resource(dossierURI, {
       file_id: '@file_id'
     }, {

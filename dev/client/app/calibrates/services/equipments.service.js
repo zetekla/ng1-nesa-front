@@ -9,8 +9,8 @@
   EquipmentsService.$inject = ['$resource'];
 
   function EquipmentsService($resource) {
-    // let equipmentURI = 'http://localhost:3000/equipments/:asset_id';
-    let equipmentURI = 'http://esp21:3000/equipments/:asset_id';
+    // let equipmentURI = 'http://localhost:3003/equipments/:asset_id';
+    let equipmentURI = 'http://esp21:3003/equipments/:asset_id';
     let Equipment = $resource(equipmentURI, {
       asset_id: '@asset_id'
     }, {
