@@ -3,18 +3,18 @@
 
   angular
     .module('calibrates')
-    .directive('fileInput', ['$parse', 
+    .directive('fileInput', ['$parse',
       function ($parse) {
         return {
           restrict: 'A',
           link: function (scope, element, attributes) {
             element.bind('change', function () {
               $parse(attributes.fileInput)
-                .assign(scope,element[0].files);
+                .assign(scope, element[0].files);
               scope.$apply()
             });
           }
         };
       }
-    ]); 
+    ]);
 })();

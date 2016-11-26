@@ -12,8 +12,9 @@
     vm.title  = 'filename_placeholder';
     vm.formData = {};
     vm.submit = function () {
+      console.log('file attrs', vm.formData.file[0]);
       let config = {
-        params: { dossier: vm.formData.file},
+        params: { file: vm.formData.file[0]},
         headers: {
           'Content-Type': 'multipart/form-data'
         }
