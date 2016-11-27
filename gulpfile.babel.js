@@ -11,12 +11,13 @@ import minify           from 'gulp-minify-css';
 
 /*-- Mixed --*/
 import _                from 'lodash';
+import glob             from 'glob';
 import sourcemaps       from 'gulp-sourcemaps';
 import ext_replace      from 'gulp-ext-replace';
 import concat           from 'gulp-concat';
 import es               from 'event-stream';
 import bs               from 'browser-sync';
-let    browserSync  = bs.create();
+let    browserSync      = bs.create();
 
 import runSequence      from 'run-sequence';
 import shell            from 'gulp-shell';
@@ -29,10 +30,12 @@ import bower            from 'gulp-bower';
 
 
 /*-- Images --*/
-import imagemin     from 'gulp-imagemin';
+import imagemin         from 'gulp-imagemin';
 
-
-  /*-- JS & TS --*/
+/*-- JS & TS --*/
+import source           from 'vinyl-source-stream';
+import browserify       from 'browserify';
+import babelify         from 'babelify';
 import babel            from 'gulp-babel';
 import uglify           from 'gulp-uglify';
 import rename           from 'gulp-rename';
@@ -44,7 +47,7 @@ import typescript       from 'gulp-typescript';
 
 
 
-  /*-- Bundling --*/
+/*-- Bundling --*/
 import htmlreplace      from 'gulp-html-replace';
 
 import moment           from 'moment';
@@ -134,25 +137,63 @@ let tasks = {
 gulp.task('bundle:vendor', ['bundle:vendor:dev', 'bundle:vendor:dist']);
 
 gulp.task('bundle:vendor:dev', ['bower_restore'], function () {
-  var vendor = gulp.src(config.vendor.js);
+  let vendor = gulp.src(config.vendor.js);
     return tasks.bundle_vendor.dev(vendor);
 });
 gulp.task('bundle:vendor:dist', ['bower_restore'], function () {
-  var vendor = gulp.src(config.vendor.js);
+  let vendor = gulp.src(config.vendor.js);
     return tasks.bundle_vendor.dist(vendor);
 });
 
 gulp.task('bundle:app', ['bundle:app:dev', 'bundle:app:dist']);
 
+gulp.task('browserify', function (done) {
+  glob('./dev/client/app/**/*.js', function(err, files){
+    if (err) done(err);
+    let tasks = files.map(function(entry) {
+        return browserify({ entries: [entry], debug: true })
+            .transform(babelify,
+              { "presets": ["es2015"] }
+            )
+            .bundle()
+            .pipe(source(entry))
+            .pipe(rename({
+                extname: '.bundle.js'
+            }))
+            .pipe(gulp.dest('./browserify'));
+        });
+    es.merge(tasks).on('end', done);
+  })
+
+});
+
+gulp.task('release', ['browserify'], function () {
+  let app = gulp.src('./browserify/**/*.js')
+    .on('error', notify.onError("Error: <%= error.message %>"))
+    .pipe(angularFilesort());
+
+  return tasks.bundle_app.dev(app);
+});
+
+gulp.task('clean:browserified', ['release'], function(){
+  return gulp.src([
+    './browserify/**/*.js'
+  ], {read: false})
+    .pipe(clean());
+});
+
+gulp.task('bundle.app.dev', ['browserify', 'release', 'clean:browserified']);
+
 gulp.task('bundle:app:dev', function () {
-  var app = gulp.src(config.scripts.src)
+  let app = gulp.src(config.scripts.src)
     .pipe(babel())
+    .on('error', notify.onError("Error: <%= error.message %>"))
     .pipe(angularFilesort());
 
   return tasks.bundle_app.dev(app);
 });
 gulp.task('bundle:app:dist', function () {
-  var app = gulp.src(config.scripts.src)
+  let app = gulp.src(config.scripts.src)
     .pipe(babel())
     .pipe(angularFilesort());
 
