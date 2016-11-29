@@ -14,13 +14,15 @@
     vm.state              = $state.params;
     vm.searchText         = false;
     vm.locationDisabled   = false;
+    vm.statusAlert        = null;
+    vm.asset_status       = null;
 
     if (!vm.equipment.asset_id) {
       let equipments = Service.query().$promise;
 
       equipments.then(function(equipments){
         vm.hints = { model: [], asset_number: [], location: [] };
-        let asset_numbers = [], locations = [];
+        let asset_numbers = [], locations = [], other_asset_numbers;
 
         _.map(equipments, function(equipment){
           vm.hints.model.push(equipment.model);
@@ -36,12 +38,37 @@
             vm.hints.asset_number     = [];
             vm.equipment.asset_number = '';
           }
+
           asset_numbers = vm.hints.asset_number = _(equipments).chain().filter({'model' : newVal}).map('asset_number').uniq().value();
+          other_asset_numbers = _(equipments).chain().reject({'model' : newVal}).map('asset_number').uniq().value();
         });
 
         $scope.$watch('vm.equipment.asset_number', function(newVal, oldVal){
+          vm.asset_status = null;
+          vm.statusAlert  = null;
+
           if(newVal !== oldVal){
-            locations = _(equipments).chain().filter({'model' : vm.equipment.model, 'asset_number': newVal}).map('ECMS_Location.desc').uniq().value();
+
+            if(_.indexOf(asset_numbers, newVal) >-1) vm.asset_status = '(existing)';
+            else if(_.indexOf(other_asset_numbers, newVal) >-1) vm.asset_status = '(used)';
+            else vm.asset_status = '(new)';
+
+
+            let filteredEquipments = _(equipments).chain().filter({'model' : vm.equipment.model, 'asset_number': newVal}).value();
+
+            locations = _(filteredEquipments).chain().map('ECMS_Location.desc').uniq().value();
+
+            if(filteredEquipments.length)
+            if (_(filteredEquipments[0]).chain().get('ECMS_Dossiers').size().value()) {
+              let dossiers    = _(filteredEquipments[0]).chain().get('ECMS_Dossiers').orderBy(['file_id'], ['desc']).value();
+              // let last_indexed_dossier = _(dossiers).chain().max(['file_id']).value();
+              let last_indexed_dossier = dossiers[0];
+
+              vm.equipment.last_cal = last_indexed_dossier.createdAt;
+              vm.statusAlert = 'statusAlert';
+              console.log(dossiers, last_indexed_dossier);
+
+            }
 
             vm.locationDisabled = !!_.includes(asset_numbers, newVal);
             vm.equipment.ECMS_Location = {
