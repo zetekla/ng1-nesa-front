@@ -14,7 +14,7 @@
 
       // The controller that handles our component logic
       controller: function () {
-        this.message = "the component feature"
+        // this.message = "the component !! feature"
       }
   })
 })();
