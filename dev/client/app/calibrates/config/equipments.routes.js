@@ -103,9 +103,7 @@
       })
       .state('calibration.dossierPane', {
         url: '/dossierPane',
-        templateUrl: './app/calibrates/views/dossier-pane.html',
-        controller: 'DossiersPaneController',
-        controllerAs: 'vm'
+        templateUrl: './app/calibrates/views/dossier-pane.html'
       })
       .state('calibration.multerPane', {
         url: '/multerPane' ,
