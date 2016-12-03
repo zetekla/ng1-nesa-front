@@ -95,10 +95,5 @@
         "present": "chapter 15"
       }
     ];
-
-    vm.name         = 'Ellen_Page';
-    vm.reverseName  = function(){
-      vm.name = vm.name.split('').reverse().join('');
-    };
   }
 })();

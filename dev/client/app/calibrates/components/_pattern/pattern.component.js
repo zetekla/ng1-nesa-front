@@ -3,10 +3,10 @@
 
   angular
     .module('calibrates')
-    .component('componentPattern', 
+    .component('componentPattern',
     {
       bindings: {
-        message: '='
+        message: '<'
       },
       // template: '<li ng-repeat="x in heroes">{{ x.name }} </li>',
       template:'<div>Provide {{$ctrl.message}}</div>',
