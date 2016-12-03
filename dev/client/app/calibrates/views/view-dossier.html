@@ -6,11 +6,11 @@
 
     <equipment-details-component equipment="vm.equipment"></equipment-details-component>
     <br>
-    <dossiers-list-view-component></dossiers-list-view-component>
+    <dossiers-list-view-component equipment="vm.equipment" state="vm.state" dossierRemove="vm.dossierRemove"></dossiers-list-view-component>
     <br>
 
     <view-actions-component equipment="vm.equipment" state="vm.state" remove="vm.remove"></view-actions-component>
-    <user-interaction-info-component></user-interaction-info-component>
+    <user-interaction-info-component equipment="vm.equipment"></user-interaction-info-component>
     <!--<component-pattern message="'for higher code standard'"></component-pattern>-->
     <!--<heroes-list capcom='kaban' pref='2' board="'heroes list'">HEROES- 2 sets of contents OKAY</heroes-list>-->
     <!--<marvels-list marvels='marvels' pref="pref" title='xyz'>PREF & TITLE SEEM HAVING NO EFFECT ON ATTEMPT TO OVERRIDE</marvels-list>-->
