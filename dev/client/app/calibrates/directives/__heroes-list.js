@@ -3,9 +3,9 @@
 
   angular
     .module('calibrates')
-    .directive('heroesListComponent', [heroesListComponent]);
+    .directive('heroesList', [heroesList]);
 
-  function heroesListComponent (){
+  function heroesList (){
     return {
       restrict: 'E',
       scope: {

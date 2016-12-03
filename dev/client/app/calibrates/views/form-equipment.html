@@ -16,7 +16,7 @@
           <!--<file-pane-component equipment="vm.equipment"></file-pane-component>-->
 
           <br>
-          <form-actions-component equipment='vm.equipment' state='vm.state'></form-actions-component>
+          <form-actions-component equipment="vm.equipment" state="vm.state" remove="vm.remove"></form-actions-component>
           <div ng-messages="vm.form.equipmentForm.incrementer.$error" ng-if="vm.form.equipmentForm.incrementer.$dirty && vm.form.equipmentForm.incrementer.$invalid" role="alert">
             <p class="help-block error-text" ng-message="pattern">Check number input.</p>
           </div>

@@ -3,10 +3,10 @@
 
   angular
     .module('calibrates')
-    .directive('marvelsListComponent', [marvelsListComponent]);
+    .directive('marvelsList', [marvelsList]);
 
-  marvelsListComponentController.$inject = ['$scope'];
-  function marvelsListComponentController($scope){
+  marvelsListController.$inject = ['$scope'];
+  function marvelsListController($scope){
     let vm    = this;
     vm.title  = 'Marvel List'; // okay
     vm.pref   = 2;
@@ -34,7 +34,7 @@
     ];
   }
 
-  function marvelsListComponent (){
+  function marvelsList (){
     return {
       restrict: 'E',
       scope: {
@@ -47,7 +47,7 @@
         return './app/calibrates/views/components/marvels-list.tpl.html';
       }
       ,
-      controller: marvelsListComponentController,
+      controller: marvelsListController,
       controllerAs: 'vm',
       bindToController: true,
       replace: true

@@ -9,7 +9,21 @@
     return {
       restrict: "EA",
       scope: false,
-      templateUrl: './app/calibrates/views/components/user-interaction-info.tpl.html'
+      template:`
+        <div class="row">
+          <small>
+            <em class="text-muted">
+              Posted on
+              <span data-ng-bind="vm.equipment.createdAt | date:'mediumDate'"></span>
+              by
+              <span data-ng-if="vm.equipment.user"
+                    data-ng-bind="vm.equipment.user.displayName"></span>
+              <span data-ng-if="!vm.equipment.user">Deleted User</span>
+            </em>
+          </small>
+          <p class="lead" data-ng-bind="vm.equipment.content"></p>
+        </div>
+      `
     }
   }
 })();

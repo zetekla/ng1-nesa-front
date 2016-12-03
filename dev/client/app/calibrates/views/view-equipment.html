@@ -6,10 +6,10 @@
 
     <equipment-details-component equipment="vm.equipment"></equipment-details-component>
     <br>
-    <dossiers-list-view-component></dossiers-list-view-component>
+    <dossiers-list-view-component state="vm.state" equipment="vm.equipment" dossierRemove="vm.dossierRemove"></dossiers-list-view-component>
     <br>
 
-    <view-actions-component></view-actions-component>
+    <view-actions-component equipment="vm.equipment" state="vm.state" remove="vm.remove"></view-actions-component>
     <user-interaction-info-component></user-interaction-info-component>
   </div>
 </section>
