@@ -5,7 +5,7 @@
     .module('calibrates')
     .component('equipmentDetailsComponent', {
       bindings: {
-        equipment: '='
+        equipment: '<'
       },
       template: `
         <div class="row">
@@ -14,8 +14,8 @@
           <h5 class="row offset-sm-5" data-ng-bind="$ctrl.equipment.schedule"></h5>
           <h5 class="row offset-sm-5" data-ng-bind="$ctrl.equipment.next_cal | date:'MM/dd/yyyy'"></h5>
         </div>
-      `,
+      `/*,
       controller: function () {
-      }
+      }*/
     })
 })();
