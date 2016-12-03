@@ -1,6 +1,10 @@
 <ul>
   <li ng-repeat="dog in dogs">{{ dog }}</li>
 </ul>
+<hr>
+<ul ng-repeat='user in userProfiles | orderBy:"name"'>
+  <li>{{ user.name }}</li>
+</ul>
 
 <div class="form-group">
   <label for="states">Search for US States</label>

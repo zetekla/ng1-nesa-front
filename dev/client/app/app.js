@@ -16,8 +16,13 @@ function CalibratesRouteConfig($stateProvider, $urlRouterProvider){
     .state('home.list', {
       url: '/list',
       templateUrl: './app/fixtures/partial-list.html',
-      controller: function($scope) {
+      controller: function($scope, $http) {
         $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
+
+        $scope.userProfiles = [];
+        $http.get('/app/server-data/mock-data.json').then(res=>{
+          _(res.data).chain().map('name').forEach(each => $scope.userProfiles.push({name: each.first + ' ' + each.last})).value();
+        });
 
         $scope.selected = undefined;
         $scope.states = [
