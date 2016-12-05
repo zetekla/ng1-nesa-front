@@ -17,7 +17,7 @@
             <!--<file-pane-component equipment="vm.equipment"></file-pane-component>-->
             <!--<heroes-list capcom='kaban'pref="'user.pref'" board="'heroes list'">HEROES- can accommodate 2 sets of contents</heroes-list>
             <marvels-list marvels='marvels' pref='vm.pref' title='zxt'>MARVEL-1-SET of CONTENT across the board</marvels-list>-->
-            <uploader-mockup-component data-ng-if="!vm.state.file_id"></uploader-mockup-component>
+            <uploader-mockup-component data-ng-if="!vm.state.file_id" vm="vm"></uploader-mockup-component>
           </div>
           <form-actions-component equipment="vm.equipment" state="vm.state" remove="vm.remove"></form-actions-component>
           <!--<form-actions-component ng-if="!vm.state.file_id" equipment="vm.equipment" state="vm.state" remove="vm.remove"></form-actions-component>-->

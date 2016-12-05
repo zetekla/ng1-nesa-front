@@ -20,9 +20,9 @@ function CalibratesRouteConfig($stateProvider, $urlRouterProvider){
         $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
 
         $scope.userProfiles = [];
-        $http.get('/app/server-data/mock-data.json').then(res=>{
-          _(res.data).chain().map('name').forEach(each => $scope.userProfiles.push({name: each.first + ' ' + each.last})).value();
-        });
+        $http.get('/app/server-data/mock-data.json').then(res =>
+          _(res.data).chain().map('name').forEach(user => $scope.userProfiles.push({name: user.first + ' ' + user.last})).value()
+        );
 
         $scope.selected = undefined;
         $scope.states = [

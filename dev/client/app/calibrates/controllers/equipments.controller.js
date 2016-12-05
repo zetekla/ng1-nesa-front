@@ -49,8 +49,8 @@
 
           if(newVal !== oldVal){
 
-            if(_.indexOf(asset_numbers, newVal) >-1) vm.asset_status = '(existing)';
-            else if(_.indexOf(other_asset_numbers, newVal) >-1) vm.asset_status = '(used)';
+            if(_.includes(asset_numbers, newVal)) vm.asset_status = '(existing)';
+            else if(_.includes(other_asset_numbers, newVal)) vm.asset_status = '(used)';
             else vm.asset_status = '(new)';
 
 
@@ -66,8 +66,8 @@
 
               vm.equipment.last_cal = last_indexed_dossier.createdAt;
               vm.statusAlert = 'statusAlert';
-              console.log(dossiers, last_indexed_dossier);
 
+              /* console.log(dossiers, last_indexed_dossier);*/
             }
 
             vm.locationDisabled = !!_.includes(asset_numbers, newVal);
@@ -85,23 +85,6 @@
     vm.remove             = remove;
     vm.dossierRemove      = record => RecordService.remove(record);
     vm.save               = save;
-
-    let usePlaceHolder    = true,
-        useRandomized     = true;
-
-    $scope.$watch('vm.incrementer', function(newVal, oldVal){
-      let element = angular.element( document.querySelector( '#documentID' ) );
-      element.remove();
-      if (newVal){
-        vm.equipment.documents = [];
-        _.times(newVal, function(){
-          let int = (useRandomized) ? (_.random(1,100)): (vm.equipment.documents.length+1),
-            file  = (usePlaceHolder)? 'placeholder'+ int : null;
-          return vm.equipment.documents.push({file: file, filename: file});
-        });
-      }
-    });
-
 
     // Remove existing Equipment
     function remove() {
