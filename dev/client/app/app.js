@@ -1,10 +1,10 @@
 let app = angular.module('plunker', ['angularFileUpload', 'ui.bootstrap', 'ui.router', 'calibrates']);
-    app.config(CalibratesRouteConfig);
+    app.config(routeConfig);
 
 
-CalibratesRouteConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-function CalibratesRouteConfig($stateProvider, $urlRouterProvider){
+function routeConfig($stateProvider, $urlRouterProvider){
 
   $urlRouterProvider.when('', '/home');
 

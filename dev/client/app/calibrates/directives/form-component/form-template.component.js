@@ -87,10 +87,8 @@
                 </div>
               </div>
             </div>
-            <br>
-            <!--<form-actions-component equipment="vm.equipment" state="vm.state" remove="vm.remove"></form-actions-component>-->
-        
-            <!--<dossiers-list1-component equipment="vm.equipment"></dossiers-list1-component>-->
+            <br> 
+            
           </div>
         </div>
       `
