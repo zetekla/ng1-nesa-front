@@ -61,11 +61,11 @@
               <div class="col-sm-6">
                 <div class="controls input-group">
                   <span class="input-group-addon">Model</span>
-                  <input id="model2" ng-readonly="vm.equipment.asset_id" name="model" type="text" ng-model="vm.equipment.model" uib-typeahead="model for model in vm.hints.model | filter:$viewValue | limitTo:8" class="form-control form-control-lg" placeholder="model" autocomplete="off">
+                  <input id="model2" ng-readonly="vm.equipment.asset_id" name="model" type="text" ng-model="vm.equipment.model" uib-typeahead="model for model in vm.hints.model | filter:$viewValue | limitTo:8" typeahead-on-select="vm.onSelectModel($item, $model, $label)" class="form-control form-control-lg" placeholder="model" autocomplete="off">
                 </div>
                 <div class="controls input-group">
                   <span class="input-group-addon">Asset Number {{ vm.asset_status }}</span>
-                  <input id="assetNumber2" ng-readonly="vm.equipment.asset_id" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" uib-typeahead="asset_number for asset_number in vm.hints.asset_number | filter:$viewValue | limitTo:8" class="form-control form-control-lg" placeholder="asset number" autocomplete="off" required>
+                  <input id="assetNumber2" ng-readonly="vm.equipment.asset_id" name="assetNumber" type="text" ng-model="vm.equipment.asset_number" ng-change="vm.onChangeAsset_Number(vm.equipment.asset_number)" uib-typeahead="asset_number for asset_number in vm.hints.asset_number | filter:$viewValue | limitTo:8" typeahead-on-select="vm.onSelectAsset_Number($item, $model, $label)" class="form-control form-control-lg" placeholder="asset number" autocomplete="off" required>
                 </div>
                 <div class="controls input-group">
                   <span class="input-group-addon">Location</span>

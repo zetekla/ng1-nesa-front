@@ -28,7 +28,9 @@ let vendor = {
     './public/lib/angular-touch/angular-touch.js',
     './public/lib/lodash/dist/lodash.js',
     './public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-    './public/lib/angular-file-upload/dist/angular-file-upload.js', // http://nervgh.github.io/pages/angular-file-upload/examples/simple/
+    './public/lib/ng-file-upload-shim/ng-file-upload-shim.js', // https://github.com/danialfarid/ng-file-upload
+    './public/lib/ng-file-upload/ng-file-upload.js',
+    './public/lib/ng-img-crop/compile/unminified/ng-img-crop.js',
     './public/lib/angular-messages/angular-messages.js' // https://www.sitepoint.com/easy-form-validation-angularjs-ngmessages/
   ],
   watch: './dev/client/app/vendor.js'

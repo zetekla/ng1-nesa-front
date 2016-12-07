@@ -2,6 +2,7 @@
 //@include make-col-offset(2);
 
 @import '../../../public/lib/bootstrap/scss/bootstrap';
+@import '../../../public/lib/ng-img-crop/source/scss/ng-img-crop';
 
 body { background-color: white; padding: 0; margin: 8px; }
 /* ... but remain the "jasmine.css" styling for the Jasmine reporting */
@@ -108,3 +109,16 @@ fieldset {
 .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
 .another-file-over-class { border: dotted 3px green; }
 .statusAlert { color: red };
+
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  width: 250px;
+  height: 100px;
+  text-align: center;
+  padding-top: 25px;
+  margin: 10px;
+}
+.dragover {
+  border: 5px dashed blue;
+}

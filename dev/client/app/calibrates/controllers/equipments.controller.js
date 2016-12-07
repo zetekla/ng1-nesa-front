@@ -22,7 +22,6 @@
 
       equipments.then(function(equipments){
         vm.hints = { model: [], asset_number: [], location: [] };
-        let asset_numbers = [], locations = [], other_asset_numbers;
 
         _.map(equipments, function(equipment){
           vm.hints.model.push(equipment.model);
@@ -30,52 +29,81 @@
           vm.hints.location.push(equipment.ECMS_Location.desc);
         });
 
+        let other_asset_numbers = vm.hints.asset_number;
+
         vm.hints.model    = _.uniq(vm.hints.model);
         vm.hints.location = _.uniq(vm.hints.location);
 
-        $scope.$watch('vm.equipment.model', function(newVal, oldVal){
-          if (newVal!==oldVal) {
-            vm.hints.asset_number     = [];
-            vm.equipment.asset_number = '';
+        vm.onSelectAsset_Number = function($item, $model, $label){
+          insertion($item, vm.equipment.model ? {model: vm.equipment.model, 'asset_number': $item} : {'asset_number': $item});
+        };
+
+        vm.onChangeAsset_Number = $item => set_status($item);
+
+        vm.onSelectModel = function($item, $model, $label){
+          vm.hints.asset_number = _(equipments).chain().filter({'model' : $item}).map('asset_number').uniq().value();
+          other_asset_numbers = _(equipments).chain().reject({'model' : $item}).map('asset_number').uniq().value();
+          rinse();
+        };
+
+        function insertion($item, filterParams){
+          let filteredEquipments = _(equipments).filter(filterParams).value();
+
+          if(!filteredEquipments.length) {
+            rinse();
           }
+          else {
+            // display model
+            if (filterParams.model == null){
+              vm.equipment.model = filteredEquipments[0].model;
+            }
 
-          asset_numbers = vm.hints.asset_number = _(equipments).chain().filter({'model' : newVal}).map('asset_number').uniq().value();
-          other_asset_numbers = _(equipments).chain().reject({'model' : newVal}).map('asset_number').uniq().value();
-        });
-
-        $scope.$watch('vm.equipment.asset_number', function(newVal, oldVal){
-          vm.asset_status = null;
-          vm.statusAlert  = null;
-
-          if(newVal !== oldVal){
-
-            if(_.includes(asset_numbers, newVal)) vm.asset_status = '(existing)';
-            else if(_.includes(other_asset_numbers, newVal)) vm.asset_status = '(used)';
-            else vm.asset_status = '(new)';
-
-
-            let filteredEquipments = _(equipments).chain().filter({'model' : vm.equipment.model, 'asset_number': newVal}).value();
-
-            locations = _(filteredEquipments).chain().map('ECMS_Location.desc').uniq().value();
-
-            if(filteredEquipments.length)
+            // display dossier
             if (_(filteredEquipments[0]).chain().get('ECMS_Dossiers').size().value()) {
               let dossiers    = _(filteredEquipments[0]).chain().get('ECMS_Dossiers').orderBy(['file_id'], ['desc']).value();
               // let last_indexed_dossier = _(dossiers).chain().max(['file_id']).value();
+
               let last_indexed_dossier = dossiers[0];
 
               vm.equipment.last_cal = last_indexed_dossier.createdAt;
               vm.statusAlert = 'statusAlert';
-
-              /* console.log(dossiers, last_indexed_dossier);*/
             }
 
-            vm.locationDisabled = !!_.includes(asset_numbers, newVal);
+            // set location
             vm.equipment.ECMS_Location = {
-              desc: vm.locationDisabled ? locations[0] : ''
+              desc: filteredEquipments[0].ECMS_Location.desc
             };
+
+            vm.hints.asset_number = _(equipments).chain().filter({'model' : vm.equipment.model}).map('asset_number').uniq().value();
+            other_asset_numbers = _(equipments).chain().reject({'model' : vm.equipment.model}).map('asset_number').uniq().value();
           }
-        });
+
+          set_status($item);
+
+          vm.locationDisabled = !!_.includes(vm.hints.asset_number, $item);
+        }
+
+        function set_status($item){
+          if($item)
+            vm.asset_status = _.includes(other_asset_numbers, $item)
+                                ? '(used)'
+                                :_.includes(vm.hints.asset_number, $item)
+                                  ? '(existing)'
+                                  : '(new)';
+          if (vm.asset_status ==='(new)') {vm.locationDisabled = false; vm.statusAlert = null;}
+        }
+
+        function rinse (){
+          if(!_.includes(vm.hints.asset_number, vm.equipment.asset_number)){
+            vm.equipment.asset_number = null;
+            vm.equipment.last_cal = null;
+            vm.equipment.ECMS_Location = {desc: null};
+            vm.statusAlert = null;
+            vm.asset_status = null;
+            vm.locationDisabled = false;
+          }
+        }
+
       });
     }
 
