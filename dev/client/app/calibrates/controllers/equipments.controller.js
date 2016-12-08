@@ -111,7 +111,6 @@
     vm.error              = null;
     vm.form               = {};
     vm.remove             = remove;
-    vm.dossierRemove      = record => RecordService.remove(record);
     vm.save               = save;
 
     // Remove existing Equipment

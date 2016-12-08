@@ -12,11 +12,12 @@
         ng-change="$ctrl.update($files)"
 -->
         <!--<span class="error-text" ng-show="vm.form.equipmentForm.incrementer.$dirty && vm.form.equipmentForm.incrementer.$invalid">Must Enter a Number (ex: 2) </span>-->
+        <!-- ngf-resize, ngf-resize-if, ngf-max-files, ngf-pattern -->
       </div>
     </div>
   </div>
 
-  <div class="btn btn-secondary" ngf-select="$ctrl.upload($files)" ngf-multiple="true">Select File</div>
+  <div class="btn btn-secondary" ngf-select="$ctrl.upload($files)" ngf-multiple="true">Select Files</div>
   <br>
   <br>
   Drop File:
@@ -27,4 +28,9 @@
 
   <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
   <br>
+  <div class="row" ng-repeat="file in $ctrl.files">
+    Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+    Audio preview: <audio controls ngf-src="file"></audio>
+    Video preview: <video controls ngf-src="file"></video>
+  </div>
 </div>

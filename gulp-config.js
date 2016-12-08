@@ -49,7 +49,6 @@ module.exports = {
   },
   maps: {
     src: [
-      './public/lib/angular-file-upload/dist/angular-file-upload.js.map',
       './node_modules/systemjs/dist/system.js.map'
     ],
     dest: './public/dist/'
