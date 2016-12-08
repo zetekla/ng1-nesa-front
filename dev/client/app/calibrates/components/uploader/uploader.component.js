@@ -28,15 +28,13 @@ angular
           Upload.base64DataUrl(files).then(function(urls){
 
             _.times(files.length, function(i){
-              console.log('no split', urls[i]);
               files[i].file = urls[i].split(',')[1];
-              // files[i].file = urls[i];
               files[i].filename = files[i].name;
             });
 
             $ctrl.equipment.documents = files;
-            console.log('urls', urls, 'equipment', $ctrl.equipment);
           });
+
           /*console.log('json Blob', Upload.jsonBlob(files));
           _.forEach(files, function(file){
             console.log('json Blob forEach', Upload.jsonBlob(file));

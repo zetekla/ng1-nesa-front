@@ -6,9 +6,9 @@
     .module('calibrates')
     .controller('EquipmentsController', EquipmentsController);
 
-  EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve', 'EquipmentsService', 'RecordService'];
+  EquipmentsController.$inject = ['$scope', '$state', '$window', 'equipmentResolve', 'EquipmentsService'];
 
-  function EquipmentsController ($scope, $state, $window, equipment, Service, RecordService) {
+  function EquipmentsController ($scope, $state, $window, equipment, Service) {
     let vm                = this;
     vm.equipment          = equipment;
     vm.state              = $state.params;
