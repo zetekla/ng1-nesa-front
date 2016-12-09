@@ -28,10 +28,12 @@ angular
           Upload.base64DataUrl(files).then(function(urls){
 
             _.times(files.length, function(i){
-              files[i].file = urls[i].split(',')[1];
-              files[i].filename = files[i].name;
-            });
+              files[i].file = urls[i].split('base64,')[1];
+              files[i].src  = 'data:application/pdf;base64,' + files[i].file;
 
+              files[i].filename = files[i].name;
+              console.log(files[i]);
+            });
             $ctrl.equipment.documents = files;
           });
 
@@ -40,7 +42,6 @@ angular
             console.log('json Blob forEach', Upload.jsonBlob(file));
           });*/
 
-          console.log(files);
         }
       };
     },

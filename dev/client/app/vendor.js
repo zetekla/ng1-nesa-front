@@ -31,6 +31,8 @@ let vendor = {
     './public/lib/ng-file-upload-shim/ng-file-upload-shim.js', // https://github.com/danialfarid/ng-file-upload
     './public/lib/ng-file-upload/ng-file-upload.js',
     './public/lib/ng-img-crop/compile/unminified/ng-img-crop.js',
+    './public/lib/highlightjs/highlight.pack.js',
+    // './public/lib/ngEmbed/src/ng-embed.js',
     './public/lib/angular-messages/angular-messages.js' // https://www.sitepoint.com/easy-form-validation-angularjs-ngmessages/
   ],
   watch: './dev/client/app/vendor.js'

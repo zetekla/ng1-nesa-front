@@ -1,4 +1,4 @@
-let app = angular.module('plunker', ['ngFileUpload', 'ngImgCrop', 'ui.bootstrap', 'ui.router', 'calibrates']);
+let app = angular.module('plunker', ['ngFileUpload', 'ngImgCrop', 'ui.bootstrap', 'ui.router', 'ngSanitize',  'calibrates']);
     app.config(routeConfig);
 
 

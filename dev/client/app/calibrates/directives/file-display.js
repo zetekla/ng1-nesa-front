@@ -11,11 +11,12 @@
           },
           restrict: 'EA',
           link: function (scope, element, attrs) {
+
             templateGenerator(scope.dossier);
 
             element.html(scope.dossier.template, scope.dossier.file_id);
             $compile(element.contents())(scope);
-            console.log(scope,element, attrs);
+            // console.log(scope,element, attrs);
 
             function templateGenerator(dossier){
               dossier.src = dossier.filename.split('.').pop();
@@ -26,30 +27,28 @@
 
               switch (true){
                 case _.includes(image_ext,dossier.src):
-                  dossier.src       = 'data:image/'+dossier.src+';base64,'+decode2base64String(dossier.file.data);
+                  dossier.src       = 'data:image/'+dossier.src+';base64,'+buffer2base64String(dossier.file.data);
                   dossier.template  = `<img src="${dossier.src}" alt="${dossier.filename}">`;
                   break;
                 case _.includes(pdf_ext,dossier.src):
-                  dossier.src       = 'data:application/'+dossier.src+';base64,'+decode2base64String(dossier.file.data);
-                  dossier.template  = `
-                    
-                    <embed ng-src="${dossier.src}" style="width:200px;height:200px;"></embed>
+                  dossier.src   = 'data:application/'+dossier.src+';base64,' + buffer2base64String(dossier.file.data);
+                  dossier.template  = ` 
+                    <!--<embed ng-src="https://www.cca.edu/sites/default/files/pdf/08/word-to-pdf.pdf" style="width:200px;height:200px;"></embed>-->
+                    <embed ng-src="${dossier.src}" style="width:100%;height:auto;"></embed>
                     <br>
-                    <button ng-click="ctrl.downloadPDF(dossier.src)" class="btn btn-primary">download</button>
-                    <a download="${dossier.filename}" href="${dossier.src}" title="${dossier.filename}" />Download using anchor tag</a>
+                    <button ng-click="ctrl.download(dossier.src)" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+                    <a download="${dossier.filename}" href="${dossier.src}" title="${dossier.filename}" /><i class="fa fa-save" aria-hidden="true"></i> Download</a>
                   `;
-                  // http://stackoverflow.com/questions/25781927/how-to-read-pdf-stream-in-angularjs
-                  // download : http://jsfiddle.net/filixix/0816jdfq/
-                  // http://stackoverflow.com/questions/31299799/how-to-open-base64-encoded-pdf-in-javascript
-                  // http://stackoverflow.com/questions/21628378/angularjs-display-blob-pdf-in-an-angular-app   <object ng-show="dossier.src" data="${dossier.src}" type="application/pdf" style="width: 100%; height: 400px;"></object>
-                  // https://github.com/sayanee/angularjs-pdf
-                  // http://www.angularjs4u.com/modules/5-angularjs-microsoft-word-excel-integrations/
-                  // https://www.npmjs.com/package/angular-save-html-to-pdf
                   break;
                 case _.includes(word_ext,dossier.src):
-                  dossier.src       = 'data:application/msword;base64,' +decode2base64String(dossier.file.data);
+                  dossier.src       = 'data:application/msword;base64,' +buffer2base64String(dossier.file.data);
                   dossier.template  = `
                     <embed ng-src="${dossier.src}" style="width:200px;height:200px;"></embed>
+                    <br>
+                    <br>
+                    <object data="${dossier.src}" type="application/msword" style="width:200px;height:200px;"></object>
+                    <br>
+                    <button ng-click="ctrl.download(dossier.src)" class="btn btn-primary">download</button>
                   `;
                   break;
                 case _.includes(video_ext,dossier.src):
@@ -62,19 +61,19 @@
               }
             }
 
-            function decode2base64String(bufferArray){
+            function buffer2base64String(bufferArray){
               return btoa(String.fromCharCode(...new Uint8Array(bufferArray)));
             }
 
             function decode2regularString(bufferArray) {
-              return atob(decode2base64String(bufferArray));
+              return atob(buffer2base64String(bufferArray));
             }
           },
           controllerAs: 'ctrl',
           controller: function () {
             this.$onInit = function() {
-              this.downloadPDF = function (file) {
-                window.open("data:application/pdf;base64," + btoa(file));
+              this.download = function (file) {
+                window.open(file);
               };
             };
             // console.log(this);

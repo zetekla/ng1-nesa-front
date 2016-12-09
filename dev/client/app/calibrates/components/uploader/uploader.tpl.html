@@ -28,6 +28,8 @@
       Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
       Audio preview: <audio controls ngf-src="file"></audio>
       Video preview: <video controls ngf-src="file"></video>
+      PDF preview:   <embed ng-src="{{ file.src | trusted}}" style="width:800px;height:400px;"></embed>
+
     </div>
   </div>
 </div>

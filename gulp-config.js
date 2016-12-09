@@ -24,6 +24,7 @@ module.exports = {
       ],
       bundle: [
         './public/lib/jasmine/lib/jasmine-core/jasmine.css',
+        // './public/lib/ngEmbed/src/ng-embed.css',
         // './public/lib/bootstrap/dist/css/bootstrap.css',
         './public/lib/font-awesome/css/font-awesome.css',
         './public/dist/assets/**/*.css',
