@@ -40,7 +40,7 @@ angular
             console.log('json Blob forEach', Upload.jsonBlob(file));
           });*/
 
-          // console.log(files, 'username', this.username);
+          console.log(files);
         }
       };
     },

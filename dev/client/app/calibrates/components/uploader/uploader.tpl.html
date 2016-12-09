@@ -1,36 +1,33 @@
 <div class="row">
   <div class="row alert alert-warning">
-    <p class="text-lg-center">FILE ADDING SECTION</p>
-    <div class="col-sm-6">
-      <label class="control-label" for="username">Specify how many files:</label>
-      <div class="controls input-group input-group-lg">
-        <span class="input-group-addon">UserName</span>
-        <input class="form-control" id="username" name="username" type="text" ng-model="$ctrl.username"><br/><br/>
-<!--
-        <input id="incrementer" name="incrementer" type="number" ng-model="$ctrl.incrementer" ng-change="$ctrl.uploaderGenerator($ctrl.incrementer)" class="form-control" min="0" max="99" ng-pattern="/^\d+$/">
-
-        ng-change="$ctrl.update($files)"
--->
-        <!--<span class="error-text" ng-show="vm.form.equipmentForm.incrementer.$dirty && vm.form.equipmentForm.incrementer.$invalid">Must Enter a Number (ex: 2) </span>-->
-        <!-- ngf-resize, ngf-resize-if, ngf-max-files, ngf-pattern -->
+    <div class="row">
+      <p class="text-lg-center">FILE ADDING SECTION</p>
+      <div class="col-sm-6">
+        <label class="control-label" for="username">Extra param to send along with this POST:</label>
+        <div class="controls input-group input-group-lg">
+          <span class="input-group-addon">UserName</span>
+          <input class="form-control" id="username" name="username" type="text" ng-model="$ctrl.username"><br/><br/>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="btn btn-secondary" ngf-select="$ctrl.upload($files)" ngf-multiple="true">Select Files</div>
-  <br>
-  <br>
-  Drop File:
-  <div ngf-drop ngf-select ng-model="$ctrl.files" ng-change="$ctrl.update($ctrl.files)" class="drop-box"
-       ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-       accept="image/*,application/pdf"
-       ngf-pattern="'image/*,application/pdf'">Drop pdfs or images here or click to upload</div>
+  <!--<div class="btn btn-secondary" ngf-select="$ctrl.upload($files)" ngf-multiple="true">Select Files</div>-->
 
-  <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-  <br>
-  <div class="row" ng-repeat="file in $ctrl.files">
-    Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
-    Audio preview: <audio controls ngf-src="file"></audio>
-    Video preview: <video controls ngf-src="file"></video>
+    <br>
+    <div ngf-drop ngf-select ng-model="$ctrl.files" ng-change="$ctrl.update($ctrl.files)" class="drop-box"
+         ngf-max-files="10"
+         ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+         accept="image/*,audio/*,video/*,application/pdf,application/doc,application/odt,application/docx"
+         ngf-validate="{size: {max: '20MB', min: '10B'}, height: {max: 12000}, width: {max: 12000}, duration: {max: '5m'}}"
+         ngf-resize="{width: 1000, height: 1000, centerCrop: true}"
+         ngf-resize-if="$width > 5000 || $height > 5000">Select or Drop files</div>
+
+    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    <br>
+    <div class="row" ng-repeat="file in $ctrl.files">
+      Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+      Audio preview: <audio controls ngf-src="file"></audio>
+      Video preview: <video controls ngf-src="file"></video>
+    </div>
   </div>
 </div>
