@@ -1,13 +1,12 @@
 (function () {
   'use strict';
 
-  angular
-    .module('calibrates', ['ngResource'])
-    .config(routeConfig)
-    /*.run(function($state) {
+  let app = angular.module('calibrates', ['ngResource']);
+    app.config(routeConfig);
+    /*app.run(function($state) {
       $state.go('equipments'); //make a transition to equipments state when app starts
-    })*/;
-
+    })*/
+  
   routeConfig.$inject = ['$stateProvider'];
 
   function routeConfig($stateProvider) {

@@ -8,11 +8,8 @@ angular
       vm: '='
     },
     templateUrl: './app/calibrates/components/uploader/uploader.tpl.html',
-    controller: function (Upload) {
-      // let uploader = this.uploader = new FileUploader({});
-      let usePlaceHolder    = true,
-        useRandomized     = true,
-        $ctrl = this.vm;
+    controller: function (Upload, customValue, version, UtilityService) {
+      let $ctrl = this.vm;
 
       this.$onInit = function(){
         this.log = '';
@@ -24,24 +21,22 @@ angular
       };
 
       this.upload = function(files){
+        console.log(customValue, version, UtilityService.greeting());
+
         if(files && files.length) {
           Upload.base64DataUrl(files).then(function(urls){
 
             _.times(files.length, function(i){
               files[i].file = urls[i].split('base64,')[1];
-              files[i].src  = 'data:application/pdf;base64,' + files[i].file;
+
+              if(files[i].type.re('application/pdf'))
+                files[i].src  = 'data:application/pdf;base64,' + files[i].file;
 
               files[i].filename = files[i].name;
               console.log(files[i]);
             });
             $ctrl.equipment.documents = files;
           });
-
-          /*console.log('json Blob', Upload.jsonBlob(files));
-          _.forEach(files, function(file){
-            console.log('json Blob forEach', Upload.jsonBlob(file));
-          });*/
-
         }
       };
     },

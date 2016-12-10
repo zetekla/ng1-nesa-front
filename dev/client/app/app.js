@@ -1,11 +1,34 @@
+(function () {
+  'use strict';
+
 let app = angular.module('plunker', ['ngFileUpload', 'ngImgCrop', 'ui.bootstrap', 'ui.router', 'ngSanitize',  'calibrates']);
     app.config(routeConfig);
 
+app.value('customValue', 'The value recipe');
+app.provider('version', function(){
+  let version, movie;
+  return {
+    setVersion: ver => version = ver,
+    $get: function () {
+      return {
+        title: 'The nesa1 v.' + version,
+        movie: 'The show this week is ' + movie
+      }
+    },
+    setMovie: mov => movie = mov
+  }
+});
 
-routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+String.prototype.re = function(pattern){
+  pattern = (typeof pattern ==='string') ? new RegExp(pattern) : pattern;
+  return pattern.test(this);
+};
 
-function routeConfig($stateProvider, $urlRouterProvider){
+routeConfig.$inject = ['$stateProvider', '$urlRouterProvider', 'versionProvider'];
 
+function routeConfig($stateProvider, $urlRouterProvider, versionProvider){
+  versionProvider.setVersion('v.1.5.1');
+  versionProvider.setMovie('FastNFurious!');
   $urlRouterProvider.when('', '/home');
 
   $stateProvider
@@ -107,8 +130,8 @@ function routeConfig($stateProvider, $urlRouterProvider){
     });
 }
 
+})();
 /*
-
 app.controller('MainCtrl', function($scope) {
   $scope.name = 'World';
 });*/

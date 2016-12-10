@@ -25,10 +25,14 @@
     <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
     <br>
     <div class="row" ng-repeat="file in $ctrl.files">
-      Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+      <div class="row" ng-if="file.type.re('image')">
+        Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+      </div>
       Audio preview: <audio controls ngf-src="file"></audio>
       Video preview: <video controls ngf-src="file"></video>
-      PDF preview:   <embed ng-src="{{ file.src | trusted}}" style="width:800px;height:400px;"></embed>
+      <div class="row" ng-if="file.type==='application/pdf'">
+        PDF preview:   <embed ng-src="{{ file.src | trusted}}" style="width:800px;height:400px;"></embed>
+      </div>
 
     </div>
   </div>

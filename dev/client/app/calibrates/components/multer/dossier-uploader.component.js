@@ -32,14 +32,14 @@ angular
     controller: function ($http) {
       this.upload = function(){
         // console.log(angular.element(document.querySelector('#file')));
-        var file = angular.element(document.querySelector('#file')).prop("files")[0];
+        let file = angular.element(document.querySelector('#file')).prop("files")[0];
         this.files = [file];
         $http({
           method: 'POST',
           url: 'http://esp21:3003/dossier_upload',
           headers: { 'Content-Type': undefined },
           transformRequest: function (data) {
-            var formData = new FormData();
+            let formData = new FormData();
             formData.append('model', angular.toJson(data.model));
             formData.append('file', data.files[0]);
             return formData;
