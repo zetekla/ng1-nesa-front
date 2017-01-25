@@ -1,7 +1,8 @@
+import {equipmentURI} from '../../config/default.js';
 //Equipments service used to communicate Equipments REST endpoints
 (function () {
+  console.log(equipmentURI);
   'use strict';
-
   angular
     .module('calibrates')
     .factory('EquipmentsService', EquipmentsService);
@@ -9,8 +10,8 @@
   EquipmentsService.$inject = ['$resource'];
 
   function EquipmentsService($resource) {
-    // let equipmentURI = 'http://localhost:3003/equipments/:asset_id';
-    let equipmentURI = 'http://esp21:3003/equipments/:asset_id';
+    let equipmentURI = 'http://localhost:3003/equipments/:asset_id';
+    // let equipmentURI = 'http://esp21:3003/equipments/:asset_id';
     let Equipment = $resource(equipmentURI, {
       asset_id: '@asset_id'
     }, {

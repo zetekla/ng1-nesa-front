@@ -186,7 +186,7 @@ gulp.task('bundle.app.dev', ['browserify', 'release', 'clean:browserified']);
 
 gulp.task('bundle:app:dev', function () {
   let app = gulp.src(config.scripts.src)
-    .pipe(babel())
+    .pipe(babel({ presets: ['es2015'] }))
     .on('error', notify.onError("Error: <%= error.message %>"))
     .pipe(angularFilesort());
 

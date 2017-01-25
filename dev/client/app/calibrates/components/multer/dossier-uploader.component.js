@@ -36,7 +36,8 @@ angular
         this.files = [file];
         $http({
           method: 'POST',
-          url: 'http://esp21:3003/dossier_upload',
+          url: 'http://localhost:3003/dossier_upload',
+          // url: 'http://esp21:3003/dossier_upload',
           headers: { 'Content-Type': undefined },
           transformRequest: function (data) {
             let formData = new FormData();

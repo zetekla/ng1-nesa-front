@@ -1,6 +1,6 @@
 'use strict';
 // export const vendor = {
-function browserRequire(_){
+function require(_){
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
       exports = module.exports = _;
@@ -15,6 +15,7 @@ let vendor = {
   js: [
     // './public/lib/json3/lib/json3.js',
     './node_modules/systemjs/dist/system.js',
+    './node_modules/babel-core/browser-polyfill.min.js',
     './public/lib/angular/angular.js',
     './public/lib/angular-mocks/angular-mocks.js',
     './public/lib/angular-ui-router/release/angular-ui-router.js',
@@ -42,9 +43,9 @@ let vendor = {
 
 module.exports = vendor;
 
-// works fine for [dev] with server-side systemJS load, browserRequire not needed.
+// works fine for [dev] with server-side systemJS load, require not needed.
 // For production, all vendor becomes vendor.bundle.js, so systemJS isn't then needed.
 
 */
 
-browserRequire(vendor);
+require(vendor);
