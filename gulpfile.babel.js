@@ -55,6 +55,7 @@ import moment           from 'moment';
 // let bundleHash        = moment(new Date().getTime()).format('YYYY-MM-DD-HH-mm-ss'), // 'MMM Do h:mm:ss A'
 let bundleHash        = moment().format('YYYY-MM-DD-HH-mm-ss'),
   mainBundleName      = bundleHash + '.main.bundle.js',
+  mainScript          = 'babel.bundle.js',
   mainShortName       = 'main.bundle.js',
   vendorBundleName    = bundleHash + '.vendor.bundle.js',
   vendorShortName     = 'vendor.bundle.js',
@@ -76,7 +77,7 @@ gulp.task('serve', function(callback) {
 gulp.task('copy:dev', ['copy_images', 'copy_maps', 'copy_fonts', 'copy_lib']);
 gulp.task('copy',     ['copy_images', 'copy_maps', 'copy_fonts', 'copy_lib', 'copy_html']);
 
-gulp.task('bundle:dev', ['bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev']);
+gulp.task('bundle:dev', ['bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'bundle:browserify']);
 gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:css'], function () {
   return gulp.src('dev/client/index.html')
     .pipe(htmlreplace({
@@ -108,10 +109,10 @@ let tasks = {
                 .pipe(gulp.dest(config.dist))
   },
   bundle_app: {
-    dev:      (app) =>  app.pipe(concat(mainShortName))
+    dev:      (app) =>  app.pipe(concat(mainScript))
                           .pipe(ngAnnotate())
                           .pipe(gulp.dest(config.dist))
-                          .pipe(notify({message: 'Compiled [dev] main.bundle.js (' + moment().format('YYYY-MM-DD-HH-mm-ss') + ')', onLast: true})),
+                          .pipe(notify({message: 'Compiled [dev] babel.bundle.js (' + moment().format('YYYY-MM-DD-HH-mm-ss') + ')', onLast: true})),
     dist:     (app) =>  app.pipe(sourcemaps.init())
                           .pipe(concat(mainBundleName))
                           .pipe(ngAnnotate())
@@ -146,6 +147,20 @@ gulp.task('bundle:vendor:dist', ['bower_restore'], function () {
 });
 
 gulp.task('bundle:app', ['bundle:app:dev', 'bundle:app:dist']);
+
+gulp.task('bundle:browserify', ['bundle:app:dev'], function () {
+    return (function(entry) {
+      browserify({ entries: [entry], debug: true })
+        .transform(babelify,
+          { "presets": ["es2015"] }
+        )
+        .bundle()
+        .pipe(source(entry))
+        .pipe(rename(mainShortName))
+        .pipe(gulp.dest(config.dist))
+        .pipe(notify({message: 'Compiled [dev] main.bundle.js (' + moment().format('YYYY-MM-DD-HH-mm-ss') + ')', onLast: true}));
+    })('./public/dist/'+ mainScript);
+});
 
 gulp.task('browserify', function (done) {
   glob('./dev/client/app/**/*.js', function(err, files){
@@ -300,7 +315,8 @@ gulp.task('clean:vendor', function () {
 
 gulp.task('clean:scripts', function () {
   return gulp.src([
-    config.scripts.dest + mainShortName
+    config.scripts.dest + mainShortName,
+    config.scripts.dest + mainScript
   ], {read: false})
     .pipe(clean());
 });

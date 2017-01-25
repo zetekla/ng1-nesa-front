@@ -1,4 +1,4 @@
-import {equipmentURI} from '../../config/default.js';
+import {equipmentURI} from '../../dev/client/app/config/default.js';
 //Equipments service used to communicate Equipments REST endpoints
 (function () {
   console.log(equipmentURI);
