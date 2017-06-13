@@ -9,12 +9,9 @@ export default {
   scripts: {
     src: [
       './dev/client/app/**/*.js',
+      '!./dev/client/app/**/*.spec.js',
       '!./dev/client/app/vendor.js',
-      '!./dev/client/app/config/*.js',
-      './public/lib/jasmine/lib/jasmine-core/json2.js',
-      './public/lib/jasmine/lib/jasmine-core/jasmine-core.js',
-      './public/lib/jasmine/lib/jasmine-core/jasmine-html.js',
-      './public/lib/jasmine/lib/jasmine-core/boot.js'
+      '!./dev/client/app/config/*.js'
     ],
     watch: [
       './dev/client/app/**/*.+(ts|js)',
@@ -60,12 +57,12 @@ export default {
     dest: './public/dist/'
   },
   jasmine: {
-    src: [
-      './public/lib/jasmine/lib/jasmine-core/json2.js',
-      './public/lib/jasmine/lib/jasmine-core/jasmine.js',
-      './public/lib/jasmine/lib/jasmine-core/jasmine-html.js'
-    ],
+    src: [],
     dest: './public/dist/lib/'
   },
-  vendor: vendor
+  vendor: vendor,
+  test: {
+    src: ['./dev/client/app/**/*.spec.js'],
+    watch: ['./dev/client/app/**/*.spec.js']
+  }
 };

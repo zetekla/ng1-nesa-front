@@ -1,19 +1,11 @@
 'use strict';
-// export const vendor = {
-function require(_){
-  if (typeof exports !== 'undefined') {
-    if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = _;
-    }
-    exports._ = _;
-  } else {
-    return _;
-  }
-}
-
-let vendor = {
+export default {
   js: [
     // './public/lib/json3/lib/json3.js',
+    './public/lib/jasmine/lib/jasmine-core/json2.js',
+    './public/lib/jasmine/lib/jasmine-core/jasmine.js',
+    './public/lib/jasmine/lib/jasmine-core/jasmine-html.js',
+    './public/lib/jasmine/lib/jasmine-core/boot.js',
     './node_modules/systemjs/dist/system.js',
     './node_modules/babel-core/browser-polyfill.min.js',
     './public/lib/angular/angular.js',
@@ -37,15 +29,4 @@ let vendor = {
     './public/lib/angular-messages/angular-messages.js' // https://www.sitepoint.com/easy-form-validation-angularjs-ngmessages/
   ],
   watch: './dev/client/app/vendor.js'
-};
-
-/*
-
-module.exports = vendor;
-
-// works fine for [dev] with server-side systemJS load, require not needed.
-// For production, all vendor becomes vendor.bundle.js, so systemJS isn't then needed.
-
-*/
-
-require(vendor);
+}

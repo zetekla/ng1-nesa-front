@@ -32,9 +32,11 @@
     <div ng-include="'./app/layout/footer.html'"></div>
   </div>
 
-  <script type="text/javascript" src="./lib/json2.js"></script>
+<!--  <script type="text/javascript" src="./lib/json2.js"></script>
   <script type="text/javascript" src="./lib/jasmine.js"></script>
   <script type="text/javascript" src="./lib/jasmine-html.js"></script>
+  <script type="text/javascript" src="./lib/boot.js"></script>
+  <script type="text/javascript" src="./lib/angular-mocks.js'"></script>-->
 
   <!-- build:vendor -->
   <script src="/public/dist/vendor.bundle.js"></script>
@@ -69,6 +71,10 @@
   <!-- build:app -->
   <script src="/public/dist/main.bundle.js"></script>
   <!-- bootstraps Jasmine -->
+  <!-- endbuild -->
+
+  <!-- build:test -->
+  <script src="/app/app.spec.js"></script>
   <!-- endbuild -->
 </body>
 </html>
