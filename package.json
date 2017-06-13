@@ -14,7 +14,7 @@
     "npm": ">=2.0.0"
   },
   "scripts": {
-    "start": "set NODE_ENV=development && gulp serve",
+    "start": "cross-env NODE_ENV=development && gulp serve",
     "build": "gulp dist",
     "dev": "concurrent \"set NODE_ENV=development\" \"gulp watch\" \"lite-server\"",
     "lite": "lite-server",
@@ -37,6 +37,7 @@
     "browser-sync": "^2.17.0",
     "browserify": "^13.1.1",
     "concurrently": "^3.1.0",
+    "cross-env": "^5.0.1",
     "cssnano": "^3.7.6",
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
