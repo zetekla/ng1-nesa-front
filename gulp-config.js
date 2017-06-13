@@ -1,4 +1,6 @@
-module.exports = {
+import vendor from './dev/client/app/vendor';
+
+export default {
   clientDir: './dev/client/',
   dist: './public/dist/',
   lib: './public/lib/',
@@ -9,7 +11,10 @@ module.exports = {
       './dev/client/app/**/*.js',
       '!./dev/client/app/vendor.js',
       '!./dev/client/app/config/*.js',
-      'test/client/jasmineBootstrap.js'
+      './public/lib/jasmine/lib/jasmine-core/json2.js',
+      './public/lib/jasmine/lib/jasmine-core/jasmine-core.js',
+      './public/lib/jasmine/lib/jasmine-core/jasmine-html.js',
+      './public/lib/jasmine/lib/jasmine-core/boot.js'
     ],
     watch: [
       './dev/client/app/**/*.+(ts|js)',
@@ -62,5 +67,5 @@ module.exports = {
     ],
     dest: './public/dist/lib/'
   },
-  vendor: require('./dev/client/app/vendor')
+  vendor: vendor
 };
