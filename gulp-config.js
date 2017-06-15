@@ -10,8 +10,7 @@ export default {
     src: [
       './dev/client/app/**/*.js',
       '!./dev/client/app/**/*.spec.js',
-      '!./dev/client/app/vendor.js',
-      '!./dev/client/app/config/*.js'
+      '!./dev/client/app/vendor.js'
     ],
     watch: [
       './dev/client/app/**/*.+(ts|js)',
@@ -61,6 +60,10 @@ export default {
     dest: './public/dist/lib/'
   },
   vendor: vendor,
+  vendor_file: {
+    src: './dev/client/app/vendor.js',
+    dest: './public/dist/vendor/',
+  },
   test: {
     src: ['./dev/client/app/**/*.spec.js'],
     watch: ['./dev/client/app/**/*.spec.js']

@@ -80,7 +80,7 @@ gulp.task('copy:dev', ['copy_images', 'copy_maps', 'copy_fonts', 'copy_lib']);
 gulp.task('copy',     ['copy_images', 'copy_maps', 'copy_fonts', 'copy_lib', 'copy_html']);
 
 gulp.task('bundle:dev', ['bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'bundle:test:dev', 'bundle:browserify']);
-gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:test', 'bundle:css'], function () {
+gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:test', 'bundle:browserify', 'bundle:css'], function () {
   return gulp.src('dev/client/index.html')
     .pipe(htmlreplace({
       'app': mainBundleName,
@@ -153,11 +153,11 @@ let tasks = {
 
 gulp.task('bundle:vendor', ['bundle:vendor:dev', 'bundle:vendor:dist']);
 
-gulp.task('bundle:vendor:dev', ['bower_restore'], function () {
+gulp.task('bundle:vendor:dev', ['copy_vendor_itself', 'bower_restore'], function () {
   let vendor = gulp.src(config.vendor.js);
     return tasks.bundle_vendor.dev(vendor);
 });
-gulp.task('bundle:vendor:dist', ['bower_restore'], function () {
+gulp.task('bundle:vendor:dist', ['copy_vendor_itself', 'bower_restore'], function () {
   let vendor = gulp.src(config.vendor.js);
     return tasks.bundle_vendor.dist(vendor);
 });
@@ -319,6 +319,11 @@ gulp.task('copy_maps', function(){
 gulp.task('copy_lib', function(){
   return gulp.src(config.jasmine.src)
     .pipe(gulp.dest(config.jasmine.dest));
+});
+
+gulp.task('copy_vendor_itself', function(){
+  return gulp.src(config.vendor_file.src)
+    .pipe(gulp.dest(config.vendor_file.dest));
 });
 
 /*-- CLEANERS --*/

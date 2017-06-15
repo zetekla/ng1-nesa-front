@@ -2,13 +2,13 @@
 export default {
   js: [
     // './public/lib/json3/lib/json3.js',
+    './node_modules/systemjs/dist/system.js',
+    './node_modules/babel-core/browser-polyfill.min.js',
+    './public/lib/angular/angular.js',
     './public/lib/jasmine/lib/jasmine-core/json2.js',
     './public/lib/jasmine/lib/jasmine-core/jasmine.js',
     './public/lib/jasmine/lib/jasmine-core/jasmine-html.js',
     './public/lib/jasmine/lib/jasmine-core/boot.js',
-    './node_modules/systemjs/dist/system.js',
-    './node_modules/babel-core/browser-polyfill.min.js',
-    './public/lib/angular/angular.js',
     './public/lib/angular-mocks/angular-mocks.js',
     './public/lib/angular-ui-router/release/angular-ui-router.js',
     './public/lib/moment/moment.js',
