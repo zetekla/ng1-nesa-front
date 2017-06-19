@@ -53,6 +53,11 @@ import htmlreplace      from 'gulp-html-replace';
 
 import moment           from 'moment';
 
+
+/*-- Linting --*/
+// import jshint from 'gulp-jshint';
+
+
 // let bundleHash        = moment(new Date().getTime()).format('YYYY-MM-DD-HH-mm-ss'), // 'MMM Do h:mm:ss A'
 let bundleHash        = moment().format('YYYY-MM-DD-HH-mm-ss'),
   mainBundleName      = bundleHash + '.main.bundle.js',
@@ -77,8 +82,8 @@ gulp.task('serve', function(callback) {
   runSequence('clean:dev', 'copy:dev', 'bundle:dev', 'watch', 'shell', callback);
 });
 
-gulp.task('copy:dev', ['copy_images', 'copy_maps', 'copy_fonts', 'copy_lib']);
-gulp.task('copy',     ['copy_images', 'copy_maps', 'copy_fonts', 'copy_lib', 'copy_html']);
+gulp.task('copy:dev', ['copy_config', 'copy_images', 'copy_maps', 'copy_fonts', 'copy_lib']);
+gulp.task('copy',     ['copy_config', 'copy_images', 'copy_maps', 'copy_fonts', 'copy_lib', 'copy_html']);
 
 gulp.task('bundle:dev', ['bundle:css:dev', 'bundle:vendor:dev', 'bundle:app:dev', 'bundle:test:dev', 'bundle:browserify']);
 gulp.task('bundle', ['bundle:vendor', 'bundle:app', 'bundle:test', 'bundle:css'], function () {
@@ -193,7 +198,7 @@ gulp.task('browserify', function (done) {
             .pipe(rename({
                 extname: '.bundle.js'
             }))
-            .pipe(gulp.dest('./browserify'));
+            .pipe(gulp.dest('./public/dist/'));
         });
     es.merge(tasks).on('end', done);
   })
@@ -306,6 +311,11 @@ gulp.task('copy_html', function(){
     .pipe(gulp.dest(config.html.dest));
 });
 
+gulp.task('copy_config', function(){
+  return gulp.src('./dev/client/app/config/*.js')
+    .pipe(gulp.dest('./public/dist/app/config/'));
+});
+
 gulp.task('copy_images', function(){
   return gulp.src(config.images.src)
     .pipe(gulp.dest(config.images.dest));
@@ -356,3 +366,10 @@ gulp.task('clean:scripts', function () {
 });
 
 gulp.task('clean:dev', ['clean:styles', 'clean:vendor', 'clean:scripts']);
+
+/*/!*-- LINTING --*!/
+gulp.task('jshint', function() {
+  return gulp.src('./dev/client/app/!**!/!*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});*/

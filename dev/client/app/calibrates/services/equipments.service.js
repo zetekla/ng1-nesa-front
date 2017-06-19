@@ -1,4 +1,5 @@
-// import {equipmentURI} from '../../dev/client/app/config/default.js';
+// import _default from './app/config/default.js';
+
 //Equipments service used to communicate Equipments REST endpoints
 (function () {
   'use strict';
