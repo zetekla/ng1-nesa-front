@@ -1,6 +1,21 @@
 (function () {
   'use strict';
 
+  System.import('./app/vendor.js')
+    .then(callback, console.error.bind(console));
+
+  function callback(vendor){
+    console.log(vendor.default);
+  }
+
+  System.import('./app/config/default.js')
+    .then(kallback, console.error.bind(console));
+
+  function kallback(config){
+    console.log(config.default);
+    // must figure a way to have main.bundle script inside this
+  }
+
 let app = angular.module('plunker', ['ngFileUpload', 'ngImgCrop', 'ui.bootstrap', 'ui.router', 'ngSanitize',  'calibrates']);
     app.config(routeConfig);
 

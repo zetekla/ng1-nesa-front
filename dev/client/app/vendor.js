@@ -6,12 +6,9 @@ export default {
     './public/lib/jasmine/lib/jasmine-core/jasmine.js',
     './public/lib/jasmine/lib/jasmine-core/jasmine-html.js',
     './public/lib/jasmine/lib/jasmine-core/boot.js',
-    './node_modules/traceur/bin/BrowserSystem.js',
-    './node_modules/traceur/bin/traceur.js',
-    './node_modules/es-module-loader/dist/es-module-loader.js',
-    './node_modules/systemjs/dist/system.js',
     './node_modules/babel-polyfill/dist/polyfill.js',
     './node_modules/babel-core/browser-polyfill.min.js',
+    './node_modules/systemjs/dist/system.js',
     './public/lib/angular/angular.js',
     './public/lib/angular-mocks/angular-mocks.js',
     './public/lib/angular-ui-router/release/angular-ui-router.js',
@@ -30,7 +27,8 @@ export default {
     './public/lib/ng-img-crop/compile/unminified/ng-img-crop.js',
     './public/lib/highlightjs/highlight.pack.js',
     // './public/lib/ngEmbed/src/ng-embed.js',
-    './public/lib/angular-messages/angular-messages.js' // https://www.sitepoint.com/easy-form-validation-angularjs-ngmessages/
+    './public/lib/angular-messages/angular-messages.js', // https://www.sitepoint.com/easy-form-validation-angularjs-ngmessages/
+    './system.config.js'
   ],
   watch: './dev/client/app/vendor.js'
 }

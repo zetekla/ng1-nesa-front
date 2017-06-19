@@ -279,7 +279,7 @@ gulp.task('watch:vendors', function () {
 gulp.task('watch:scripts', function () {
   return gulp.watch(config.scripts.watch, file => {
     console.log(chalk.green(' ✓ registered changes in %s'), file.path.split('/').pop());
-    runSequence('bundle:app:dev');
+    return runSequence('bundle:app:dev');
   });
 });
 

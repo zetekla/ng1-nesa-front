@@ -50,49 +50,11 @@
     <!--Using SystemJS by default -->
     <!--<script src="/node_modules/systemjs/dist/system.js"></script>-->
     <!--<script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>-->
-    <script type="module">
-      import {vendor} from './app/vendor.js';
-      console.log('traceur Vendor', vendor);
-    </script>
-    <script>
-      SystemJS.config({
-        traceurOptions: {
-          asyncFunctions: true
-        },
-        warnings: true,
-        map: {
-          'plugin-traceur': '/node_modules/systemjs-plugin-traceur/plugin-traceur.js',
-          'traceur': '/node_modules/traceur/bin/traceur.js'
-        },
-        meta: {
-          'traceur': {
-            format: 'global',
-            exports: 'traceur'
-          }
-        },
-        transpiler: 'plugin-traceur'
-      });
-
-      SystemJS.import('./app/vendor.js')
-        .then(callback, console.error.bind(console));
-
-      function callback(vendor){
-        console.log(vendor);
-      }
-
-      SystemJS.import('./app/config/default.js')
-        .then(kallback, console.error.bind(console));
-
-      function kallback(config){
-         console.log(config);
-        // must figure a way to have main.bundle script inside this
-      }
-    </script>
     <!-- optionally -->
   <!-- endbuild -->
 
   <!-- build:app -->
-  <script src="/public/dist/main.bundle.js"></script>
+  <script src="/public/dist/babel.bundle.js"></script>
   <!-- bootstraps Jasmine -->
   <!-- endbuild -->
 
