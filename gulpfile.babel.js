@@ -23,6 +23,7 @@ import runSequence      from 'run-sequence';
 import shell            from 'gulp-shell';
 // logger
 import notify           from 'gulp-notify';
+import chalk            from 'chalk';
 // sanity
 import clean            from 'gulp-clean';
 // dependencies management
@@ -276,7 +277,10 @@ gulp.task('watch:vendors', function () {
 });
 
 gulp.task('watch:scripts', function () {
-  return gulp.watch(config.scripts.watch, ['bundle:app:dev']);
+  return gulp.watch(config.scripts.watch, file => {
+    console.log(chalk.green(' ✓ registered changes in %s'), file.path.split('/').pop());
+    runSequence('bundle:app:dev');
+  });
 });
 
 gulp.task('watch:images', function () {
