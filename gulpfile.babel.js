@@ -47,7 +47,6 @@ import ngAnnotate       from 'gulp-ng-annotate';
 import typescript       from 'gulp-typescript';
 
 
-
 /*-- Bundling --*/
 import htmlreplace      from 'gulp-html-replace';
 
@@ -55,7 +54,7 @@ import moment           from 'moment';
 
 
 /*-- Linting --*/
-// import jshint from 'gulp-jshint';
+import jshint from 'gulp-jshint';
 
 
 // let bundleHash        = moment(new Date().getTime()).format('YYYY-MM-DD-HH-mm-ss'), // 'MMM Do h:mm:ss A'
@@ -283,8 +282,25 @@ gulp.task('watch:vendors', function () {
 
 gulp.task('watch:scripts', function () {
   return gulp.watch(config.scripts.watch, file => {
-    console.log(chalk.green(' ✓ registered changes in %s'), file.path.split('/').pop());
-    return runSequence('bundle:app:dev');
+    let arr = file.path.split('/');
+    let filename = arr.pop();
+    let filepath = arr.join('/');
+    console.log(chalk.green(' ✓ registered changes in %s'), filename);
+
+    if(file.path){
+      (function(entry, filename) {
+        browserify({ entries: [entry], debug: true })
+          .transform(babelify,
+            { "presets": ["es2015"] }
+          )
+          .bundle()
+          .pipe(source(entry))
+          .pipe(gulp.dest(config.dist))
+          .pipe(notify({message: `Compiled ${filename} ${moment().format('YYYY-MM-DD-HH-mm-ss')}`, onLast: true}));
+      })(file.path, filename);
+    }
+
+    // runSequence('jshint');
   });
 });
 
@@ -367,9 +383,9 @@ gulp.task('clean:scripts', function () {
 
 gulp.task('clean:dev', ['clean:styles', 'clean:vendor', 'clean:scripts']);
 
-/*/!*-- LINTING --*!/
+/*-- LINTING --*/
 gulp.task('jshint', function() {
-  return gulp.src('./dev/client/app/!**!/!*.js')
+  return gulp.src('./dev/client/app/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
-});*/
+});
