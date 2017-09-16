@@ -17,7 +17,7 @@ import ext_replace      from 'gulp-ext-replace';
 import concat           from 'gulp-concat';
 import es               from 'event-stream';
 import bs               from 'browser-sync';
-let    browserSync      = bs.create();
+let    browserSync      = bs.create(); // https://browsersync.io/docs/options
 
 import runSequence      from 'run-sequence';
 import shell            from 'gulp-shell';
@@ -287,7 +287,9 @@ gulp.task('watch:scripts', function () {
     let filepath = arr.join('/');
     console.log(chalk.green(' ✓ registered changes in %s'), filename);
 
-    if(file.path){
+    if(file)
+    if(filename.includes('.es6.js')){
+      let es5file = filename.split('.es6.js')[0] +'.js';
       (function(entry, filename) {
         browserify({ entries: [entry], debug: true })
           .transform(babelify,
@@ -295,11 +297,13 @@ gulp.task('watch:scripts', function () {
           )
           .bundle()
           .pipe(source(entry))
-          .pipe(gulp.dest(config.dist))
-          .pipe(notify({message: `Compiled ${filename} ${moment().format('YYYY-MM-DD-HH-mm-ss')}`, onLast: true}));
+          .pipe(rename(es5file))
+          .pipe(gulp.dest(filepath))
+          .pipe(notify({message: `Compiled ${es5file} from ${filename} ${moment().format('YYYY-MM-DD-HH-mm-ss')}`, onLast: true}));
       })(file.path, filename);
     }
 
+    return runSequence('bundle:app:dev');
     // runSequence('jshint');
   });
 });
@@ -329,7 +333,7 @@ gulp.task('copy_html', function(){
 
 gulp.task('copy_config', function(){
   return gulp.src('./dev/client/app/config/*.js')
-    .pipe(gulp.dest('./public/dist/app/config/'));
+    .pipe(gulp.dest('./public/dist/'));
 });
 
 gulp.task('copy_images', function(){

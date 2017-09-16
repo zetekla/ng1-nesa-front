@@ -9,6 +9,7 @@ export default {
   scripts: {
     src: [
       './dev/client/app/**/*.js',
+      '!./dev/client/app/**/*.es6.js',
       '!./dev/client/app/**/*.spec.js',
       '!./dev/client/app/vendor.js',
       '!./dev/client/app/config/*.js'
